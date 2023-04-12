@@ -1,0 +1,8 @@
+=========================================
+| 1 SỐ LỖI CÓ THỂ GẶP VÀ CÁCH KHẮC PHỤC |
+=========================================
+
+- Trường hợp 1: Khi chạy lệnh 'npm start' nhưng trình duyệt hiển thị lỗi thì thực hiện các bước như sau:
+	+ Xóa 'node_modules' và 'package-lock.json' theo đường dẫn 'BTN1_PTUDWNC\book-store'
+	+ Mở command line và chạy lệnh 'npm cache clean --force'
+	+ Tiếp tục chạy lệnh 'npm install'

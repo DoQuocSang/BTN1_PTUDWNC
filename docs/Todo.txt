@@ -1,0 +1,8 @@
++ Tailwind
++ Sử dụng treact component xây dựng UI
++ 'babel-plugin-macros.config.js' chứa các cấu hình cho twin.marco, xác định vị trí của file cấu hình tailwind
++ 'tailwind.config.js' chứa các cấu hình tailwind của dự án
++ 'jsconfig.json' chứa các cấu hình cho việc sử dụng địa chỉ tuyệt đối
++ 'style.css' chứa câu lệnh import font
++ Link cài đặt: https://owaiskhan.me/post/using-treact-components-custom-react-app
++ Hiệu ứng website nằm trong helpers/AnimationRevealPage
