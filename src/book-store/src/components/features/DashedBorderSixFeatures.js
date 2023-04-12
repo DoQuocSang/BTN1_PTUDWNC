@@ -15,6 +15,15 @@ import CustomizeIconImage from "../../images/customize-icon.svg";
 import FastIconImage from "../../images/fast-icon.svg";
 import ReliableIconImage from "../../images/reliable-icon.svg";
 import SimpleIconImage from "../../images/simple-icon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTruck } from "@fortawesome/free-solid-svg-icons";
+import { faShield } from "@fortawesome/free-solid-svg-icons";
+import { faMoneyCheckDollar } from "@fortawesome/free-solid-svg-icons";
+import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
+import { faRotate } from "@fortawesome/free-solid-svg-icons";
+import { faHeadset } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const Container = tw.div`relative`;
 
@@ -49,9 +58,15 @@ const Card = styled.div`
   }
 `;
 
+const CustomFontAwesomeIcon = styled.div`
+${tw`text-primary-500 text-2xl w-8 leading-8`}
+`;
+
 const DecoratorBlob = styled(SvgDecoratorBlob3)`
   ${tw`pointer-events-none absolute right-0 bottom-0 w-64 opacity-25 transform translate-x-32 translate-y-48 `}
 `;
+
+
 
 export default () => {
   /*
@@ -64,26 +79,49 @@ export default () => {
 
   const cards = [
     {
-      imageSrc: ShieldIconImage,
-      title: "Ads Management",
-      description: "We create and manage ads that you need, from creation to deployment. Lorem ipsum donor sit amet consicou."
+      imageSrc: faShield,
+      title: "Uy tín",
+      description: "Fahasa đảm bảo 100% những cuốn sách của mình đêu là hàng chính hãng"
     },
-    { imageSrc: SupportIconImage, title: "Video Marketing" },
-    { imageSrc: CustomizeIconImage, title: "Customer Relation" },
-    { imageSrc: ReliableIconImage, title: "Product Outreach" },
-    { imageSrc: FastIconImage, title: "PR Campaign" },
-    { imageSrc: SimpleIconImage, title: "Product Expansion" }
+    {
+      imageSrc: faHeadset,
+      title: "Hỗ trợ 24/7",
+      description: "Đội ngũ của chúng tôi luôn thường trực để hỗ trợ khách hàng"
+    },
+    {
+      imageSrc: faRotate,
+      title: "Đổi trả hàng",
+      description: "Thoải mái đổi trả hàng trong vòng 14 ngày nếu có hư hỏng do phía Fahasa"
+    },
+    {
+      imageSrc: faTruck,
+      title: "Vận chuyển toàn quốc",
+      description: "Bạn hoàn toàn có thể đặt mua sách trên Website và Fahasa sẽ vận chuyển tận nơi cho bạn"
+    },
+    {
+      imageSrc: faSackDollar,
+      title: "Ưu đãi hấp dẫn",
+      description: "Fahasa thường xuyên có các đợt giảm giá sách để dễ dàng tiếp cận người đọc hơn"
+    },
+    {
+      imageSrc: faMoneyCheckDollar,
+      title: "Phương thức thanh toán",
+      description: "Đa dạng các phương thức thanh toán trong việc mua sách"
+    }
   ];
 
   return (
     <Container>
       <ThreeColumnContainer>
-        <Heading>Our Professional <span tw="text-primary-500">Services</span></Heading>
+        <Heading>Nét nổi bật của <span tw="text-primary-500">Fahasa</span></Heading>
         {cards.map((card, i) => (
           <Column key={i}>
             <Card>
               <span className="imageContainer">
-                <img src={card.imageSrc || defaultCardImage} alt="" />
+                <CustomFontAwesomeIcon>
+                    <FontAwesomeIcon icon={card.imageSrc}/>
+                </CustomFontAwesomeIcon>
+                {/* <img src={card.imageSrc || defaultCardImage} alt="" /> */}
               </span>
               <span className="textContainer">
                 <span className="title">{card.title || "Fully Secure"}</span>

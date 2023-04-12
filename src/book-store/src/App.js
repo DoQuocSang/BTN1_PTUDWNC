@@ -4,12 +4,15 @@ import "tailwindcss/lib/css/preflight.css"
 import AnimationRevealPage from "helpers/AnimationRevealPage"
 import Hero from "components/hero/FullWidthWithImage"
 import RestaurantLandingPage from "demos/RestaurantLandingPage"
-import HotelTravelLandingPage from "demos/HotelTravelLandingPage"
+import HomePage from "demos/HomePage"
+import "fontawesome"
+import AllProductPage from "demos/AllProductPage"
 
 function App() {
   return (
     <AnimationRevealPage>
-      <HotelTravelLandingPage/>
+      <HomePage />
+      {/* <AllProductPage /> */}
     </AnimationRevealPage>
   )
 }

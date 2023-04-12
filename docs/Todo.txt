@@ -5,3 +5,4 @@
 + 'jsconfig.json' chứa các cấu hình cho việc sử dụng địa chỉ tuyệt đối
 + 'style.css' chứa câu lệnh import font
 + Link cài đặt: https://owaiskhan.me/post/using-treact-components-custom-react-app
++ Hiệu ứng website nằm trong helpers/AnimationRevealPage

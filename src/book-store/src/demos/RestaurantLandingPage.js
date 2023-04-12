@@ -113,6 +113,7 @@ export default () => {
             key: "Chefs",
             value: "1500+"
           }
+          
         ]}
         primaryButtonText="Order Now"
         primaryButtonUrl="https://order.now.com"

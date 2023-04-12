@@ -126,7 +126,7 @@ export default () => {
       <ContentWithPaddingXl>
         <Row>
           <PopularPostsContainer>
-            <Heading>Popular Posts</Heading>
+            <Heading>Bài viết nổi bật</Heading>
             <PostsContainer>
               {popularPosts.map((post, index) => (
                 <Post key={index} href={post.url} className="group" initial="rest" whileHover="hover" animate="rest">
@@ -149,7 +149,7 @@ export default () => {
             </PostsContainer>
           </PopularPostsContainer>
           <RecentPostsContainer>
-            <Heading>Recent Posts</Heading>
+            <Heading>Các bài viết</Heading>
             <PostsContainer>
               {recentPosts.map((post, index) => (
               <Post key={index} href={post.url} className="group">
