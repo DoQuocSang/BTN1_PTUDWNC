@@ -9,6 +9,12 @@ import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
 import logo from "../../images/logo.png";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { faPeopleRoof } from "@fortawesome/free-solid-svg-icons";
+import { faListUl } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Header = tw.header`
   flex justify-between items-center
@@ -72,9 +78,31 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#">Danh mục</NavLink>
-      <NavLink href="/#">Giới thiệu</NavLink>
-      <NavLink href="/#">Bài viết</NavLink>
+      <NavLink href="/#">
+        <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
+        Danh mục
+      </NavLink>
+
+      <NavLink href="/#">
+        <FontAwesomeIcon icon={faMagnifyingGlass} css={tw`mr-2 text-base`} />
+        Tìm kiếm
+      </NavLink>
+
+      <NavLink href="/#">
+        <FontAwesomeIcon icon={faPeopleRoof} css={tw`mr-2 text-base`} />
+        Giới thiệu
+      </NavLink>
+
+      <NavLink href="/#">
+        <FontAwesomeIcon icon={faFileLines} css={tw`mr-2 text-base`} />
+        Bài viết
+      </NavLink>
+
+      <NavLink href="/#">
+        <FontAwesomeIcon icon={faShoppingCart} css={tw`mr-2 text-base`} />
+        Giỏ hàng
+      </NavLink>
+
       <NavLink href="/#" tw="lg:ml-12!">
         Đăng nhập
       </NavLink>

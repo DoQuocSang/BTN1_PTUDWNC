@@ -10,6 +10,7 @@ import AllProductPage from "demos/AllProductPage"
 import AboutUs from "pages/AboutUs"
 import Login from "pages/Login"
 import Signup from "pages/Signup"
+import ProductDetailPage from "demos/ProductDetailPage"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       {/* <AllProductPage /> */}
       {/* <Login /> */}
       {/* <Signup /> */}
+      <ProductDetailPage />
     </AnimationRevealPage>
   )
 }

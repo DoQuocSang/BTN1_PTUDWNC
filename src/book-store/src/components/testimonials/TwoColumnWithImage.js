@@ -79,9 +79,9 @@ export default () => {
       imageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=512&h=512&q=80",
       quote:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-      customerName: "Charlotte Hale",
-      customerTitle: "CEO, Delos Inc."
+        "Truyện khá hay, nhưng bìa sách hơi xấu",
+      customerName: "Sang Đỗ",
+      customerTitle: "Ngày đăng: 15/02/2023"
     },
     {
       imageSrc:
@@ -104,7 +104,7 @@ export default () => {
     <Container>
       <Content>
         <HeadingInfoContainer>
-          <HeadingTitle>Our Awesome Customers</HeadingTitle>
+          <HeadingTitle>Đánh giá của người mua</HeadingTitle>
           <HeadingDescription></HeadingDescription>
         </HeadingInfoContainer>
         <TestimonialSliderContainer>

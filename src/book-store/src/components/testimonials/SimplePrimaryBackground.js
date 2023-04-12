@@ -8,18 +8,19 @@ import { SectionDescription } from "components/misc/Typography.js";
 import { ReactComponent as QuoteIconBase } from "images/quotes-l.svg"
 import { ReactComponent as ArrowLeftIcon } from "images/arrow-left-3-icon.svg"
 import { ReactComponent as ArrowRightIcon } from "images/arrow-right-3-icon.svg"
+import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 
 import "slick-carousel/slick/slick.css";
 
-const PrimaryBackgroundContainer = tw(Container)`-mx-8 px-8 bg-primary-900 text-gray-100`;
+const PrimaryBackgroundContainer = tw(Container)`-mx-8 px-8`;
 
 const HeadingContainer = tw.div``;
-const Subheading = tw(SubheadingBase)`text-center text-gray-100 mb-4`;
+const Subheading = tw(SubheadingBase)`text-center mb-4`;
 const Heading = tw(SectionHeading)``;
-const Description = tw(SectionDescription)`mx-auto text-center text-gray-300`;
+const Description = tw(SectionDescription)`mx-auto text-center text-secondary-100`;
 
 const TestimonialsSlider = styled(Slider)`
-  ${tw`flex mt-16 mx-auto max-w-xs sm:max-w-xl lg:max-w-4xl text-left bg-gray-100 rounded-lg text-gray-900`}
+  ${tw`flex mt-16 mx-auto max-w-xs sm:max-w-xl lg:max-w-4xl text-left bg-gray-100 rounded-lg text-gray-900 shadow-lg`}
   .slick-track {
     ${tw`flex!`}
   }
@@ -47,34 +48,62 @@ const ControlButton = styled.button`
   }
 `;
 
+const RatingsInfo = styled.div`
+  ${tw`flex items-center mt-2 sm:mb-5`}
+  svg {
+    ${tw`w-6 h-6 text-yellow-500`}
+  }
+`;
+const Rating = tw.span`ml-2 font-bold`;
+
+const starNum = (numLoop) => {
+  //numLoop = parseInt(num, 10)
+  const rows = [];
+  for (var i = 0; i < numLoop; i++) {
+    rows.push(<StarIcon css= {tw`fill-current`} key={i}/>);
+  } 
+
+  for (var i = 0; i < 5-numLoop; i++) {
+    rows.push(<StarIcon css= {tw`stroke-current`} key={i}/>);
+  } 
+
+  return rows;
+};
+
 export default ({
   subheading = "",
-  heading = "Testimonials",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  heading = "Đánh giá của người mua",
+  description = "Dưới đây là một số đánh giá của người mua sản phẩm này.",
   testimonials = [
     {
-      customerName: "David Hanson",
-      customerProfile: "CEO, Koalify",
+      ratingIcon: 5,
+      ratingState: "Cực kì hài lòng",
+      customerName: "Sang Đỗ",
+      customerProfile: "12/05/2023",
       imageSrc:
         "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.85&w=256&h=256&q=80",
       quote:
-        "We have been using servana for about 2 years. And in that time we have had no problem at all. The user interface is really simple to use. Our services scale automatically and we never have to worry about downtimes. is as described."
+        "Sách được bọc nilông cẩn thận giao hàng rất nhanh trong vòng một ngày nội dung sách thì mình chưa đọc nên chưa thể nhận xét nhưng đã có rất nhiều YouTuber review Đánh giá với số điểm cao nên mình quyết định mua"
     },
     {
-      customerName: "Serena Davis",
-      customerProfile: "Founder, Travana",
+      ratingIcon: 4,
+      ratingState: "Khá hài lòng",
+      customerName: "Đoàn Đình Hoàng",
+      customerProfile: "12/05/2023",
       imageSrc:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3.25&w=256&h=256&q=80",
       quote:
-        "We are delighted with the quality and performance of the servers that servana provides. The uptime is amazing and the internet connection is great for the price we are paying."
+        "Cuốn sách rất đẹp, giấy xịn, mượt, trơn, cực kì thích luôn ạ. Fahasha giao hàng rất nhanh, mới đặt ngày sau đã có rùi ❤❤❤"
     },
     {
-      customerName: "Timothy Burr",
-      customerProfile: "CTO, Coronax",
+      ratingIcon: 3,
+      ratingState: "Tạm ổn",
+      customerName: "Quảng Văn Sương",
+      customerProfile: "12/05/2023",
       imageSrc:
         "https://images.unsplash.com/photo-1580852300654-03c803a14e24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4.25&w=256&h=256&q=80",
       quote:
-        "It has been 8 months since we have switched to servana and it has nothing but an amazing experience. The cost is affordable, support is great, uptime is as described."
+        "Mình bất ngờ bởi bìa sách siêu sắc nét, mỗi khi nhìn vào mình cảm nhận như thầy đang hiện diện. Trang giấy có hơi mỏng nhưng giấy màu ngà vàng tốt cho mắt. Do là bản dịch lại nên đôi khi mình thấy việc đọc không được mượt mà lắm, tuy nhiên không ảnh hưởng đến ý nghĩa của thầy muốn truyền tải"
     }
   ]
 }) => {
@@ -93,6 +122,10 @@ export default ({
             <Testimonial key={index}>
               <QuoteContainer>
                 <QuoteIcon />
+                <RatingsInfo>
+                {starNum(testimonial.ratingIcon)}
+                <Rating>({testimonial.ratingState})</Rating>
+            </RatingsInfo>
                 <Quote>
                   {testimonial.quote}
                 </Quote>
