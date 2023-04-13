@@ -11,15 +11,18 @@ import AboutUs from "pages/AboutUs"
 import Login from "pages/Login"
 import Signup from "pages/Signup"
 import ProductDetailPage from "demos/ProductDetailPage"
+import BlogIndex from "pages/BlogIndex"
 
 function App() {
   return (
     <AnimationRevealPage>
       {/* <HomePage /> */}
-      {/* <AllProductPage /> */}
+      <AllProductPage />
       {/* <Login /> */}
       {/* <Signup /> */}
-      <ProductDetailPage />
+      {/* <ProductDetailPage /> */}
+      {/* <AboutUs /> */}
+      {/* <BlogIndex /> */}
     </AnimationRevealPage>
   )
 }

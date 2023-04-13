@@ -14,7 +14,7 @@ export default () => (
     <Header />
     <Features />
     <Testimonial />
-    <SliderCard />
+    <SliderCard HeadingText="Sản phẩm liên quan"/>
     <Footer />
   </AnimationRevealPage>
 );
