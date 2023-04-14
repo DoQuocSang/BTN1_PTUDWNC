@@ -7,6 +7,9 @@ import LogoImage from "../../images/logo.png";
 import { ReactComponent as FacebookIcon } from "../../images/facebook-icon.svg";
 import { ReactComponent as TwitterIcon } from "../../images/twitter-icon.svg";
 import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 const Container = tw.div`relative bg-gray-200 -mx-8 -mb-8 px-8`;
 const FiveColumns = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20 flex flex-wrap justify-between`;
@@ -26,6 +29,8 @@ const LogoText = tw.h5`ml-2 text-xl font-black text-primary-500`;
 
 const CompanyDescription = tw.p`mt-4 max-w-xs font-medium text-sm mx-auto md:mx-0 md:mr-4 `;
 
+const TextPrimary = tw(CompanyDescription)`mt-2`;
+
 const SocialLinksContainer = tw.div`mt-4 `;
 const SocialLink = styled.a`
   ${tw`cursor-pointer inline-block p-2 rounded-full bg-gray-700 text-gray-100 hover:bg-gray-900 transition duration-300 mr-4`}
@@ -44,9 +49,24 @@ export default () => {
             <LogoText>Fahasa</LogoText>
           </LogoContainer>
           <CompanyDescription>
-            Fahasa là cửa hàng kinh danh sách hàng đầu tại Việt Nam. 
+            Fahasa là cửa hàng kinh danh sách hàng đầu tại Việt Nam.
             Nếu có bất kì thắc mắc nào hãy liên hệ với chúng tôi qua những đường link bên dưới
           </CompanyDescription>
+
+          <TextPrimary>
+            <span tw="font-bold">
+              <FontAwesomeIcon icon={faPhone} css={tw`mr-2  text-xs`} />
+              Số điện thoại:
+            </span> 0909.789.789
+          </TextPrimary>
+
+          <TextPrimary>
+            <span tw="font-bold">
+              <FontAwesomeIcon icon={faMapLocationDot} css={tw`mr-2  text-xs`} />
+              Địa chỉ:
+            </span> 1 Đường Phù Đổng Thiên Vương, Phường 8, Thành phố Đà Lạt, Lâm Đồng
+          </TextPrimary>
+
           <SocialLinksContainer>
             <SocialLink href="https://facebook.com">
               <FacebookIcon />

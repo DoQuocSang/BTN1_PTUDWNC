@@ -77,7 +77,7 @@ export default () => {
     <Container>
       <SingleColumn>
         <HeadingInfoContainer>
-          <HeadingTitle>Sách nổi bật</HeadingTitle>
+          <HeadingTitle>Sách bán chạy</HeadingTitle>
           {/* <HeadingDescription>
             Dưới đây là một số sách nổi bật của Fahasa
           </HeadingDescription> */}

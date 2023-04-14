@@ -48,10 +48,7 @@ export default ({
     </>
   ),
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  primaryButtonText = "Learn More",
-  primaryButtonUrl = "https://timerse.com",
   imageSrc = TeamIllustrationSrc,
-  buttonRounded = true,
   imageRounded = true,
   imageBorder = false,
   imageShadow = false,
@@ -61,6 +58,13 @@ export default ({
   textOnLeft = true
 }) => {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
+
+  function NewlineText({props}) {
+    console.log(props.split('\n')); 
+
+    const newText = props.split('\n').map(str => <p css={tw`pb-2`}>{str}</p>);
+    return newText;
+  }
 
   return (
     <Container>
@@ -73,10 +77,10 @@ export default ({
           <TextContent>
             <Subheading>{subheading}</Subheading>
             <Heading>{heading}</Heading>
-            <Description>{description}</Description>
-            <PrimaryButton buttonRounded={buttonRounded} as="a" href={primaryButtonUrl}>
-              {primaryButtonText}
-            </PrimaryButton>
+            <Description>
+              <NewlineText props={description} />
+            </Description>
+
           </TextContent>
         </TextColumn>
       </TwoColumn>

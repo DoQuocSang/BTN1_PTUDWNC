@@ -7,12 +7,22 @@ import RestaurantLandingPage from "demos/RestaurantLandingPage"
 import HomePage from "demos/HomePage"
 import "fontawesome"
 import AllProductPage from "demos/AllProductPage"
+import AboutUs from "pages/AboutUs"
+import Login from "pages/Login"
+import Signup from "pages/Signup"
+import ProductDetailPage from "demos/ProductDetailPage"
+import BlogIndex from "pages/BlogIndex"
 
 function App() {
   return (
     <AnimationRevealPage>
-      <HomePage />
-      {/* <AllProductPage /> */}
+      {/* <HomePage /> */}
+      <AllProductPage />
+      {/* <Login /> */}
+      {/* <Signup /> */}
+      {/* <ProductDetailPage /> */}
+      {/* <AboutUs /> */}
+      {/* <BlogIndex /> */}
     </AnimationRevealPage>
   )
 }
