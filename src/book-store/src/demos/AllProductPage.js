@@ -11,7 +11,6 @@ import Footer from "components/footers/FiveColumnWithInputForm.js";
 export default ({ roundedHeaderButton }) => {
     return (
         <AnimationRevealPage>
-            <Header roundedHeaderButton={roundedHeaderButton} />
             <TabGrid
                 heading={
                     <>
@@ -20,7 +19,6 @@ export default ({ roundedHeaderButton }) => {
                 }
             />
             <SubscribeNewsLetterForm />
-            <Footer />
         </AnimationRevealPage>
     );
 }

@@ -20,7 +20,6 @@ const Subheading = tw.span`uppercase tracking-wider text-sm`;
 export default () => {
   return (
     <AnimationRevealPage>
-      <Header />
       <MainFeature1
         subheading={<Subheading>FAHASA NHÀ PHÂN PHỐI SÁCH CHUYÊN NGHIỆP</Subheading>}
         heading="Hệ thống nhà sách FAHASA rộng khắp trên toàn quốc"
@@ -62,7 +61,6 @@ export default () => {
         heading="3 thành viên chủ chốt của Fahasa"
         description="Dưới đây là những người đã sáng lập nên Fahasa và có những đóng góp rất lớn vào sự nghiệp phát triển của công ty, không có họ Fahasa sẽ không đứng ở vị trí ngày hôm nay"
       />
-      <Footer />
     </AnimationRevealPage>
   );
 };

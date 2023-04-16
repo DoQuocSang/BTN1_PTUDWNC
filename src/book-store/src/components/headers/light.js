@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
+import { Routes, Route, Link } from "react-router-dom";
 import { css } from "styled-components/macro"; //eslint-disable-line
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
@@ -112,7 +113,8 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#" className="group relative">
+      <Link to="/all-product">
+      <NavLink className="group" css={tw``}>
         <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
         Danh mục
         <MenuOnHover>
@@ -218,42 +220,54 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
         </MenuOnHover>
       </NavLink>
+      </Link>
 
-
-
-      <NavLink href="/#" className="group relative">
+      <NavLink className="group" css={tw`cursor-pointer`}>
         <FontAwesomeIcon icon={faMagnifyingGlass} css={tw`mr-2 text-base`} />
         Tìm kiếm
         <MenuOnHover>
           <MenuSection flexCol>
-              <ImageFinding src={catFind} />
-              <Actions>
-                <input type="text" placeholder="Nhập tên sách cần tìm..." />
-                <button>Tìm kiếm</button>
-              </Actions>
+            <ImageFinding src={catFind} />
+            <Actions>
+              <input type="text" placeholder="Nhập tên sách cần tìm..." />
+              <button>Tìm kiếm</button>
+            </Actions>
           </MenuSection>
         </MenuOnHover>
       </NavLink>
 
-      <NavLink href="/#">
+      <Link to="/about-us">
+      <NavLink>
         <FontAwesomeIcon icon={faPeopleRoof} css={tw`mr-2 text-base`} />
         Giới thiệu
       </NavLink>
+      </Link>
 
-      <NavLink href="/#">
+      <Link to="/blog">
+      <NavLink>
         <FontAwesomeIcon icon={faFileLines} css={tw`mr-2 text-base`} />
         Bài viết
       </NavLink>
+      </Link>
 
-      <NavLink href="/#">
+      <Link to="/">
+      <NavLink>
         <FontAwesomeIcon icon={faShoppingCart} css={tw`mr-2 text-base`} />
         Giỏ hàng
       </NavLink>
+      </Link>
 
-      <NavLink href="/#" tw="lg:ml-12!">
-        Đăng nhập
-      </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/#">Đăng ký</PrimaryLink>
+      <Link to="/login">
+        <NavLink tw="lg:ml-12!">
+          Đăng nhập
+        </NavLink>
+      </Link>
+
+      <Link to="/signup">
+        <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}>
+          Đăng ký
+        </PrimaryLink>
+      </Link>
     </NavLinks>
   ];
 
@@ -261,10 +275,12 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink href="/">
+    <Link to="/">
+    <LogoLink>
       <img src={logo} alt="logo" />
       Fahasa
     </LogoLink>
+    </Link>
   );
 
   logoLink = logoLink || defaultLogoLink;

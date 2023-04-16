@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
-import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
+import { Container, ContentWithNoPadding } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
@@ -86,12 +86,11 @@ export default ({
   };
   return (
     <AnimationRevealPage>
-      <Header />
       <Container>
-        <ContentWithPaddingXl>
-          <HeadingRow>
+        <ContentWithNoPadding>
+          {/* <HeadingRow>
             <Heading>{headingText}</Heading>
-          </HeadingRow>
+          </HeadingRow> */}
           <Posts>
             {posts.slice(0, visible).map((post, index) => (
               <PostContainer key={index} featured={post.featured}>
@@ -112,9 +111,8 @@ export default ({
               <LoadMoreButton onClick={onLoadMoreClick}>Xem thêm</LoadMoreButton>
             </ButtonContainer>
           )}
-        </ContentWithPaddingXl>
+        </ContentWithNoPadding>
       </Container>
-      <Footer />
     </AnimationRevealPage>
   );
 };
