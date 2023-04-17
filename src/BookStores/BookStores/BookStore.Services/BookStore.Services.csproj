@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Blogs\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Media\" />
+    <Folder Include="Rss\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BookStore.Core\BookStore.Core.csproj" />
+    <ProjectReference Include="..\BookStore.Data\BookStore.Data.csproj" />
+  </ItemGroup>
+
+</Project>
