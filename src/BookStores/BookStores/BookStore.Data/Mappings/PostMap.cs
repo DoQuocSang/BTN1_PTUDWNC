@@ -41,13 +41,13 @@ public class PostMap : IEntityTypeConfiguration<Post>
         builder.Property(p => p.ImageUrl)
             .HasMaxLength(1000);
 
-        //builder.Property(p => p.ViewCount)
-        //    .IsRequired()
-        //    .HasDefaultValue(0);
+        builder.Property(p => p.ViewCount)
+            .IsRequired()
+            .HasDefaultValue(0);
 
-        //builder.Property(p => p.Published)
-        //    .IsRequired()
-        //    .HasDefaultValue(false);
+        builder.Property(p => p.Published)
+            .IsRequired()
+            .HasDefaultValue(false);
 
         builder.Property(p => p.PostedDate)
             .HasColumnType("datetime");
@@ -63,7 +63,7 @@ public class PostMap : IEntityTypeConfiguration<Post>
 
         builder.HasOne(p => p.Author)
             .WithMany(a => a.Posts)
-            .HasForeignKey(p => p.CategoryId)
+            .HasForeignKey(p => p.AuthorId)
             .HasConstraintName("FK_Posts_Authors")
             .OnDelete(DeleteBehavior.Cascade);
 

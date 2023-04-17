@@ -21,15 +21,6 @@ public class AuthorMap : IEntityTypeConfiguration<Author>
             .HasMaxLength(100)
             .IsRequired();
 
-        //builder.Property(a => a.ImageUrl)
-        //    .HasMaxLength(500);
-
-        //builder.Property(a => a.Email)
-        //    .HasMaxLength(150);
-
-        //builder.Property(a => a.JoinedDate)
-        //    .HasColumnType("datetime");
-
         builder.Property(a => a.Notes)
             .HasMaxLength(500);
     }

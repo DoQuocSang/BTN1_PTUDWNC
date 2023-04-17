@@ -11,12 +11,13 @@ public class Author : IEntity
     public string UrlSlug { get; set; }
 
     //public string ImageUrl { get; set; }
-    //// Ngày bắt đầu
+    // Ngày bắt đầu
     //public DateTime JoinedDate { get; set; }
     //public string Email { get; set; }
-    
+
     // Ghi chú
     public string Notes { get; set; }
     // Danh sách bài viết của tác giả
     public IList<Post> Posts { get; set; }
+    public IList<Book> Books { get; set; }
 }

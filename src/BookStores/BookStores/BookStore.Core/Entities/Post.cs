@@ -14,15 +14,17 @@ public class Post : IEntity
     public string Meta { get; set; }
     public string UrlSlug { get; set; }
     public string ImageUrl { get; set; }
-    //// Số Lượt xem
-    //public int ViewCount { get; set; }
-    //// Trạng thái bài viét
-    //public bool Published { get; set; }
+    // Số Lượt xem
+    public int ViewCount { get; set; }
+    // Trạng thái bài viét
+    public bool Published { get; set; }
 
     // Ngày giờ đăng
     public DateTime PostedDate { get; set; }
     // Ngày cập nhật lần cuối
     public DateTime? ModifiedDate { get; set; }
+    // Mã Sách
+
     // Mã chuyên mục
     public int CategoryId { get; set; }
 
@@ -36,5 +38,5 @@ public class Post : IEntity
 
     // Danh sách từ khóa bài viết
     public IList<Tag> Tags { get; set; }
-
+  
 }
