@@ -250,7 +250,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       </NavLink>
       </Link>
 
-      <Link to="/">
+      <Link to="/admin">
       <NavLink>
         <FontAwesomeIcon icon={faShoppingCart} css={tw`mr-2 text-base`} />
         Giỏ hàng

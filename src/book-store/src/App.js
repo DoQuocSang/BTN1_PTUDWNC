@@ -13,24 +13,31 @@ import Login from "pages/Login"
 import Signup from "pages/Signup"
 import ProductDetailPage from "demos/ProductDetailPage"
 import BlogIndex from "pages/BlogIndex"
-import Header from "components/headers/light.js";
-import Footer from "components/footers/SimpleFiveColumn.js";
+import UserLayout from "components/layout/Layout"
+import AdminLayout from "components/admin/layout/Layout"
+
+
 import { Route, Routes } from "react-router-dom"
 
 function App() {
   return (
     <AnimationRevealPage>
-      <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/all-product" element={<AllProductPage />} />
-        <Route path="/product-detail" element={<ProductDetailPage />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/" element={<UserLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/all-product" element={<AllProductPage />} />
+          <Route path="/product-detail" element={<ProductDetailPage />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/blog" element={<BlogIndex />} />
+        </Route>
+
+        <Route path="/admin" element={<AdminLayout />}>
+          {/* <Route path="/" element={<HomePage />} /> */}
+        </Route>
+
       </Routes>
-      <Footer />
       {/* <HomePage /> */}
       {/* <AllProductPage /> */}
       {/* <Login /> */}
