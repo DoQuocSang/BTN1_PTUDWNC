@@ -10,6 +10,7 @@ import { ReactComponent as YoutubeIcon } from "../../images/youtube-icon.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { PaddingContainer } from "components/headers/light";
 
 const Container = tw.div`relative bg-gray-200 -mx-8 -mb-8 px-8`;
 const FiveColumns = tw.div`max-w-screen-xl mx-auto py-16 lg:py-20 flex flex-wrap justify-between`;
@@ -41,96 +42,99 @@ const SocialLink = styled.a`
 
 export default () => {
   return (
-    <Container>
-      <FiveColumns>
-        <WideColumn>
-          <LogoContainer>
-            <LogoImg src={LogoImage} />
-            <LogoText>Fahasa</LogoText>
-          </LogoContainer>
-          <CompanyDescription>
-            Fahasa là cửa hàng kinh danh sách hàng đầu tại Việt Nam.
-            Nếu có bất kì thắc mắc nào hãy liên hệ với chúng tôi qua những đường link bên dưới
-          </CompanyDescription>
+    <PaddingContainer>
+      <Container>
+        <FiveColumns>
+          <WideColumn>
+            <LogoContainer>
+              <LogoImg src={LogoImage} />
+              <LogoText>Fahasa</LogoText>
+            </LogoContainer>
+            <CompanyDescription>
+              Fahasa là cửa hàng kinh danh sách hàng đầu tại Việt Nam.
+              Nếu có bất kì thắc mắc nào hãy liên hệ với chúng tôi qua những đường link bên dưới
+            </CompanyDescription>
 
-          <TextPrimary>
-            <span tw="font-bold">
-              <FontAwesomeIcon icon={faPhone} css={tw`mr-2  text-xs`} />
-              Số điện thoại:
-            </span> 0909.789.789
-          </TextPrimary>
+            <TextPrimary>
+              <span tw="font-bold">
+                <FontAwesomeIcon icon={faPhone} css={tw`mr-2  text-xs`} />
+                Số điện thoại:
+              </span> 0909.789.789
+            </TextPrimary>
 
-          <TextPrimary>
-            <span tw="font-bold">
-              <FontAwesomeIcon icon={faMapLocationDot} css={tw`mr-2  text-xs`} />
-              Địa chỉ:
-            </span> 1 Đường Phù Đổng Thiên Vương, Phường 8, Thành phố Đà Lạt, Lâm Đồng
-          </TextPrimary>
+            <TextPrimary>
+              <span tw="font-bold">
+                <FontAwesomeIcon icon={faMapLocationDot} css={tw`mr-2  text-xs`} />
+                Địa chỉ:
+              </span> 1 Đường Phù Đổng Thiên Vương, Phường 8, Thành phố Đà Lạt, Lâm Đồng
+            </TextPrimary>
 
-          <SocialLinksContainer>
-            <SocialLink href="https://facebook.com">
-              <FacebookIcon />
-            </SocialLink>
-            <SocialLink href="https://twitter.com">
-              <TwitterIcon />
-            </SocialLink>
-            <SocialLink href="https://youtube.com">
-              <YoutubeIcon />
-            </SocialLink>
-          </SocialLinksContainer>
-        </WideColumn>
-        <Column>
-          <ColumnHeading>Lối tắt</ColumnHeading>
-          <LinkList>
-            <LinkListItem>
-              <Link href="#">Danh mục</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">FAQs</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Hỗ trợ</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Giới thiệu</Link>
-            </LinkListItem>
-          </LinkList>
-        </Column>
-        <Column>
-          <ColumnHeading>Tài khoản</ColumnHeading>
-          <LinkList>
-            <LinkListItem>
-              <Link href="#">Đăng nhập</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Chi tiết tài khoản</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Lịch sử mua hàng</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Mục ưa thích</Link>
-            </LinkListItem>
-          </LinkList>
-        </Column>
-        <Column>
-          <ColumnHeading>Hỗ trợ</ColumnHeading>
-          <LinkList>
-            <LinkListItem>
-              <Link href="#">Chính sách đổi trả</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Chính sách bảo hành</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Chính sách vận chuyển</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Phương thức thanh toán</Link>
-            </LinkListItem>
-          </LinkList>
-        </Column>
-      </FiveColumns>
-    </Container>
+            <SocialLinksContainer>
+              <SocialLink href="https://facebook.com">
+                <FacebookIcon />
+              </SocialLink>
+              <SocialLink href="https://twitter.com">
+                <TwitterIcon />
+              </SocialLink>
+              <SocialLink href="https://youtube.com">
+                <YoutubeIcon />
+              </SocialLink>
+            </SocialLinksContainer>
+          </WideColumn>
+          <Column>
+            <ColumnHeading>Lối tắt</ColumnHeading>
+            <LinkList>
+              <LinkListItem>
+                <Link href="#">Danh mục</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">FAQs</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Hỗ trợ</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Giới thiệu</Link>
+              </LinkListItem>
+            </LinkList>
+          </Column>
+          <Column>
+            <ColumnHeading>Tài khoản</ColumnHeading>
+            <LinkList>
+              <LinkListItem>
+                <Link href="#">Đăng nhập</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Chi tiết tài khoản</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Lịch sử mua hàng</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Mục ưa thích</Link>
+              </LinkListItem>
+            </LinkList>
+          </Column>
+          <Column>
+            <ColumnHeading>Hỗ trợ</ColumnHeading>
+            <LinkList>
+              <LinkListItem>
+                <Link href="#">Chính sách đổi trả</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Chính sách bảo hành</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Chính sách vận chuyển</Link>
+              </LinkListItem>
+              <LinkListItem>
+                <Link href="#">Phương thức thanh toán</Link>
+              </LinkListItem>
+            </LinkList>
+          </Column>
+        </FiveColumns>
+      </Container>
+    </PaddingContainer>
+
   );
 };
