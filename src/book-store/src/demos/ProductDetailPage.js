@@ -11,10 +11,8 @@ import SliderCard from "components/cards/ThreeColSlider.js";
 
 export default () => (
   <AnimationRevealPage>
-    <Header />
     <Features />
     <Testimonial />
     <SliderCard HeadingText="Sản phẩm liên quan"/>
-    <Footer />
   </AnimationRevealPage>
 );

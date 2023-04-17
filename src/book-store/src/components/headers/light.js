@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
+import { Routes, Route, Link } from "react-router-dom";
 import { css } from "styled-components/macro"; //eslint-disable-line
 
 import useAnimatedNavToggler from "../../helpers/useAnimatedNavToggler.js";
@@ -26,6 +27,8 @@ const Header = tw.header`
   flex justify-between items-center
   max-w-screen-xl mx-auto
 `;
+
+export const PaddingContainer = tw.div`p-8`;
 
 export const NavLinks = tw.div`inline-block`;
 
@@ -112,148 +115,161 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
    */
   const defaultLinks = [
     <NavLinks key={1}>
-      <NavLink href="/#" className="group relative">
-        <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
-        Danh mục
-        <MenuOnHover>
-          <MenuSection hasBorder>
-            <MenuTitle>
-              <FontAwesomeIcon icon={faBoltLightning} css={tw`mr-2 text-base`} />
-              Truy cập nhanh
-            </MenuTitle>
-            <MenuContainer flexCol>
-              <MenuItem href="#">
-                Sách mới
-              </MenuItem>
-              <MenuItem href="#">
-                Sách bán chạy
-              </MenuItem>
-              <MenuItem href="#">
-                Sách nổi bật
-              </MenuItem>
-              <MenuItem href="#">
-                Đang giảm giá
-              </MenuItem>
-            </MenuContainer>
-          </MenuSection>
-
-          <MenuSection flexCol>
-            <MenuSection>
+      <Link to="/all-product">
+        <NavLink className="group" css={tw``}>
+          <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
+          Danh mục
+          <MenuOnHover>
+            <MenuSection hasBorder>
               <MenuTitle>
-                <FontAwesomeIcon icon={faUserPen} css={tw`mr-2 text-base`} />
-                Tác giả
+                <FontAwesomeIcon icon={faBoltLightning} css={tw`mr-2 text-base`} />
+                Truy cập nhanh
               </MenuTitle>
-              <MenuContainer >
+              <MenuContainer flexCol>
                 <MenuItem href="#">
-                  Sách thiếu nhi
+                  Sách mới
                 </MenuItem>
                 <MenuItem href="#">
-                  Sách văn học
+                  Sách bán chạy
                 </MenuItem>
                 <MenuItem href="#">
                   Sách nổi bật
                 </MenuItem>
                 <MenuItem href="#">
                   Đang giảm giá
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách bán chạy
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách thiếu nhi
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách văn học
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách nổi bật
-                </MenuItem>
-                <MenuItem href="#">
-                  Đang giảm giá
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách bán chạy
                 </MenuItem>
               </MenuContainer>
             </MenuSection>
-            <MenuSection>
-              <MenuTitle>
-                <FontAwesomeIcon icon={faBook} css={tw`mr-2 text-base`} />
-                Thể loại
-              </MenuTitle>
-              <MenuContainer >
-                <MenuItem href="#">
-                  Sách thiếu nhi
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách văn học
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách nổi bật
-                </MenuItem>
-                <MenuItem href="#">
-                  Đang giảm giá
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách bán chạy
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách thiếu nhi
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách văn học
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách nổi bật
-                </MenuItem>
-                <MenuItem href="#">
-                  Đang giảm giá
-                </MenuItem>
-                <MenuItem href="#">
-                  Sách bán chạy
-                </MenuItem>
-              </MenuContainer>
+
+            <MenuSection flexCol>
+              <MenuSection>
+                <MenuTitle>
+                  <FontAwesomeIcon icon={faUserPen} css={tw`mr-2 text-base`} />
+                  Tác giả
+                </MenuTitle>
+                <MenuContainer >
+                  <MenuItem href="#">
+                    Sách thiếu nhi
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách văn học
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách nổi bật
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Đang giảm giá
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách bán chạy
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách thiếu nhi
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách văn học
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách nổi bật
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Đang giảm giá
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách bán chạy
+                  </MenuItem>
+                </MenuContainer>
+              </MenuSection>
+              <MenuSection>
+                <MenuTitle>
+                  <FontAwesomeIcon icon={faBook} css={tw`mr-2 text-base`} />
+                  Thể loại
+                </MenuTitle>
+                <MenuContainer >
+                  <MenuItem href="#">
+                    Sách thiếu nhi
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách văn học
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách nổi bật
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Đang giảm giá
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách bán chạy
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách thiếu nhi
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách văn học
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách nổi bật
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Đang giảm giá
+                  </MenuItem>
+                  <MenuItem href="#">
+                    Sách bán chạy
+                  </MenuItem>
+                </MenuContainer>
+              </MenuSection>
             </MenuSection>
-          </MenuSection>
 
-        </MenuOnHover>
-      </NavLink>
+          </MenuOnHover>
+        </NavLink>
+      </Link>
 
-
-
-      <NavLink href="/#" className="group relative">
+      <NavLink className="group" css={tw`cursor-pointer`}>
         <FontAwesomeIcon icon={faMagnifyingGlass} css={tw`mr-2 text-base`} />
         Tìm kiếm
         <MenuOnHover>
           <MenuSection flexCol>
-              <ImageFinding src={catFind} />
-              <Actions>
-                <input type="text" placeholder="Nhập tên sách cần tìm..." />
-                <button>Tìm kiếm</button>
-              </Actions>
+            <ImageFinding src={catFind} />
+            <Actions>
+              <input type="text" placeholder="Nhập tên sách cần tìm..." />
+              <button>Tìm kiếm</button>
+            </Actions>
           </MenuSection>
         </MenuOnHover>
       </NavLink>
 
-      <NavLink href="/#">
-        <FontAwesomeIcon icon={faPeopleRoof} css={tw`mr-2 text-base`} />
-        Giới thiệu
-      </NavLink>
+      <Link to="/about-us">
+        <NavLink>
+          <FontAwesomeIcon icon={faPeopleRoof} css={tw`mr-2 text-base`} />
+          Giới thiệu
+        </NavLink>
+      </Link>
 
-      <NavLink href="/#">
-        <FontAwesomeIcon icon={faFileLines} css={tw`mr-2 text-base`} />
-        Bài viết
-      </NavLink>
+      <Link to="/blog">
+        <NavLink>
+          <FontAwesomeIcon icon={faFileLines} css={tw`mr-2 text-base`} />
+          Bài viết
+        </NavLink>
+      </Link>
 
-      <NavLink href="/#">
-        <FontAwesomeIcon icon={faShoppingCart} css={tw`mr-2 text-base`} />
-        Giỏ hàng
-      </NavLink>
+      <Link to="/admin">
+        <NavLink>
+          <FontAwesomeIcon icon={faShoppingCart} css={tw`mr-2 text-base`} />
+          Giỏ hàng
+        </NavLink>
+      </Link>
 
-      <NavLink href="/#" tw="lg:ml-12!">
-        Đăng nhập
-      </NavLink>
-      <PrimaryLink css={roundedHeaderButton && tw`rounded-full`} href="/#">Đăng ký</PrimaryLink>
+      <Link to="/login">
+        <NavLink tw="lg:ml-12!">
+          Đăng nhập
+        </NavLink>
+      </Link>
+
+      <Link to="/signup">
+        <PrimaryLink css={roundedHeaderButton && tw`rounded-full`}>
+          Đăng ký
+        </PrimaryLink>
+      </Link>
     </NavLinks>
   ];
 
@@ -261,32 +277,37 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const collapseBreakpointCss = collapseBreakPointCssMap[collapseBreakpointClass];
 
   const defaultLogoLink = (
-    <LogoLink href="/">
-      <img src={logo} alt="logo" />
-      Fahasa
-    </LogoLink>
+    <Link to="/">
+      <LogoLink>
+        <img src={logo} alt="logo" />
+        Fahasa
+      </LogoLink>
+    </Link>
   );
 
   logoLink = logoLink || defaultLogoLink;
   links = links || defaultLinks;
 
   return (
-    <Header className={className || "header-light"}>
-      <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
-        {logoLink}
-        {links}
-      </DesktopNavLinks>
-
-      <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
-        {logoLink}
-        <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks}>
+    <PaddingContainer>
+      <Header className={className || "header-light"}>
+        <DesktopNavLinks css={collapseBreakpointCss.desktopNavLinks}>
+          {logoLink}
           {links}
-        </MobileNavLinks>
-        <NavToggle onClick={toggleNavbar} className={showNavLinks ? "open" : "closed"}>
-          {showNavLinks ? <CloseIcon tw="w-6 h-6" /> : <MenuIcon tw="w-6 h-6" />}
-        </NavToggle>
-      </MobileNavLinksContainer>
-    </Header>
+        </DesktopNavLinks>
+
+        <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
+          {logoLink}
+          <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks}>
+            {links}
+          </MobileNavLinks>
+          <NavToggle onClick={toggleNavbar} className={showNavLinks ? "open" : "closed"}>
+            {showNavLinks ? <CloseIcon tw="w-6 h-6" /> : <MenuIcon tw="w-6 h-6" />}
+          </NavToggle>
+        </MobileNavLinksContainer>
+      </Header>
+    </PaddingContainer>
+
   );
 };
 

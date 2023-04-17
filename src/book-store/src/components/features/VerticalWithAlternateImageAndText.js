@@ -17,7 +17,7 @@ const HeadingDescription = tw.p`mt-4 font-medium text-gray-600 text-center max-w
 const Content = tw.div`mt-16`;
 
 const Card = styled.div(props => [
-  tw`mt-24 md:flex justify-center items-center`,
+  tw`mt-12 md:flex justify-center items-center`,
   props.reversed ? tw`flex-row-reverse` : "flex-row"
 ]);
 const Image = styled.div(props => [

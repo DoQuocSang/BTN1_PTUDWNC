@@ -15,6 +15,7 @@ import  Book3  from "images/book3.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw.h2`text-4xl sm:text-4xl font-black tracking-wide text-center`
@@ -211,7 +212,9 @@ export default ({
                       }}
                       transition={{ duration: 0.3 }}
                     >
+                      <Link to="/product-detail">
                       <CardButton>Mua ngay</CardButton>
+                      </Link>
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>

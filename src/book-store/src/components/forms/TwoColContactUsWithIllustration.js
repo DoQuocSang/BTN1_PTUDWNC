@@ -32,7 +32,7 @@ const SubmitButton = tw(PrimaryButtonBase)`inline-block lg:ml-6 mt-6 lg:mt-0`
 
 export default ({
   subheading = "Liên hệ với chúng tôi",
-  heading = <>Hãy điền email của bạn để được <span tw="text-primary-500">Fahasa</span><wbr/> hỗ trợ.</>,
+  heading = <>Hãy điền email của bạn để được <span tw="text-primary-500">Fahasa</span><wbr/> hỗ trợ</>,
   description = "Nếu bạn có thắc mắc và cần được tư vấn hãy điền Email của mình vào ô bên dưới để được hỗ trợ một cách nhanh nhất",
   submitButtonText = "Gửi",
   formAction = "#",

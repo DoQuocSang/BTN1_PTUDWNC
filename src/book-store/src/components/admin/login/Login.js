@@ -4,7 +4,7 @@ import { Container as ContainerBase } from "components/misc/Layouts";
 import tw from "twin.macro";
 import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
-import illustration from "images/login-illustration.svg";
+import illustration from "images/design-illustration.svg";
 import logo from "images/logo.png";
 import googleIconImageSrc from "images/google-icon.png";
 import facebookIconImageSrc from "images/facebook-icon.png";
@@ -56,7 +56,7 @@ const IllustrationImage = styled.div`
 export default ({
   logoLinkUrl = "#",
   illustrationImageSrc = illustration,
-  headingText = "Đăng nhập",
+  headingText = "Đăng nhập Admin",
   socialButtons = [
     {
       iconImageSrc: googleIconImageSrc,
@@ -95,33 +95,12 @@ export default ({
                 </SubmitButton>
               </Form>
 
-              <p tw="mt-6 text-xs text-gray-600 text-center">
+              {/* <p tw="mt-6 text-xs text-gray-600 text-center">
                 <a href={forgotPasswordUrl} tw="border-b border-gray-500 border-dotted">
                   Quên mật khẩu?
                 </a>
-              </p>
-
-              <DividerTextContainer>
-                <DividerText>Hoặc sử dụng phương thức khác</DividerText>
-              </DividerTextContainer>
-
-              <SocialButtonsContainer>
-                {socialButtons.map((socialButton, index) => (
-                  <SocialButton key={index} href={socialButton.url}>
-                    <span className="iconContainer">
-                      <img src={socialButton.iconImageSrc} className="icon" alt=""/>
-                    </span>
-                    <span className="text">{socialButton.text}</span>
-                  </SocialButton>
-                ))}
-              </SocialButtonsContainer>
-
-              <p tw="mt-8 text-sm text-gray-600 text-center">
-                Chưa có tài khoản?{" "}
-                <a href={signupUrl} tw="border-b border-gray-500 border-dotted">
-                  Đăng ký ngay
-                </a>
-              </p>
+              </p> */}
+              
             </FormContainer>
           </MainContent>
         </MainContainer>

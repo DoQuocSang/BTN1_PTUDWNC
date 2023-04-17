@@ -16,7 +16,7 @@ const PrimaryBackgroundContainer = tw(Container)`-mx-8 px-8`;
 
 const HeadingContainer = tw.div``;
 const Subheading = tw(SubheadingBase)`text-center mb-4`;
-const Heading = tw(SectionHeading)``;
+const Heading = tw(SectionHeading)`text-4xl`;
 const Description = tw(SectionDescription)`mx-auto text-center text-secondary-100`;
 
 const TestimonialsSlider = styled(Slider)`

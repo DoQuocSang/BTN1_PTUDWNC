@@ -20,6 +20,5 @@ export default () => (
     <SliderCard />
     <Blog />
     <SubscribeNewsLetterForm />
-    <Footer />
   </AnimationRevealPage>
 );
