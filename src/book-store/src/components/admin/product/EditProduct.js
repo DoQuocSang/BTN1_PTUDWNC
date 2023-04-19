@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
 import Book1 from "images/book1.png"
 import Book2 from "images/book2.jpg"
 import Book3 from "images/book3.jpg"
@@ -8,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+
 
 export default () => {
 
@@ -81,12 +81,10 @@ export default () => {
                                     <span className="text-base font-normal text-gray-500">Các sách hiện có trong database</span>
                                 </div>
                                 <div className="flex-shrink-0">
-                                    <Link to="/admin/dashboard/add-product">
-                                        <a className="hidden sm:inline-flex ml-5 text-white bg-teal-400 hover:bg-teal-600 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
-                                            <FontAwesomeIcon icon={faPlus} className="text-base mr-3" />
-                                            Thêm
-                                        </a>
-                                    </Link>
+                                    <a href="#" className="hidden sm:inline-flex ml-5 text-white bg-teal-400 hover:bg-teal-600 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
+                                        <FontAwesomeIcon icon={faPlus} className="text-base mr-3" />
+                                        Thêm
+                                    </a>
                                 </div>
                             </div>
                             <div className="flex flex-col mt-8">

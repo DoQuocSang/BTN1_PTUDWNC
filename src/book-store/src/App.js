@@ -16,6 +16,7 @@ import UserLayout from "components/layout/Layout"
 import AdminLayout from "components/admin/layout/Layout"
 import Dashboard from "components/admin/dashboard/Dashboard"
 import AllProduct from "components/admin/product/AllProduct"
+import AddProduct from "components/admin/product/AddProduct"
 import AdminLogin from "components/admin/login/Login"
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/dashboard/all-product" element={<AllProduct />} />
+          <Route path="/admin/dashboard/add-product" element={<AddProduct />} />
         </Route>
 
       </Routes>
