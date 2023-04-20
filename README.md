@@ -11,7 +11,7 @@
 - &nbsp; Xem chi tiết bài viết
 - &nbsp; Hiển thị các trang thành phần: Đăng ký, đăng nhập, giới thiệu
 
-* Trang Admin
+<h5>Trang Admin</h5
 - &nbsp; Hiển thị danh sách loại sách
 - &nbsp; Thêm xóa sửa loại sách
 - &nbsp; Hiển thị danh sách sản phẩm
