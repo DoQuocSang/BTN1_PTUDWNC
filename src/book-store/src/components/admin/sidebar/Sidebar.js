@@ -1,5 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook, faTags } from "@fortawesome/free-solid-svg-icons";
+import { faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faFileLines } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
 
 export default () => {
 
@@ -25,47 +32,89 @@ export default () => {
                         </li>
                         <li>
                            <Link to="/admin/dashboard">
-                              <a className="text-sm text-gray-900 font-semibold rounded-lg flex items-center p-2 hover:bg-gray-100 group">
-                                 <svg className="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <p className="text-sm text-gray-900 font-semibold rounded-lg flex items-center p-2 hover:bg-gray-100 group">
+                                 <svg className="w-5 h-5 text-gray-500 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                                     <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                                  </svg>
                                  <span className="ml-3">
                                     Quản lý chung
                                  </span>
-                              </a>
+                              </p>
                            </Link>
                         </li>
                         <li>
                            <Link to="/admin/dashboard/all-product">
-                              <a target="_blank" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-                                 <svg className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                              <p target="_blank" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                 <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <FontAwesomeIcon icon={faBook} />
                                  </svg>
                                  <span className="ml-3 flex-1 whitespace-nowrap">
                                     Sách
                                  </span>
                                  {/* <span className="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">Pro</span> */}
-                              </a>
+                              </p>
                            </Link>
                         </li>
                         <li>
-                           <a href="#" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
-                              <svg className="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                              </svg>
-                              <span className="ml-3 flex-1 whitespace-nowrap">Loại sách</span>
-                           </a>
+                           <Link to="/admin/dashboard/all-category">
+                              <p className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                 <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <FontAwesomeIcon icon={faBookmark} />
+                                 </svg>
+                                 <span className="ml-3 flex-1 whitespace-nowrap">Loại sách</span>
+                              </p>
+                           </Link>
+                        </li>
+                        <li>
+                           <Link to="/admin/dashboard/all-author">
+                              <p className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                 <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <FontAwesomeIcon icon={faUserPen} />
+                                 </svg>
+                                 <span className="ml-3 flex-1 whitespace-nowrap">Tác giả</span>
+                              </p>
+                           </Link>
+                        </li>
+                        <li>
+                           <Link to="/admin/dashboard/all-blog">
+                              <p href="#" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                 <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <FontAwesomeIcon icon={faFileLines} />
+                                 </svg>
+                                 <span className="ml-3 flex-1 whitespace-nowrap">Bài viết</span>
+                              </p>
+                           </Link>
+                        </li>
+                        <li>
+                           <Link to="/admin/dashboard/all-tag">
+                              <p href="#" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                 <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <FontAwesomeIcon icon={faTags} />
+                                 </svg>
+                                 <span className="ml-3 flex-1 whitespace-nowrap">Thẻ</span>
+                              </p>
+                           </Link>
+                        </li>
+                        <li>
+                           <Link to="/admin/dashboard/all-user">
+                              <p href="#" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
+                                 <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <FontAwesomeIcon icon={faUser} />
+                                 </svg>
+                                 <span className="ml-3 flex-1 whitespace-nowrap">Tài khoản</span>
+                              </p>
+                           </Link>
                         </li>
                      </ul>
-                     <div className="space-y-2 pt-3 px-3">
-                        <a href="#" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
+                     {/* <div className="space-y-2 pt-3 px-3">
+                        <p href="#" className="text-sm text-gray-900 font-semibold rounded-lg hover:bg-gray-100 group transition duration-75 flex items-center p-2">
                            <svg className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gem" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path fill="currentColor" d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z"></path>
                            </svg>
                            <span className="ml-4">Đăng xuất</span>
-                        </a>
-                     </div>
+                        </p>
+                     </div> */}
                   </div>
                </div>
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "images/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +7,7 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default () => {
 
-  return (
+   return (
       <nav className="bg-white border-b border-gray-200 fixed z-30 w-full">
          <div className="px-3 py-3 lg:px-5 lg:pl-3 shadow-md">
             <div className="flex items-center justify-between">
@@ -19,10 +20,13 @@ export default () => {
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                      </svg>
                   </button>
-                  <a href="#" className="text-xl font-bold flex items-center lg:ml-2.5">
-                  <img src={Logo} className="h-10 mr-2" alt="Windster Logo"/>
-                  <span className="self-center whitespace-nowrap text-2xl font-extrabold">Fahasa</span>
-                  </a>
+                  <Link to="/">
+                     <a className="text-xl font-bold flex items-center lg:ml-2.5 hover:text-amber-500 transition duration-300">
+                        <img src={Logo} className="h-10 mr-2" alt="Windster Logo" />
+                        <span className="self-center whitespace-nowrap text-2xl font-extrabold">Fahasa</span>
+                     </a>
+                  </Link>
+
                   <form action="#" method="GET" className="hidden lg:block lg:pl-32">
                      <label for="topbar-search" className="sr-only">Tìm kiếm</label>
                      <div className="mt-1 relative lg:w-64">
@@ -31,7 +35,7 @@ export default () => {
                               <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                            </svg>
                         </div>
-                        <input type="text" name="email" id="topbar-search" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-full focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5" placeholder="Tìm kiếm"/>
+                        <input type="text" name="email" id="topbar-search" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-full focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5" placeholder="Tìm kiếm" />
                      </div>
                   </form>
                </div>
@@ -43,7 +47,7 @@ export default () => {
                      </svg>
                   </button>
                   <div className="hidden lg:flex items-center">
-                  <img className="h-8 w-8 rounded-lg mx-3" src="https://demo.themesberg.com/windster/images/users/michael-gough.png" alt="Neil image" />
+                     <img className="h-8 w-8 rounded-lg mx-3" src="https://demo.themesberg.com/windster/images/users/michael-gough.png" alt="Neil image" />
                      <span className="text-base font-bold text-gray-500 mr-5">
                         Sang Đỗ
                      </span>
@@ -51,7 +55,7 @@ export default () => {
                         <a className="github-button" href="#" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themesberg/windster-tailwind-css-dashboard on GitHub">Star</a>
                      </div> */}
                   </div>
-                  <a href="#" className="hidden sm:inline-flex ml-5 text-white bg-amber-400 hover:bg-purple-500 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
+                  <a href="#" className="hidden transition duration-300 sm:inline-flex ml-5 text-white bg-amber-400 hover:bg-purple-500 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
                      <FontAwesomeIcon icon={faRightFromBracket} className="text-base mr-3" />
                      Đăng xuất
                   </a>
@@ -59,6 +63,6 @@ export default () => {
             </div>
          </div>
       </nav>
-  );
+   );
 }
 
