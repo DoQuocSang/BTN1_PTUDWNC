@@ -27,16 +27,16 @@ namespace TatBlog.WinApp
 
             seeder.Initialize();
 
-            //var authors = context.Authors.ToList();
+            var accounts = context.Accounts.ToList();
 
-            //Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}",
-            //    "ID", "Full Name", "Email", "Joined Date");
+            Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}",
+                "id", " name", "email", "pass");
 
-            //foreach (var author in authors) 
-            //{
-            //    Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12:MM/dd/yyyy}",
-            //        author.Id, author.FullName, author.Email, author.JoinedDate);
-            //}
+            foreach (var account in accounts)
+            {
+                Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}",
+                    account.Id, account.NameAccount, account.EmailAccount,account.Pass);
+            }
             //==================================================
 
             //Hiển thị bài viết

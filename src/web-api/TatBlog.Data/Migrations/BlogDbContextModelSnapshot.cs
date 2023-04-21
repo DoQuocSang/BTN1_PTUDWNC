@@ -17,7 +17,7 @@ namespace TatBlog.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -35,6 +35,39 @@ namespace TatBlog.Data.Migrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("PostTags", (string)null);
+                });
+
+            modelBuilder.Entity("TatBlog.Core.Entities.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmailAccount")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("NameAccount")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Pass")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Account", (string)null);
                 });
 
             modelBuilder.Entity("TatBlog.Core.Entities.Author", b =>
@@ -217,6 +250,13 @@ namespace TatBlog.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TatBlog.Core.Entities.Account", b =>
+                {
+                    b.HasOne("TatBlog.Core.Entities.Account", null)
+                        .WithMany("Accounts")
+                        .HasForeignKey("AccountId");
+                });
+
             modelBuilder.Entity("TatBlog.Core.Entities.Post", b =>
                 {
                     b.HasOne("TatBlog.Core.Entities.Author", "Author")
@@ -236,6 +276,11 @@ namespace TatBlog.Data.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("TatBlog.Core.Entities.Account", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 
             modelBuilder.Entity("TatBlog.Core.Entities.Author", b =>

@@ -20,13 +20,32 @@ namespace TatBlog.Data.Seeders
         public void Initialize()
         {
             _dbContext.Database.EnsureCreated();
-
+            var accounts = AddAccounts();
             if (_dbContext.Posts.Any()) return;
-
+            
             var authors = AddAuthors();
             var categories = AddCategories();
             var tags = AddTags();
             var posts = AddPosts(authors, categories, tags);
+        }
+
+        private IList<Account> AddAccounts()
+        {
+            var accounts = new List<Account>()
+            {
+                new()
+                {
+                    NameAccount = "Hoang",
+                    EmailAccount = "hoang@gmail.com",
+                    Pass = "123dsd",
+                },
+            };
+
+            _dbContext.Accounts.AddRange(accounts);
+            _dbContext.SaveChanges();
+
+            return accounts;
+
         }
 
         private IList<Author> AddAuthors() 
