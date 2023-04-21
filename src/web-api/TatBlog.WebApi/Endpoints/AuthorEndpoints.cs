@@ -95,6 +95,8 @@ namespace TatBlog.WebApi.Endpoints
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
 
+
+
         private static async Task<IResult> GetAuthorDetails(
             int id,
             IAuthorRepository authorRepository,

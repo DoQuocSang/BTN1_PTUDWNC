@@ -38,6 +38,15 @@ namespace TatBlog.Data.Seeders
                     NameAccount = "Hoang",
                     EmailAccount = "hoang@gmail.com",
                     Pass = "123dsd",
+                    Type = true,
+                },
+
+                new()
+                {
+                    NameAccount = "Admin",
+                    EmailAccount = "Admin@gmail.com",
+                    Pass = "123dsd",
+                    Type = false,
                 },
             };
 

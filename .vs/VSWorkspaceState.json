@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\web-api",
+    "\\src\\web-api\\TatBlog.Data",
+    "\\src\\web-api\\TatBlog.Data\\Contexts"
+  ],
+  "SelectedNode": "\\src\\web-api\\TatBlog.Data\\Contexts\\BlogDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}

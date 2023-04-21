@@ -21,22 +21,22 @@ namespace TatBlog.WinApp
         {
             //Test danh sách tác giả
             //==================================================
-            var context = new BlogDbContext();
+            //var context = new BlogDbContext();
 
-            var seeder = new DataSeeder(context);
+            //var seeder = new DataSeeder(context);
 
-            seeder.Initialize();
+            //seeder.Initialize();
 
-            var accounts = context.Accounts.ToList();
+            //var accounts = context.Accounts.ToList();
 
-            Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}",
-                "id", " name", "email", "pass");
+            //Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}{4,12}",
+            //    "id", " name", "email", "pass","type");
 
-            foreach (var account in accounts)
-            {
-                Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}",
-                    account.Id, account.NameAccount, account.EmailAccount,account.Pass);
-            }
+            //foreach (var account in accounts)
+            //{
+            //    Console.WriteLine("{0,-4}{1,-30}{2,-30}{3,12}{4,12}",
+            //        account.Id, account.NameAccount, account.EmailAccount,account.Pass,account.Type);
+            //}
             //==================================================
 
             //Hiển thị bài viết
@@ -73,19 +73,17 @@ namespace TatBlog.WinApp
             //==================================================
             //var context = new BlogDbContext();
 
-            //IBlogRepository blogRepo = new BlogRepository(context);
+            //IAccountRepository blogRepo = new AccountRepository(context);
 
-            //var posts = await blogRepo.GetPopularArticleAsync(3);
+            //var accounts = await blogRepo.GetAccountsAsync();
 
-            //foreach (var post in posts)
+            //foreach (var account in accounts)
             //{
-            //    Console.WriteLine("ID        : {0}", post.Id);
-            //    Console.WriteLine("Title     : {0}", post.Title);
-            //    Console.WriteLine("View      : {0}", post.ViewCount);
-            //    Console.WriteLine("Date      : {0:MM/dd/yyyy}", post.PostedDate);
-            //    Console.WriteLine("Author    : {0}", post.Author);
-            //    Console.WriteLine("Category  : {0}", post.Category);
-            //    Console.WriteLine("".PadRight(80, '-'));
+            //    Console.WriteLine("ID        : {0}", account.Id);
+            //    Console.WriteLine("Name     : {0}", account.NameAccount);
+            //    Console.WriteLine("Email    : {0}", account.EmailAccount);
+            //    Console.WriteLine("Pass      : {0}", account.Pass);
+            //    Console.WriteLine("Type    : {0}", account.Type);
             //}
             //==================================================
 

@@ -45,9 +45,6 @@ namespace TatBlog.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<string>("EmailAccount")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -63,9 +60,12 @@ namespace TatBlog.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("Type")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
-                    b.HasIndex("AccountId");
+                    b.HasKey("Id");
 
                     b.ToTable("Account", (string)null);
                 });
@@ -250,13 +250,6 @@ namespace TatBlog.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TatBlog.Core.Entities.Account", b =>
-                {
-                    b.HasOne("TatBlog.Core.Entities.Account", null)
-                        .WithMany("Accounts")
-                        .HasForeignKey("AccountId");
-                });
-
             modelBuilder.Entity("TatBlog.Core.Entities.Post", b =>
                 {
                     b.HasOne("TatBlog.Core.Entities.Author", "Author")
@@ -276,11 +269,6 @@ namespace TatBlog.Data.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("TatBlog.Core.Entities.Account", b =>
-                {
-                    b.Navigation("Accounts");
                 });
 
             modelBuilder.Entity("TatBlog.Core.Entities.Author", b =>

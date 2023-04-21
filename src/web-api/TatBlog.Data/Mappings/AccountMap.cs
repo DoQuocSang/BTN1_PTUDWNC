@@ -28,6 +28,10 @@ namespace TatBlog.Data.Mappings
             builder.Property(a => a.Pass)
                .IsRequired()
                .HasMaxLength(100);
+
+            builder.Property(a => a.Type)
+               .IsRequired()
+               .HasDefaultValue(false);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TatBlog.Core.Entities
         public string NameAccount { get; set; }
         public string EmailAccount { get; set; }
         public string Pass { get; set; }
-        public IList<Account> Accounts { get; set; }
+        public bool Type { get; set; }
     }
 
 }

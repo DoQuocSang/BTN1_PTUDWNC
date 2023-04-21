@@ -25,6 +25,11 @@ namespace TatBlog.WebApi.Mapsters
             config.NewConfig<CategoryEditModel, Category>();
 
 
+            config.NewConfig<Account, AccountDto>();
+            config.NewConfig<Account, AccountItem>();
+
+
+
             config.NewConfig<Post, PostDto>();
             config.NewConfig<Post, PostDetail>();
             config.NewConfig<PostEditModel, Post>();
