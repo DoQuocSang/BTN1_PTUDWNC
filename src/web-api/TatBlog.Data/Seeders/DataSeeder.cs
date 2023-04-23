@@ -164,33 +164,34 @@ namespace TatBlog.Data.Seeders
                 IList<Author> authors,
                 IList<Category> categories,
                 IList<Tag> tags
+           
             )
         {
             var posts = new List<Post>()
             {
                 new()
-                {
+                {   
                     Title = "Tôi thấy hoa vàng trên cỏ xanh",
                     ShortDescription = "Là một tiểu thuyết dành cho thanh thiếu niên của nhà văn Nguyễn Nhật Ánh, xuất bản lần đầu tại Việt Nam " +
                     "vào ngày 9 tháng 12 năm 2010 bởi Nhà xuất bản Trẻ với phần tranh minh họa do Đỗ Hoàng Tường thực hiện.",
                     Description = "Câu chuyện là những trang nhật ký về cuộc sống thường ngày và tâm tư của cậu bé Thiều. Thiều đang là học sinh lớp 7 sống ở một vùng quê nghèo, cùng với người em trai tên Tường. Tường là một cậu bé dễ thương, hiền lành, bao dung, rất yêu mến anh trai và thích chơi đùa với nhiều loài động vật gồm cả sâu bọ, rắn rết." +
                     " Cậu bé sống nội tâm, ham đọc sách và rất say mê những câu chuyện cổ tích, đặc biệt là truyện Cóc tía, chính vì vậy mà cậu nuôi nấng một con cóc dưới gầm giường và đặt tên cho nó là \"Cu Cậu”.",
                     Meta = "Toi thay hoa vang tren co xanh",
-                    UrlSlug = "oi-thay-hoa-vang-tren-co-xanh",
+                    UrlSlug = "toi-thay-hoa-vang-tren-co-xanh",
                     Published = true,
                     PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
                     ModifiedDate = null,
-                    ViewCount = 10,
+                    ViewCount = 1860,
                     Author = authors[0],
                     Category = categories[3],
                     Tags = new List<Tag>()
                     {
-                        tags[0]
+                        tags[3]
                     }
                 },
 
                 new()
-                {
+                {   
                     Title = "Mắt biếc",
                     ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
                     " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
@@ -296,58 +297,63 @@ namespace TatBlog.Data.Seeders
 
                 new()
                 {
-                    Title = "Why do we use it?",
-                    ShortDescription = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                    Description = "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-                    Meta = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                    UrlSlug = "why-do-we-use-it",
+                      Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
                     Published = true,
-                    PostedDate = new DateTime(2022, 6, 10, 9, 10, 0),
+                    PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
                     ModifiedDate = null,
-                    ViewCount = 601,
-                    Author = authors[2],
-                    Category = categories[5],
+                    ViewCount = 200,
+                    Author = authors[0],
+                    Category = categories[3],
                     Tags = new List<Tag>()
                     {
-                        tags[1]
+                        tags[10]
+                    }
+                },
+
+                new()
+                {   Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
+                    Published = true,
+                    PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
+                    ModifiedDate = null,
+                    ViewCount = 200,
+                    Author = authors[0],
+                    Category = categories[3],
+                    Tags = new List<Tag>()
+                    {
+                        tags[10]
                     }
                 },
 
                 new()
                 {
-                    Title = "Where can I get some?",
-                    ShortDescription = "There are many variations of passages of Lorem Ipsum available",
-                    Description = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
-                    Meta = "There are many variations of passages of Lorem Ipsum available",
-                    UrlSlug = "where-can-i-get-some",
+                      Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
                     Published = true,
-                    PostedDate = new DateTime(2023, 2, 10, 3, 20, 0),
+                    PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
                     ModifiedDate = null,
-                    ViewCount = 948,
-                    Author = authors[2],
-                    Category = categories[7],
+                    ViewCount = 200,
+                    Author = authors[0],
+                    Category = categories[3],
                     Tags = new List<Tag>()
                     {
-                        tags[17]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Section 1.10.32 of \"de Finibus Bonorum et Malorum\"",
-                    ShortDescription = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
-                    Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-                    Meta = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
-                    UrlSlug = "section-11032-of-\"de-finibus-bonorum-et-malorum\"",
-                    Published = true,
-                    PostedDate = new DateTime(2021, 10, 30, 12, 2, 0),
-                    ModifiedDate = null,
-                    ViewCount = 789,
-                    Author = authors[2],
-                    Category = categories[9],
-                    Tags = new List<Tag>()
-                    {
-                        tags[7]
+                        tags[10]
                     }
                 },
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatBlog.Core.Contracts;
 
 namespace TatBlog.Core.Entities
 {
-    public class Cart
+    public class Cart : IEntity
     {
         public int Id { get; set; }
         // Id sản phẩm

@@ -7,13 +7,17 @@ using System.Text;
 using System.Threading.Tasks;
 using TatBlog.Core.Entities;
 
+
 namespace TatBlog.Data.Mappings
 {
-    public void Configure(EntityTypeBuilder<Cart> builder)
+    public class CartMap : IEntityTypeConfiguration<Cart>
     {
-        builder.ToTable("Carts");
+        public void Configure(EntityTypeBuilder<Cart> builder)
+        {
+            builder.ToTable("Carts");
 
-        builder.HasKey(a => a.Id);
+            builder.HasKey(a => a.Id);
 
+        }
     }
 }
