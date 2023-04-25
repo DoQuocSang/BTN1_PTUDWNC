@@ -17,7 +17,7 @@ namespace TatBlog.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -73,6 +73,116 @@ namespace TatBlog.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Author", (string)null);
+                });
+
+            modelBuilder.Entity("TatBlog.Core.Entities.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AverageStar")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverForm")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Meta")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("PostedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PublishCompany")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StarNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("Supplier")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("UrlSlug")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Books", (string)null);
+                });
+
+            modelBuilder.Entity("TatBlog.Core.Entities.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("TatBlog.Core.Entities.Category", b =>
@@ -217,6 +327,31 @@ namespace TatBlog.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TatBlog.Core.Entities.Book", b =>
+                {
+                    b.HasOne("TatBlog.Core.Entities.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Books_Authors");
+
+                    b.HasOne("TatBlog.Core.Entities.Cart", null)
+                        .WithMany("Books")
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("TatBlog.Core.Entities.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Books_Categories");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("TatBlog.Core.Entities.Post", b =>
                 {
                     b.HasOne("TatBlog.Core.Entities.Author", "Author")
@@ -240,11 +375,20 @@ namespace TatBlog.Data.Migrations
 
             modelBuilder.Entity("TatBlog.Core.Entities.Author", b =>
                 {
+                    b.Navigation("Books");
+
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("TatBlog.Core.Entities.Cart", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("TatBlog.Core.Entities.Category", b =>
                 {
+                    b.Navigation("Books");
+
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

@@ -357,24 +357,6 @@ namespace TatBlog.Data.Seeders
                     }
                 },
 
-                new()
-                {
-                    Title = "Nulla varius justo non pharetra molestie",
-                    ShortDescription = "Aenean gravida iaculis metus, quis malesuada lacus porta non. Duis laoreet, augue ac gravida dignissim",
-                    Description = "Phasellus varius nisi non orci gravida, vel placerat lacus sagittis. Suspendisse placerat, nibh in finibus posuere, libero ex rhoncus neque, vitae vulputate velit leo id nisi. In convallis, nunc et iaculis convallis, tortor velit mollis lorem, malesuada imperdiet libero nunc et nisl. Duis fringilla cursus ante, a pretium eros pulvinar sed. Fusce sagittis tempor arcu in egestas. Morbi at consequat magna. Phasellus sed purus a arcu ornare semper. Fusce ultricies fringilla aliquet. Integer dapibus malesuada elit non euismod. Nullam rutrum tincidunt rhoncus. Nunc nunc risus, mattis non ultrices sit amet, congue congue ipsum. Quisque nisl justo, aliquam vel arcu sit amet, molestie mattis sapien.\r\n\r\nCras porttitor justo quis tortor gravida, ac varius sapien eleifend. Etiam feugiat mi at sapien feugiat, porttitor ullamcorper leo luctus. Nam volutpat hendrerit augue, sit amet commodo augue viverra quis. Proin id lectus quam. Etiam tincidunt est a sollicitudin ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In sodales felis eu suscipit mattis. Duis orci enim, pretium in consequat ut, dignissim ut eros. Donec eget odio id mi tincidunt condimentum vitae quis magna. Quisque rhoncus odio vitae justo faucibus fringilla.",
-                    Meta = "Aenean gravida iaculis metus, quis malesuada lacus porta non. Duis laoreet, augue ac gravida dignissim",
-                    UrlSlug = "nulla-varius-justo-non-pharetra-molestie",
-                    Published = true,
-                    PostedDate = new DateTime(2022, 3, 3, 2, 27, 0),
-                    ModifiedDate = null,
-                    ViewCount = 1085,
-                    Author = authors[3],
-                    Category = categories[4],
-                    Tags = new List<Tag>()
-                    {
-                        tags[2]
-                    }
-                },
 
                 //================================================10
 
