@@ -20,9 +20,9 @@ namespace TatBlog.Data.Seeders
         public void Initialize()
         {
             _dbContext.Database.EnsureCreated();
-            var accounts = AddAccounts();
+           
             if (_dbContext.Posts.Any()) return;
-            
+            var accounts = AddAccounts();
             var authors = AddAuthors();
             var categories = AddCategories();
             var tags = AddTags();
@@ -57,51 +57,74 @@ namespace TatBlog.Data.Seeders
 
         }
 
-        private IList<Author> AddAuthors() 
+        private IList<Author> AddAuthors()
         {
             var authors = new List<Author>()
             {
                 new()
                 {
-                    FullName = "Jason Mouth",
-                    UrlSlug = "jason-mouth",
-                    Email = "json@gmail.com",
-                    JoinedDate = new DateTime(2020, 4, 21)
+                    FullName = "Nguyễn Nhật Ánh",
+                    UrlSlug = "nguyen-nhat-anh",
+                    Email = "nguyen-nhat-anh.com",
+                    JoinedDate = new DateTime(2020, 4, 21),
+                    Notes = "Nguyễn Nhật Ánh là một nhà văn, nhà thơ, bình luận viên Việt Nam." +
+                    "Ông được biết đến qua nhiều tác phẩm văn học về đề tài tuổi trẻ, các tác phẩm của ông " +
+                    "rất được độc giả ưa chuộng và nhiều tác phẩm đã được chuyển thể thành phim"
                 },
                 new()
                 {
-                    FullName = "Jessica Wonder",
-                    UrlSlug = "jessica-wonder",
-                    Email = "jessica665@motip.com",
-                    JoinedDate = new DateTime(2020, 4, 19)
+                    FullName = "Đoàn Giỏi",
+                    UrlSlug = "doan-gioi",
+                    Email = "doan-gioi.com",
+                    JoinedDate = new DateTime(2020, 4, 19),
+                    Notes ="Đoàn Giỏi (17 tháng 5 năm 1925 – 2 tháng 4 năm 1989), là một nhà văn Việt Nam, " +
+                    "hội viên Hội Nhà văn Việt Nam từ năm 1957. Ông có những bút danh khác như: Nguyễn Hoài, Nguyễn Phú Lễ, Huyền Tư"
                 },
                 new()
                 {
-                    FullName = "Quang Van Suong",
-                    UrlSlug = "quang-van-suong",
-                    Email = "suong@motip.com",
-                    JoinedDate = new DateTime(2019, 5, 1)
+                    FullName = "Dale Carnegie",
+                    UrlSlug = "dale-carnegie",
+                    Email = "dale-carnegie.com",
+                    JoinedDate = new DateTime(2019, 5, 1),
+                    Notes ="Dale Breckenridge Carnegie là một nhà văn và nhà thuyết trình Mỹ " +
+                    "và là người phát triển các lớp tự giáo dục, nghệ thuật bán hàng, huấn luyện đoàn thể, " +
+                    "nói trước công chúng và các kỹ năng giao tiếp giữa mọi người"
                 },
                 new()
                 {
-                    FullName = "Tran Dinh Minh Nhat",
-                    UrlSlug = "tran-dinh-minh-nhat",
-                    Email = "nhat@motip.com",
-                    JoinedDate = new DateTime(2020, 12, 10)
+                    FullName = "Paulo Coelho",
+                    UrlSlug = "paulo-coelho",
+                    Email = "paulo-coelho.com",
+                    JoinedDate = new DateTime(2020, 12, 10),
+                    Notes = "Paulo Coelho (sinh ngày 24 tháng 8 năm 1947) là tiểu thuyết gia nổi tiếng người Brasil"
                 },
                 new()
                 {
-                    FullName = "Dong Ngan Quynh",
-                    UrlSlug = "dong-ngan-quynh",
-                    Email = "ty3005@gmail.com",
-                    JoinedDate = new DateTime(2020, 5, 30)
+                    FullName = "Nick Vujicic",
+                    UrlSlug = "nick-vujicic",
+                    Email = "nick-vujicic.com",
+                    JoinedDate = new DateTime(2020, 5, 30),
+                    Notes = "Nicholas James \"Nick\" Vujicic là một người truyền bá Phúc Âm và diễn giả truyền cảm hứng người Úc gốc Serbia, " +
+                    "khi được sinh ra đã không có tứ chi mà chỉ có 1 bàn chân và 2 ngón chân nhỏ"
+                },
+                 new()
+                {
+                    FullName = "Bill Gates",
+                    UrlSlug = "bill-gates",
+                    Email = "bill-gates.com",
+                    JoinedDate = new DateTime(2020, 5, 30),
+                    Notes = "William Henry Bill Gates III (sinh ngày 28 tháng 10 năm 1955) là một doanh nhân người Mỹ, nhà từ thiện, tác giả" +
+                    " và chủ tịch tập đoàn Microsoft, hãng phần mềm mà ông cùng với Paul Allen đã sáng lập ra. Ông luôn có mặt trong danh sách " +
+                    "những người giàu nhất trên thế giới."
                 },
                 new()
                 {
-                    FullName = "Thai Thanh Truc",
-                    UrlSlug = "thai-thanh-truc",
-                    Email = "truc@gmail.com",
-                    JoinedDate = new DateTime(2020, 7, 7)
+                    FullName = "Robert Toru Kiyosaki",
+                    UrlSlug = "robert-toru-kiyosaki",
+                    Email = "robert-toru-kiyosaki.com",
+                    JoinedDate = new DateTime(2020, 7, 7),
+                    Notes = "Robert Toru Kiyosaki (sinh ngày 8 tháng 4 năm 1947) là một nhà đầu tư, doanh nhân đồng thời là một tác giả người Mỹ." +
+                    "Kiyosaki nổi tiếng bởi cuốn sách Rich Dad, Poor Dad (Cha Giàu, Cha Nghèo). Ông đã viết 18 cuốn sách, bán tổng cộng 26 triệu bản."
                 }
             };
 
@@ -109,23 +132,25 @@ namespace TatBlog.Data.Seeders
             _dbContext.SaveChanges();
 
             return authors;
-        } 
+        }
 
         private IList<Category> AddCategories()
         {
             var categories = new List<Category>()
             {
-                new(){Name = ".NET Core", Description = ".NET Core", UrlSlug = "dotnet-core", ShowOnMenu = true},
-                new(){Name = "Architecture", Description = "Architecture", UrlSlug = "architecture", ShowOnMenu = true},
-                new(){Name = "Messaging", Description = "Messaging", UrlSlug = "messaging", ShowOnMenu = true},
-                new(){Name = "OOP", Description = "OOP", UrlSlug = "oop", ShowOnMenu = true},
-                new(){Name = "Design Pattern", Description = "Design Pattern", UrlSlug = "design-pattern", ShowOnMenu = true},
-                
-                new(){Name = "Cooking", Description = "Cooking", UrlSlug = "cooking", ShowOnMenu = true},
-                new(){Name = "Review", Description = "Review", UrlSlug = "review", ShowOnMenu = true},
-                new(){Name = "Story", Description = "Story", UrlSlug = "story", ShowOnMenu = true},
-                new(){Name = "Game", Description = "Game", UrlSlug = "game", ShowOnMenu = true},
-                new(){Name = "Travel", Description = "Travel", UrlSlug = "travel", ShowOnMenu = true}
+                new(){Name = "Chính trị – pháp luật", Description = "Là thể loại sách nói về pháp luật", UrlSlug = "chinhtri-phapluat", ShowOnMenu = true},
+                new(){Name = "Kinh tế", Description = "Là thể loại sách nói về kinh tế", UrlSlug = "kinhte", ShowOnMenu = true},
+                new(){Name = "Văn học nghệ thuật", Description = "Là thể loại văn học nghệ thuật", UrlSlug = "vanhocnghethuat", ShowOnMenu = true},
+                new(){Name = "Tiểu thuyết", Description = "Là một thể loại văn xuôi có hư cấu", UrlSlug = "tieuthuyet", ShowOnMenu = true},
+                new(){Name = "Tâm lý, tâm linh, tôn giáo", Description = "Là thể loại nói về các bí ẩn về tâm linh, tôn giáo", UrlSlug = "tamly-tamlinh-tongiao", ShowOnMenu = true},
+                 new(){Name = "Sách tự lực", Description = "Là sách được viết với mục đích hướng dẫn độc giả giải quyết những vấn đề cá nhân. Dòng sách lấy tên từ Self-Help, " +
+                 "cuốn sách bán chạy nhất năm 1859 của Samuel Smiles, nhưng còn được biết đến và phân loại theo \"tự cải thiện\", một thuật ngữ bản hiện đại hóa của tự lực", UrlSlug = "sach-tu-luc", ShowOnMenu = true},
+
+                new(){Name = "Thiếu nhiThiếu nhi", Description = "Là những loại sách dành cho thiếu nhi", UrlSlug = "thieunhi", ShowOnMenu = true},
+                new(){Name = "Truyện ngắn", Description = "Là thể loại truyện ngắn về một câu chuyện nào đó", UrlSlug = "truyenngan", ShowOnMenu = true},
+                new(){Name = "Truyện tranh", Description = "Là thể loại về truyện tranh", UrlSlug = "truyentranh", ShowOnMenu = true},
+                new(){Name = "Giáo trình", Description = "Là thể loại sách , tài liệu cụ thể, nói về các lĩnh vực nghiên cứu", UrlSlug = "giaotrinhgiaotrinh", ShowOnMenu = true},
+                new(){Name = "Khoa học viễn tưởng", Description = "Là thể loại sách nói vể khoa học, nói về một vấn đề mà không có thật ở hiện tại", UrlSlug = "khoahocvientuong", ShowOnMenu = true}
             };
 
             _dbContext.Categories.AddRange(categories);
@@ -138,29 +163,17 @@ namespace TatBlog.Data.Seeders
         {
             var tags = new List<Tag>()
             {
-                new(){Name = "Google", Description = "Google applications", UrlSlug = "google"},
-                new(){Name = "ASP .NET MVC", Description = "ASP .NET MVC", UrlSlug = "asp-dotnet-mvc"},
-                new(){Name = "Razor Page", Description = "Razor Page", UrlSlug = "razor-page"},
-                new(){Name = "Blazor", Description = "Blazor", UrlSlug = "blazor"},
-                new(){Name = "Deep Learning", Description = "Deep Learning", UrlSlug = "deep-learning"},
-                
-                new(){Name = "Neural Network", Description = "Neural Network", UrlSlug = "neural-network"},
-                new(){Name = "Hai huoc", Description = "Hai huoc", UrlSlug = "hai-huoc"},
-                new(){Name = "Kinh di", Description = "Kinh di", UrlSlug = "kinh-di"},
-                new(){Name = "Lang mang", Description = "Lang mang", UrlSlug = "lang-mang"},
-                new(){Name = "LOL", Description = "league of Legend", UrlSlug = "lol"},
-                
-                new(){Name = "Game of week", Description = "Game of week", UrlSlug = "game-of-week"},
-                new(){Name = "Phim le", Description = "Phim le", UrlSlug = "phim-le"},
-                new(){Name = "Phim bo", Description = "Phim bo", UrlSlug = "phim-bo"},
-                new(){Name = "Phim moi", Description = "Phim moi", UrlSlug = "phim-moi"},
-                new(){Name = "Da Lat", Description = "Da Lat", UrlSlug = "da-lat"},
+                new(){Name = "Chính trị – pháp luật", Description = "Là thể loại sách nói về pháp luật", UrlSlug = "chinhtri-phapluat"},
+                new(){Name = "Kinh tế", Description = "Là thể loại sách nói về kinh tế", UrlSlug = "kinhte"},
+                new(){Name = "Văn học nghệ thuật", Description = "Là thể loại văn học nghệ thuật", UrlSlug = "vanhocnghethuat"},
+                new(){Name = "Tiểu thuyết", Description = "tieuthuyet", UrlSlug = "Là một thể loại văn xuôi có hư cấu"},
+                new(){Name = "Tâm lý, tâm linh, tôn giáo", Description = "Là thể loại nói về các bí ẩn về tâm linh, tôn giáo", UrlSlug = "tamly-tamlinh-tongiao"},
 
-                new(){Name = "Nha Trang", Description = "Nha Trang", UrlSlug = "nha-trang"},
-                new(){Name = "Ha Noi", Description = "Ha Noi", UrlSlug = "ha-noi"},
-                new(){Name = "Mon chien", Description = "Mon chien", UrlSlug = "mon-chien"},
-                new(){Name = "Mon xao", Description = "Mon xao", UrlSlug = "mon-xao"},
-                new(){Name = "Review 5ph", Description = "Review 5ph", UrlSlug = "review5ph"},
+                new(){Name = "Thiếu nhiThiếu nhi", Description = "Là những loại sách dành cho thiếu nhi,", UrlSlug = "thieunhi"},
+                new(){Name = "Truyện ngắn", Description = "Là thể loại truyện ngắn về một câu chuyện nào đó", UrlSlug = "truyenngan"},
+                new(){Name = "Giáo trình", Description = "Là thể loại sách , tài liệu cụ thể, nói về các lĩnh vực nghiên cứu", UrlSlug = "giaotrinh"},
+                new(){Name = "Khoa học viễn tưởng ", Description = "Là thể loại sách nói vể khoa học, nói về một vấn đề mà không có thật ở hiện tại", UrlSlug = "khoahocvientuong"},
+                new(){Name = "Truyện tranh", Description = "Là thể loại về truyện tranh", UrlSlug = "truyentranh"},
             };
 
             _dbContext.Tags.AddRange(tags);
@@ -170,44 +183,91 @@ namespace TatBlog.Data.Seeders
         }
 
         private IList<Post> AddPosts(
-            IList<Author> authors,
-            IList<Category> categories,
-            IList<Tag> tags
+                IList<Author> authors,
+                IList<Category> categories,
+                IList<Tag> tags
+
             )
         {
             var posts = new List<Post>()
             {
                 new()
                 {
-                    Title = "ASP .NET Core Diagnosric Scenarios",
-                    ShortDescription = "David and friends has a great repository filled with examples of \"broken patterns\" in ASP.NET Core applications.",
-                    Description = "Here's a list of ASP.NET Core Guidance. This one is fascinating. ASP.NET Core doesn't buffer responses which allows it to be VERY scalable. Massively so. As such you do need to be aware that things need to happen in a certain order - Headers come before Body, etc so you want to avoid adding headers after the HttpResponse has started.",
-                    Meta = "David and friends has a great repository filled with examples of \"broken patterns\" in ASP.NET Core applications.",
-                    UrlSlug = "asp-dotnet-core-diagnosric-scenarios",
+                    Title = "Tôi thấy hoa vàng trên cỏ xanh",
+                    ShortDescription = "Là một tiểu thuyết dành cho thanh thiếu niên của nhà văn Nguyễn Nhật Ánh, xuất bản lần đầu tại Việt Nam " +
+                    "vào ngày 9 tháng 12 năm 2010 bởi Nhà xuất bản Trẻ với phần tranh minh họa do Đỗ Hoàng Tường thực hiện.",
+                    Description = "Câu chuyện là những trang nhật ký về cuộc sống thường ngày và tâm tư của cậu bé Thiều. Thiều đang là học sinh lớp 7 sống ở một vùng quê nghèo, cùng với người em trai tên Tường. Tường là một cậu bé dễ thương, hiền lành, bao dung, rất yêu mến anh trai và thích chơi đùa với nhiều loài động vật gồm cả sâu bọ, rắn rết." +
+                    " Cậu bé sống nội tâm, ham đọc sách và rất say mê những câu chuyện cổ tích, đặc biệt là truyện Cóc tía, chính vì vậy mà cậu nuôi nấng một con cóc dưới gầm giường và đặt tên cho nó là \"Cu Cậu”.",
+                    Meta = "Toi thay hoa vang tren co xanh",
+                    UrlSlug = "toi-thay-hoa-vang-tren-co-xanh",
                     Published = true,
                     PostedDate = new DateTime(2021, 9, 30, 10, 20, 0),
                     ModifiedDate = null,
-                    ViewCount = 10,
+                    ViewCount = 1860,
                     Author = authors[0],
-                    Category = categories[0],
+                    Category = categories[3],
                     Tags = new List<Tag>()
                     {
-                        tags[0]
+                        tags[3]
                     }
                 },
 
                 new()
                 {
-                    Title = "Elden ring has become GOTY 2022",
-                    ShortDescription = "THE NEW FANTASY ACTION RPG",
-                    Description = "Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.\r\n\r\nIn the Lands Between ruled by Queen Marika the Eternal, the Elden Ring, the source of the Erdtree, has been shattered.\r\n\r\nMarika's offspring, demigods all, claimed the shards of the Elden Ring known as the Great Runes, and the mad taint of their newfound strength triggered a war: The Shattering. A war that meant abandonment by the Greater Will.",
-                    Meta = "The Golden Order has been broken.",
-                    UrlSlug = "elden-ring-has-become-goty-2022",
+                    Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
                     Published = true,
                     PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
                     ModifiedDate = null,
                     ViewCount = 200,
-                    Author = authors[4],
+                    Author = authors[0],
+                    Category = categories[3],
+                    Tags = new List<Tag>()
+                    {
+                        tags[10]
+                    }
+                },
+
+                new()
+                {
+                    Title = "Đất rừng Phương Nam",
+                    ShortDescription = " Là truyện được biết đến nhiều nhất của ông. Đây được xem là bài ca tuyệt vời về thiên nhiên và con người Nam Bộ. Cuốn tiểu thuyết kể về cuộc đời phiêu bạt của cậu bé An. " +
+                    "Bối cảnh truyện diễn ra ở các tỉnh miền Tây Nam Bộ vào những năm 1945, sau khi thực dân Pháp quay trở lại xâm chiếm vùng đất này..",
+                    Description = "Cậu bé An sống cùng với cha mẹ tại thành phố, sau ngày độc lập 2-9-1945. Thực dân Pháp quay trở lại xâm lược Việt Nam, đổ quân vào Nam Bộ. Pháp mở những trận đánh khiến cho những người dân sống tại các thành thị phải di tản." +
+                    " An và ba má cũng phải bỏ nhà bỏ cửa để chạy giặc. Cậu nhớ đến một anh bạn đi tàu đã tặng cậu chiếc la bàn mà không kịp mang theo. Theo cha mẹ chạy hết từ vùng này tới vùng khác của miền Tây Nam Bộ. An kết bạn cùng với những đứa trẻ cùng trang lứa và có một cuộc sống tuổi thơ vùng nông thôn đầy êm đềm. " +
+                    "Nhưng cứ vừa ổn định được mấy bữa thì giặc đánh tới nơi và lại phải chạy. Trong một lần mải chơi, giặc đánh đến và An đã lạc mất gia đình. Cậu trở thành đứa trẻ lang thang.",
+                    Meta = "Dat rung phuong Nam",
+                    UrlSlug = "dat-rung-phuong-nam",
+                    Published = true,
+                    PostedDate = new DateTime(2021, 1, 12, 1, 25, 0),
+                    ModifiedDate = null,
+                    ViewCount = 1000,
+                    Author = authors[1],
+                    Category = categories[3],
+                    Tags = new List<Tag>()
+                    {
+                        tags[19]
+                    }
+                },
+
+                new()
+                {
+                    Title = "Đắc Nhân Tâm",
+                    ShortDescription = "Là một quyển sách nhằm tự giúp bản thân (self-help) bán chạy nhất từ trước đến nay. Quyển sách này do Dale Carnegie viết và đã được xuất bản lần đầu vào năm 1936, nó đã được bán 15 triệu bản trên khắp thế giới.[1][2] Nó cũng là quyển sách bán chạy nhất của New York Times trong 10 năm." +
+                    " Tác phẩm được đánh giá là cuốn sách đầu tiên và hay nhất trong thể loại này, có ảnh hưởng thay đổi cuộc đời đối với hàng triệu người trên thế giới.",
+                    Description = "Quyển sách đưa ra các lời khuyên về cách thức cư xử, ứng xử và giao tiếp với mọi người để đạt được thành công trong cuộc sống (theo bản dịch của dịch giả Nguyễn Hiến Lê). Quyển sách gồm 6 phần, mỗi phần có nhiều chương.",
+                    Meta = "Dac nhan tam",
+                    UrlSlug = "dac-nhan-tam",
+                    Published = true,
+                    PostedDate = new DateTime(2020, 1, 3, 5, 23, 0),
+                    ModifiedDate = null,
+                    ViewCount = 569,
+                    Author = authors[2],
                     Category = categories[5],
                     Tags = new List<Tag>()
                     {
@@ -217,55 +277,18 @@ namespace TatBlog.Data.Seeders
 
                 new()
                 {
-                    Title = "What is Lorem Ipsum?",
-                    ShortDescription = "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages",
-                    Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                    Meta = "It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages",
-                    UrlSlug = "what-is-lorem-ipsum",
-                    Published = true,
-                    PostedDate = new DateTime(2021, 1, 12, 1, 25, 0),
-                    ModifiedDate = null,
-                    ViewCount = 1000,
-                    Author = authors[5],
-                    Category = categories[9],
-                    Tags = new List<Tag>()
-                    {
-                        tags[19]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Where does it come from?",
-                    ShortDescription = "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-                    Description = "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC.",
-                    Meta = "Contrary to popular belief, Lorem Ipsum is not simply random text.",
-                    UrlSlug = "where-does-it-come-from",
-                    Published = true,
-                    PostedDate = new DateTime(2020, 1, 3, 5, 23, 0),
-                    ModifiedDate = null,
-                    ViewCount = 569,
-                    Author = authors[1],
-                    Category = categories[2],
-                    Tags = new List<Tag>()
-                    {
-                        tags[10]
-                    }
-                },
-
-                new()
-                {
-                    Title = "The first line of Lorem Ipsum",
-                    ShortDescription = "This book is a treatise on the theory of ethics, very popular during the Renaissance.",
-                    Description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
-                    Meta = "This book is a treatise on the theory of ethics, very popular during the Renaissance.",
-                    UrlSlug = "the-first-line-of-lorem-ipsum",
+                    Title = "Quẳng Gánh Lo Đi Và Vui Sống",
+                    ShortDescription = "Là một sách tự lực của tác giả người Mỹ Dale Carnegie, được viết vào năm 1948. Bản Việt Ngữ do Nguyễn Hiến Lê dịch năm 1955 tại Sài Gòn và đưa vào tủ sách Học làm người. " +
+                    "Quyển sách này là một cẩm nang về cách làm việc và vui sống không bị lo âu.",
+                    Description = "Phương cách để trị ưu phiền\r\nCách phân tích những vấn đề rắc rối[\r\nDiệt tất ưu phiền đi, đừng để nó diệt ta\r\n.",
+                    Meta = "Quang ganh lo di va vui song.",
+                    UrlSlug = "quang-ganh-lo-di-va-vui-song",
                     Published = true,
                     PostedDate = new DateTime(2021, 9, 1, 7, 2, 0),
                     ModifiedDate = null,
                     ViewCount = 560,
-                    Author = authors[0],
-                    Category = categories[6],
+                    Author = authors[2],
+                    Category = categories[5],
                     Tags = new List<Tag>()
                     {
                         tags[7]
@@ -276,17 +299,18 @@ namespace TatBlog.Data.Seeders
 
                 new()
                 {
-                    Title = "The standard Lorem Ipsum passage, used since the 1500s",
-                    ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                    Description = "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
-                    Meta = "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                    UrlSlug = "the-standard-lorem-ipsum-passage-used-since-the-1500s",
+                    Title = "Tham Vọng Lớn Lao Và Quá Trình Hình Thành Đế Chế Microsoft",
+                    ShortDescription = "Tham Vọng Lớn Lao Và Quá Trình Hình Thành Đế Chế Microsoft (Tái Bản 2022). Trong tiết lộ thú vị này, " +
+                    "hai phóng viên điều tra Wallace và Erickson đã lần theo bước chân của Gates từ những ngày còn là một hac. Một phần doanh nhân, một phần lập dị, Gates đã trở thành nhân vật quyền.",
+                    Description = "Cuốn sách này mở ra một câu chuyện sinh động và chân thực nhất về sự nổi lên của một thiên tài độc đoán, cách thức ông làm thay đổi cả một nền công nghiệp máy tính, và lý do tại sao mọi người quyết tâm tìm hiểu ông bằng được.",
+                    Meta = "Tham vong lon lao va qua trinh hinh thanh de che microsoft",
+                    UrlSlug = "tham-vong-lon-lao-va-qua-trinh-hinh-thanh-de-che-microsoft",
                     Published = true,
                     PostedDate = new DateTime(2020, 3, 30, 10, 45, 0),
                     ModifiedDate = null,
                     ViewCount = 800,
                     Author = authors[5],
-                    Category = categories[8],
+                    Category = categories[1],
                     Tags = new List<Tag>()
                     {
                         tags[13]
@@ -295,94 +319,81 @@ namespace TatBlog.Data.Seeders
 
                 new()
                 {
-                    Title = "Why do we use it?",
-                    ShortDescription = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                    Description = "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-                    Meta = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-                    UrlSlug = "why-do-we-use-it",
+                      Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
                     Published = true,
-                    PostedDate = new DateTime(2022, 6, 10, 9, 10, 0),
+                    PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
                     ModifiedDate = null,
-                    ViewCount = 601,
-                    Author = authors[2],
-                    Category = categories[5],
+                    ViewCount = 200,
+                    Author = authors[0],
+                    Category = categories[3],
                     Tags = new List<Tag>()
                     {
-                        tags[1]
+                        tags[10]
+                    }
+                },
+
+                new()
+                {   Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
+                    Published = true,
+                    PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
+                    ModifiedDate = null,
+                    ViewCount = 200,
+                    Author = authors[0],
+                    Category = categories[3],
+                    Tags = new List<Tag>()
+                    {
+                        tags[10]
                     }
                 },
 
                 new()
                 {
-                    Title = "Where can I get some?",
-                    ShortDescription = "There are many variations of passages of Lorem Ipsum available",
-                    Description = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
-                    Meta = "There are many variations of passages of Lorem Ipsum available",
-                    UrlSlug = "where-can-i-get-some",
+                      Title = "Mắt biếc",
+                    ShortDescription = "Một tác phẩm được nhiều người bình chọn là hay nhất của nhà văn này. Một tác phẩm đang được dịch và giới thiệu tại Nhật Bản (theo thông tin từ các báo)…Bởi sự trong sáng của một tình cảm, bởi cái kết thúc rất, rất buồn khi suốt câu chuyện vẫn là những điều vui, buồn lẫn lộn (cái kết thúc không như mong đợi của mọi người)." +
+                    " Cũng bởi, mắt biếc… năm xưa nay đâu (theo lời một bài hát).",
+                    Description = "Mắt biếc xoay quanh mối tình đơn phương của Ngạn với Hà Lan, cô bạn gái có cặp mắt hút hồn nhưng cá tính bướng bỉnh. Một chuyện tình nhiều cung bậc, từ ngộ nghĩnh trẻ con, rồi tình yêu thuở học trò trong sáng, trải qua bao biến cố, trở thành một cuộc \"đuổi hình bắt bóng\" buồn da diết nhưng không nguôi hi vọng. " +
+                    "Câu chuyện càng trở nên éo le hơn khi Trà Long - con gái của Hà Lan lớn lên lại nhen nhóm một tình yêu như thế với Ngạn.",
+                    Meta = "Mat biec",
+                    UrlSlug = "mat-biec",
                     Published = true,
-                    PostedDate = new DateTime(2023, 2, 10, 3, 20, 0),
+                    PostedDate = new DateTime(2022, 10, 3, 11, 0, 0),
                     ModifiedDate = null,
-                    ViewCount = 948,
-                    Author = authors[2],
-                    Category = categories[7],
+                    ViewCount = 200,
+                    Author = authors[0],
+                    Category = categories[3],
                     Tags = new List<Tag>()
                     {
-                        tags[17]
+                        tags[10]
                     }
                 },
 
-                new()
-                {
-                    Title = "Section 1.10.32 of \"de Finibus Bonorum et Malorum\"",
-                    ShortDescription = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
-                    Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-                    Meta = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam",
-                    UrlSlug = "section-11032-of-\"de-finibus-bonorum-et-malorum\"",
-                    Published = true,
-                    PostedDate = new DateTime(2021, 10, 30, 12, 2, 0),
-                    ModifiedDate = null,
-                    ViewCount = 789,
-                    Author = authors[2],
-                    Category = categories[9],
-                    Tags = new List<Tag>()
-                    {
-                        tags[7]
-                    }
-                },
-
-                new()
-                {
-                    Title = "Nulla varius justo non pharetra molestie",
-                    ShortDescription = "Aenean gravida iaculis metus, quis malesuada lacus porta non. Duis laoreet, augue ac gravida dignissim",
-                    Description = "Phasellus varius nisi non orci gravida, vel placerat lacus sagittis. Suspendisse placerat, nibh in finibus posuere, libero ex rhoncus neque, vitae vulputate velit leo id nisi. In convallis, nunc et iaculis convallis, tortor velit mollis lorem, malesuada imperdiet libero nunc et nisl. Duis fringilla cursus ante, a pretium eros pulvinar sed. Fusce sagittis tempor arcu in egestas. Morbi at consequat magna. Phasellus sed purus a arcu ornare semper. Fusce ultricies fringilla aliquet. Integer dapibus malesuada elit non euismod. Nullam rutrum tincidunt rhoncus. Nunc nunc risus, mattis non ultrices sit amet, congue congue ipsum. Quisque nisl justo, aliquam vel arcu sit amet, molestie mattis sapien.\r\n\r\nCras porttitor justo quis tortor gravida, ac varius sapien eleifend. Etiam feugiat mi at sapien feugiat, porttitor ullamcorper leo luctus. Nam volutpat hendrerit augue, sit amet commodo augue viverra quis. Proin id lectus quam. Etiam tincidunt est a sollicitudin ullamcorper. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In sodales felis eu suscipit mattis. Duis orci enim, pretium in consequat ut, dignissim ut eros. Donec eget odio id mi tincidunt condimentum vitae quis magna. Quisque rhoncus odio vitae justo faucibus fringilla.",
-                    Meta = "Aenean gravida iaculis metus, quis malesuada lacus porta non. Duis laoreet, augue ac gravida dignissim",
-                    UrlSlug = "nulla-varius-justo-non-pharetra-molestie",
-                    Published = true,
-                    PostedDate = new DateTime(2022, 3, 3, 2, 27, 0),
-                    ModifiedDate = null,
-                    ViewCount = 1085,
-                    Author = authors[3],
-                    Category = categories[4],
-                    Tags = new List<Tag>()
-                    {
-                        tags[2]
-                    }
-                },
 
                 //================================================10
 
                 new()
                 {
-                    Title = "1914 translation by H. Rackham",
-                    ShortDescription = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system",
-                    Description = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
-                    Meta = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system",
-                    UrlSlug = "1914-translation-by-HRackham",
+                    Title = "Chiêu Bài Quản Lý Vàng Của Bill Gates ",
+                    ShortDescription = "Chiêu Bài Quản Lý Vàng Của Bill Gates sẽ giải thích tại sao Bill Gates lại thành công đến vậy? Tại sao lịch sử lại chọn ông? Là một nhà lãnh đạo, Bill Gates đã có những phương pháp quản lý như thế nào để Microsoft không ngừng phát triển?",
+                    Description = "Chiêu Bài Quản Lý Vàng Của Bill Gates sẽ giải thích tại sao Bill Gates lại thành công đến vậy? Tại sao lịch sử lại chọn ông? Là một nhà lãnh đạo, Bill Gates đã có những phương pháp quản lý như thế nào để Microsoft không ngừng phát triển",
+                    Meta = "Chieu bai quan ly vang cua bill gates",
+                    UrlSlug = "chieu-bai-quan-ly-vang-cua-bill-gates",
                     Published = true,
                     PostedDate = new DateTime(2021, 8, 10, 8, 30, 0),
                     ModifiedDate = null,
                     ViewCount = 995,
-                    Author = authors[3],
+                    Author = authors[1],
                     Category = categories[5],
                     Tags = new List<Tag>()
                     {

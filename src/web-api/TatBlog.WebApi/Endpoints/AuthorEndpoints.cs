@@ -26,20 +26,20 @@ namespace TatBlog.WebApi.Endpoints
             routeGroupBuilder.MapGet("/", GetAuthors)
                 .WithName("GetAuthors")
                 .Produces<ApiResponse<PaginationResult<AuthorItem>>>();
-                //.Produces<PaginationResult<AuthorItem>>();
+            //.Produces<PaginationResult<AuthorItem>>();
 
             routeGroupBuilder.MapGet("/{id:int}", GetAuthorDetails)
                 .WithName("GetAuthorById")
                 .Produces<ApiResponse<AuthorItem>>();
-                //.Produces<AuthorItem>()
-                //.Produces(404);
+            //.Produces<AuthorItem>()
+            //.Produces(404);
 
             routeGroupBuilder.MapGet(
                     "/{slug:regex(^[a-z0-9_-]+$)}/posts",
                     GetPostsByAuthorSlug)
                 .WithName("GetPostsByAuthorSlug")
                 .Produces<ApiResponse<PaginationResult<PostDto>>>();
-                //.Produces<PaginationResult<PostDto>>();
+            //.Produces<PaginationResult<PostDto>>();
 
             routeGroupBuilder.MapPost("/", AddAuthor)
                 .WithName("AddNewAuthor")
@@ -47,9 +47,9 @@ namespace TatBlog.WebApi.Endpoints
                 .RequireAuthorization()
                 .Produces(401)
                 .Produces<ApiResponse<AuthorItem>>();
-                //.Produces(201)
-                //.Produces(400)
-                //.Produces(409);
+            //.Produces(201)
+            //.Produces(400)
+            //.Produces(409);
 
             routeGroupBuilder.MapPost("/{id:int}/avatar", SetAuthorPicture)
                 .WithName("SetAuthorPicture")
@@ -57,8 +57,8 @@ namespace TatBlog.WebApi.Endpoints
                 .Accepts<IFormFile>("multipart/form-data")
                 .Produces(401)
                 .Produces<ApiResponse<string>>();
-                //.Produces<string>()
-                //.Produces(400);
+            //.Produces<string>()
+            //.Produces(400);
 
             routeGroupBuilder.MapPut("/{id:int}", UpdateAuthor)
                 .WithName("UpdateAnAuthor")
@@ -66,17 +66,17 @@ namespace TatBlog.WebApi.Endpoints
                 .RequireAuthorization()
                 .Produces(401)
                 .Produces<ApiResponse<string>>();
-                //.Produces(204)
-                //.Produces(400)
-                //.Produces(409);
+            //.Produces(204)
+            //.Produces(400)
+            //.Produces(409);
 
             routeGroupBuilder.MapDelete("/{id:int}", DeleteAuthor)
                 .WithName("DeleteAnAuthor")
                 .RequireAuthorization()
                 .Produces(401)
                 .Produces<ApiResponse<string>>();
-                //.Produces(204)
-                //.Produces(404);
+            //.Produces(204)
+            //.Produces(404);
 
             return app;
         }
@@ -94,8 +94,6 @@ namespace TatBlog.WebApi.Endpoints
             //return Results.Ok(paginationResult);
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
-
-
 
         private static async Task<IResult> GetAuthorDetails(
             int id,
@@ -278,4 +276,3 @@ namespace TatBlog.WebApi.Endpoints
         }
     }
 }
-

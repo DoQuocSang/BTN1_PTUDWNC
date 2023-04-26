@@ -50,7 +50,7 @@ namespace TatBlog.Core.Collections
 
     //            return total;
     //        }
-        
+
     //    }
 
     //    public bool HasPreviousPage => PageIndex > 0;
