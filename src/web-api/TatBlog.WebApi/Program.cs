@@ -62,6 +62,7 @@ try
         app.MapAuthorEndpoints();
         app.MapCategoryEndpoints();
         app.MapPostEndpoints();
+        app.MapBookEndpoints();
 
         app.Run();
     }

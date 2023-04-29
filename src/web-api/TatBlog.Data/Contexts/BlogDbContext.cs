@@ -15,6 +15,8 @@ namespace TatBlog.Data.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         public BlogDbContext()
         {
