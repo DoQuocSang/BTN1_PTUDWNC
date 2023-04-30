@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { ReactComponent as SvgDotPatternIcon } from "images/dot-pattern.svg";
@@ -6,6 +6,9 @@ import { SectionHeading as HeadingTitle } from "components/user/misc/Headings.js
 import  Book1  from "images/book1.png";
 import  Book2  from "images/book2.jpg";
 import  Book3  from "images/book3.jpg";
+import  BookDefault from "images/book-default.png"
+import { isEmptyOrSpaces } from "../../utils/Utils";
+import { getBooks } from "../../../services/BookRepository";
 
 const Container = tw.div`relative`;
 
@@ -21,7 +24,7 @@ const Card = styled.div(props => [
   props.reversed ? tw`flex-row-reverse` : "flex-row"
 ]);
 const Image = styled.div(props => [
-  `background-image: url("${props.imageSrc}");`,
+  `background-image: url("${props.imageSrc}"); `,
   tw`rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8`
 ]);
 const Details = tw.div`mt-4 md:mt-0 md:max-w-md mx-4 sm:mx-8 md:mx-4 lg:mx-8`;
@@ -44,54 +47,78 @@ const SvgDotPattern4 = tw(
 )`absolute bottom-0 right-0 transform translate-x-20 rotate-90 -translate-y-24 -z-10 opacity-25 text-primary-500 fill-current w-24`;
 
 export default () => {
-  const cards = [
-    {
-      imageSrc: Book1,
-      subtitle: "Paid",
-      title: "Loachella, NYC",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      url: "https://timerse.com"
-    },
+  // const cards = [
+  //   {
+  //     imageSrc: Book1,
+  //     subtitle: "Paid",
+  //     title: "Loachella, NYC",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //     url: "https://timerse.com"
+  //   },
 
-    {
-      imageSrc: Book2,
-      subtitle: "Free",
-      title: "Rock In Rio, Upstate",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      url: "https://timerse.com"
-    },
+  //   {
+  //     imageSrc: Book2,
+  //     subtitle: "Free",
+  //     title: "Rock In Rio, Upstate",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //     url: "https://timerse.com"
+  //   },
 
-    {
-      imageSrc: Book3,
-      subtitle: "Exclusive",
-      title: "Lollapalooza, Manhattan",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      url: "https://timerse.com"
-    }
-  ];
+  //   {
+  //     imageSrc: Book3,
+  //     subtitle: "Exclusive",
+  //     title: "Lollapalooza, Manhattan",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  //     url: "https://timerse.com"
+  //   }
+  // ];
+
+  const [booksList, setBooksList] = useState([]);
+  const [metadata, setMetadata] = useState([]);
+
+  useEffect(() => {
+    document.title = 'Trang chủ';
+
+    getBooks().then(data => {
+        if (data){
+            setBooksList(data.items);
+            setMetadata(data.metadata);
+        }
+        else
+            setBooksList([]);
+        //console.log(data.items)
+    })
+  }, []);
+
+  let imageUrl;
 
   return (
     <Container>
       <SingleColumn>
         <HeadingInfoContainer>
-          <HeadingTitle>Sách bán chạy</HeadingTitle>
+          <HeadingTitle>Đề xuất cho bạn</HeadingTitle>
           {/* <HeadingDescription>
             Dưới đây là một số sách nổi bật của Fahasa
           </HeadingDescription> */}
         </HeadingInfoContainer>
 
         <Content>
-          {cards.map((card, i) => (
+          {booksList.map((card, i) => (
             <Card key={i} reversed={i % 2 === 1}>
-              <Image imageSrc={card.imageSrc} />
+             
+              {isEmptyOrSpaces(card.imageUrl) ? (
+                <Image imageSrc={BookDefault} />
+              ) : (
+                <Image imageSrc={card.imageUrl} />
+              )} 
               <Details>
-                <Subtitle>{card.subtitle}</Subtitle>
+                <Subtitle>{card.categoryName}</Subtitle>
                 <Title>{card.title}</Title>
-                <Description>{card.description}</Description>
-                <Link href={card.url}>Xem chi tiết</Link>
+                <Description>{card.shortDescription}</Description>
+                <Link href={card.urlSlug}>Xem chi tiết</Link>
               </Details>
             </Card>
           ))}

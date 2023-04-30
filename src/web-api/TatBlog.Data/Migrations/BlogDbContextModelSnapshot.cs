@@ -86,11 +86,6 @@ namespace TatBlog.Data.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<float>("AverageStar")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("real")
-                        .HasDefaultValue(0f);
-
                     b.Property<int?>("CartId")
                         .HasColumnType("int");
 
@@ -128,6 +123,11 @@ namespace TatBlog.Data.Migrations
 
                     b.Property<DateTime>("ReleasedDate")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("ReviewNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("ShortDescription")
                         .IsRequired()

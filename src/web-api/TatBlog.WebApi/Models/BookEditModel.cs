@@ -16,7 +16,7 @@ namespace TatBlog.WebApi.Models
         public string PublishCompany { get; set; }
         public string CoverForm { get; set; }
         public int StarNumber { get; set; }
-        public float AverageStar { get; set; }
+        public int ReviewNumber { get; set; }
         public int Price { get; set; }
     }
 }

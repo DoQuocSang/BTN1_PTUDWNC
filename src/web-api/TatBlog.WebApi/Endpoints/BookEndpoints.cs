@@ -27,51 +27,51 @@ namespace TatBlog.WebApi.Endpoints
                 .WithName("GetBooks")
                 .Produces<ApiResponse<PaginationResult<BookDto>>>();
 
-            //routeGroupBuilder.MapGet("/featured/{limit}", GetFeaturedPosts)
-            //    .WithName("GetFeaturedPosts")
-            //    .Produces<ApiResponse<PaginationResult<PostItem>>>();
+            //routeGroupBuilder.MapGet("/featured/{limit}", GetFeaturedBooks)
+            //    .WithName("GetFeaturedBooks")
+            //    .Produces<ApiResponse<PaginationResult<BookItem>>>();
 
-            //routeGroupBuilder.MapGet("/random/{limit}", GetRandomPosts)
-            //   .WithName("GetRandomPosts")
-            //   .Produces<ApiResponse<PaginationResult<PostItem>>>();
+            routeGroupBuilder.MapGet("/random/{limit}", GetRandomBooks)
+               .WithName("GetRandomBooks")
+               .Produces<ApiResponse<PaginationResult<BookItem>>>();
 
-            //routeGroupBuilder.MapGet("/archives/{limit}", GetPosts)
-            //   .WithName("GetPosts")
-            //   .Produces<ApiResponse<PaginationResult<PostItem>>>();
+            //routeGroupBuilder.MapGet("/archives/{limit}", GetBooks)
+            //   .WithName("GetBooks")
+            //   .Produces<ApiResponse<PaginationResult<BookItem>>>();
 
-            //routeGroupBuilder.MapGet("/{id:int}", GetPostDetails)
-            //    .WithName("GetPostById")
-            //    .Produces<ApiResponse<PostItem>>();
+            routeGroupBuilder.MapGet("/{id:int}", GetBookDetails)
+                .WithName("GetBookById")
+                .Produces<ApiResponse<BookItem>>();
 
             //routeGroupBuilder.MapGet(
             //        "/byslug/{slug:regex(^[a-z0-9_-]+$)}",
-            //        GetPostsBySlug)
-            //    .WithName("GetPostsBySlug")
-            //    .Produces<ApiResponse<PaginationResult<PostDto>>>();
+            //        GetBooksBySlug)
+            //    .WithName("GetBooksBySlug")
+            //    .Produces<ApiResponse<PaginationResult<BookDto>>>();
 
-            //routeGroupBuilder.MapPost("/", AddPost)
-            //    .WithName("AddNewPost")
-            //    .AddEndpointFilter<ValidatorFilter<PostEditModel>>()
+            //routeGroupBuilder.MapBook("/", AddBook)
+            //    .WithName("AddNewBook")
+            //    .AddEndpointFilter<ValidatorFilter<BookEditModel>>()
             //    .RequireAuthorization()
             //    .Produces(401)
-            //    .Produces<ApiResponse<PostItem>>();
+            //    .Produces<ApiResponse<BookItem>>();
 
-            //routeGroupBuilder.MapPost("/{id:int}/picture", SetPostPicture)
-            //    .WithName("SetPostPicture")
+            //routeGroupBuilder.MapBook("/{id:int}/picture", SetBookPicture)
+            //    .WithName("SetBookPicture")
             //    .RequireAuthorization()
             //    .Accepts<IFormFile>("multipart/form-data")
             //    .Produces(401)
             //    .Produces<ApiResponse<string>>();
 
-            //routeGroupBuilder.MapPut("/{id:int}", UpdatePost)
-            //    .WithName("UpdateAnPost")
-            //    .AddEndpointFilter<ValidatorFilter<PostEditModel>>()
+            //routeGroupBuilder.MapPut("/{id:int}", UpdateBook)
+            //    .WithName("UpdateAnBook")
+            //    .AddEndpointFilter<ValidatorFilter<BookEditModel>>()
             //    .RequireAuthorization()
             //    .Produces(401)
             //    .Produces<ApiResponse<string>>();
 
-            //routeGroupBuilder.MapDelete("/{id:int}", DeletePost)
-            //    .WithName("DeleteAnPost")
+            //routeGroupBuilder.MapDelete("/{id:int}", DeleteBook)
+            //    .WithName("DeleteAnBook")
             //    .RequireAuthorization()
             //    .Produces(401)
             //    .Produces<ApiResponse<string>>();
@@ -79,28 +79,28 @@ namespace TatBlog.WebApi.Endpoints
             return app;
         }
 
-        //private static async Task<IResult> GetPosts(
-        //    [AsParameters] PostFilterModel model,
+        //private static async Task<IResult> GetBooks(
+        //    [AsParameters] BookFilterModel model,
         //    IBlogRepository blogRepository)
         //{
-        //    var postsList = await blogRepository
-        //        .GetPagedPostsAsync(model, model.Title);
+        //    var BooksList = await blogRepository
+        //        .GetPagedBooksAsync(model, model.Title);
 
         //    var paginationResult =
-        //        new PaginationResult<PostItem>(postsList);
+        //        new PaginationResult<BookItem>(BooksList);
 
         //    return Results.Ok(ApiResponse.Success(paginationResult));
         //}
 
-        //private static async Task<IResult> GetPosts(
-        //    [AsParameters] PostQuery model,
+        //private static async Task<IResult> GetBooks(
+        //    [AsParameters] BookQuery model,
         //    IBlogRepository blogRepository)
         //{
-        //    var postsList = await blogRepository
-        //        .GetPagedPostsConvertPostItemAsync(model);
+        //    var BooksList = await blogRepository
+        //        .GetPagedBooksConvertBookItemAsync(model);
 
         //    var paginationResult =
-        //        new PaginationResult<PostItem>(postsList);
+        //        new PaginationResult<BookItem>(BooksList);
 
         //    return Results.Ok(ApiResponse.Success(paginationResult));
         //}
@@ -121,65 +121,65 @@ namespace TatBlog.WebApi.Endpoints
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
 
-        //private static async Task<IResult> GetFeaturedPosts(
-        //int numPosts,
+        //private static async Task<IResult> GetFeaturedBooks(
+        //int numBooks,
         //IBlogRepository blogRepository)
         //{
-        //    var postsList = await blogRepository
-        //        .GetPopularPostsAsync(numPosts);
+        //    var BooksList = await blogRepository
+        //        .GetPopularBooksAsync(numBooks);
 
         //    var paginationResult =
-        //        new PaginationResult<PostItem>(postsList);
+        //        new PaginationResult<BookItem>(BooksList);
 
         //    return Results.Ok(ApiResponse.Success(paginationResult));
         //}
 
-        //private static async Task<IResult> GetRandomPosts(
-        //int numPosts,
-        //IBlogRepository blogRepository)
-        //{
-        //    var postsList = await blogRepository
-        //        .GetRandomPostsAsync(numPosts);
+        private static async Task<IResult> GetRandomBooks(
+        int numBooks,
+        IBookRepository bookRepository)
+        {
+            var booksList = await bookRepository
+                .GetRandomBooksAsync(numBooks);
 
-        //    var paginationResult =
-        //        new PaginationResult<PostItem>(postsList);
+            var paginationResult =
+                new PaginationResult<BookItem>(booksList);
 
-        //    return Results.Ok(ApiResponse.Success(paginationResult));
-        //}
+            return Results.Ok(ApiResponse.Success(paginationResult));
+        }
 
-        //private static async Task<IResult> GetPostDetails(
-        //    int id,
-        //    IBlogRepository blogRepository,
-        //    IMapper mapper)
-        //{
-        //    var post = await blogRepository.GetCachedPostByIdAsync(id);
+        private static async Task<IResult> GetBookDetails(
+            int id,
+            IBookRepository bookRepository,
+            IMapper mapper)
+        {
+            var Book = await bookRepository.GetCachedBookByIdAsync(id);
 
-        //    return post == null
-        //        ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
-        //        $"không tìm thấy bài viết có mã số {id}"))
-        //        : Results.Ok(ApiResponse.Success(mapper.Map<PostItem>(post)));
-        //}
+            return Book == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+                $"không tìm thấy sách có mã số {id}"))
+                : Results.Ok(ApiResponse.Success(mapper.Map<BookItem>(Book)));
+        }
 
-        //private static async Task<IResult> GetPostsBySlug(
+        //private static async Task<IResult> GetBooksBySlug(
         //    [FromRoute] string slug,
         //    [AsParameters] PagingModel pagingModel,
         //    IBlogRepository blogRepository)
         //{
-        //    var postQuery = new PostQuery()
+        //    var BookQuery = new BookQuery()
         //    {
-        //        PostSlug = slug,
+        //        BookSlug = slug,
         //        PublishedOnly = true
         //    };
 
-        //    var postsList = await blogRepository.GetPagedPostsAsync(
-        //        postQuery, pagingModel,
-        //        posts => posts.ProjectToType<PostDto>());
-        //    var paginationResult = new PaginationResult<PostDto>(postsList);
+        //    var BooksList = await blogRepository.GetPagedBooksAsync(
+        //        BookQuery, pagingModel,
+        //        Books => Books.ProjectToType<BookDto>());
+        //    var paginationResult = new PaginationResult<BookDto>(BooksList);
 
         //    return Results.Ok(ApiResponse.Success(paginationResult));
         //}
 
-        //private static async Task<IResult> AddPost(
+        //private static async Task<IResult> AddBook(
         //    AuthorEditModel model,
         //    IValidator<AuthorEditModel> validator,
         //    IAuthorRepository authorRepository,
@@ -199,7 +199,7 @@ namespace TatBlog.WebApi.Endpoints
         //            mapper.Map<AuthorItem>(author), HttpStatusCode.Created));
         //}
 
-        //private static async Task<IResult> SetPostPicture(
+        //private static async Task<IResult> SetBookPicture(
         //    int id, IFormFile imageFile,
         //    IAuthorRepository authorRepository,
         //    IMediaManager mediaManager)
@@ -218,7 +218,7 @@ namespace TatBlog.WebApi.Endpoints
         //    return Results.Ok(ApiResponse.Success(imageUrl));
         //}
 
-        //private static async Task<IResult> UpdatePost(
+        //private static async Task<IResult> UpdateBook(
         //    int id, AuthorEditModel model,
         //    IValidator<AuthorEditModel> validator,
         //    IAuthorRepository authorRepository,
@@ -242,7 +242,7 @@ namespace TatBlog.WebApi.Endpoints
         //                    "Could not find author"));
         //}
 
-        //private static async Task<IResult> DeletePost(
+        //private static async Task<IResult> DeleteBook(
         //    int id, IAuthorRepository authorRepository)
         //{
         //    return await authorRepository.DeleteAuthorAsync(id)

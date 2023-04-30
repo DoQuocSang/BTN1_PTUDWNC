@@ -96,5 +96,68 @@ namespace TatBlog.Services.Blogs
                 nameof(Book.ReleasedDate), "DESC");
         }
 
+        public async Task<IPagedList<BookItem>> GetRandomBooksAsync(
+        int numBooks,
+        int pageSize = 30,
+        int pageNumber = 1,
+        CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Book>()
+                .Include(x => x.Category)
+                .Include(x => x.Author)
+                .OrderBy(x => Guid.NewGuid())
+                .Take(numBooks)
+                .AsNoTracking()
+                .Select(x => new BookItem()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    UrlSlug = x.UrlSlug,
+                    Meta = x.Meta,
+                    ShortDescription = x.ShortDescription,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    Supplier = x.Supplier,
+                    PublishCompany = x.PublishCompany,
+                    CoverForm = x.CoverForm,
+                    StarNumber = x.StarNumber,
+                    ReviewNumber = x.ReviewNumber,
+                    Price = x.Price,
+                    ReleasedDate = x.ReleasedDate,
+                    CategoryName = x.Category.Name,
+                    AuthorName = x.Author.FullName
+                })
+                .ToPagedListAsync(pageNumber, pageSize,
+                nameof(Book.ReleasedDate), "DESC",
+                cancellationToken);
+
+        }
+
+        public async Task<Book> GetCachedBookByIdAsync(int bookId)
+        {
+            return await _memoryCache.GetOrCreateAsync(
+                $"book.by-id.{bookId}",
+                async (entry) =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
+                    return await GetBookByIdAsync(bookId);
+                });
+        }
+
+        public async Task<Book> GetBookByIdAsync(
+          int bookId, bool includeDetails = false,
+          CancellationToken cancellationToken = default)
+        {
+            if (!includeDetails)
+            {
+                return await _context.Set<Book>().FindAsync(bookId);
+            }
+
+            return await _context.Set<Book>()
+                .Include(x => x.Category)
+                .Include(x => x.Author)
+                .FirstOrDefaultAsync(x => x.Id == bookId, cancellationToken);
+        }
+
     }
 }

@@ -17,5 +17,17 @@ namespace TatBlog.Services.Blogs
            BookQuery condition,
            IPagingParams pagingParams,
            Func<IQueryable<Book>, IQueryable<T>> mapper);
+
+        Task<IPagedList<BookItem>> GetRandomBooksAsync(
+            int numBooks,
+            int pageSize = 30,
+            int pageNumber = 1,
+            CancellationToken cancellationToken = default);
+
+        Task<Book> GetCachedBookByIdAsync(int bookId);
+
+        Task<Book> GetBookByIdAsync(
+          int bookId, bool includeDetails = false,
+          CancellationToken cancellationToken = default);
     }
 }

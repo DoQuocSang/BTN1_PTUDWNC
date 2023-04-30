@@ -28,8 +28,8 @@ namespace TatBlog.Core.Entities
         public string CoverForm { get; set; }
         // Số sao đánh
         public int StarNumber { get; set; }
-        // Số sao trung bình
-        public float AverageStar { get; set; }
+        // Số lượt đánh giá
+        public int ReviewNumber { get; set; }
         // Gía
         public int Price { get; set; }
         // Ngày phát hành

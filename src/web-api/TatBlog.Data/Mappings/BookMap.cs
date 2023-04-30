@@ -56,7 +56,7 @@ namespace TatBlog.Data.Mappings
             builder.Property(p => p.StarNumber)
              .HasDefaultValue(0);
 
-            builder.Property(p => p.AverageStar)
+            builder.Property(p => p.ReviewNumber)
              .HasDefaultValue(0);
 
             builder.Property(p => p.Price)
