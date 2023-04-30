@@ -196,11 +196,11 @@ namespace TatBlog.Data.Seeders
                 },
                 new()
                 {
-                    FullName = "PGS Hà Nam Khánh Giao",
-                    UrlSlug = "ha-nam-khanh",
-                    Email = "hanamkhanh@gmail.com",
+                    FullName = "PGS Hà Nam",
+                    UrlSlug = "ha-nam",
+                    Email = "hanam@gmail.com",
                     JoinedDate = new DateTime(2015, 11, 20),
-                    Notes = "PGS Hà Nam Khánh Giao"
+                    Notes = "PGS Hà Nam"
                 },
                 new()
                 {
@@ -236,12 +236,12 @@ namespace TatBlog.Data.Seeders
                 new(){Name = "Kinh tế", Description = "Là thể loại sách nói về kinh tế", UrlSlug = "kinhte", ShowOnMenu = true},
                 new(){Name = "Văn học nghệ thuật", Description = "Là thể loại văn học nghệ thuật", UrlSlug = "vanhocnghethuat", ShowOnMenu = true},
                 new(){Name = "Tiểu thuyết", Description = "Là một thể loại văn xuôi có hư cấu", UrlSlug = "tieuthuyet", ShowOnMenu = true},
-                new(){Name = "Tâm lý, tâm linh, tôn giáo", Description = "Là thể loại nói về các bí ẩn về tâm linh, tôn giáo", UrlSlug = "tamly-tamlinh-tongiao", ShowOnMenu = true},
+                new(){Name = "Tâm linh & Tôn giáo", Description = "Là thể loại nói về các bí ẩn về tâm linh, tôn giáo", UrlSlug = "tamly-tamlinh-tongiao", ShowOnMenu = true},
                 //================================================5
                 
                 new(){Name = "Sách tự lực", Description = "Là sách được viết với mục đích hướng dẫn độc giả giải quyết những vấn đề cá nhân. Dòng sách lấy tên từ Self-Help, " +
                  "cuốn sách bán chạy nhất năm 1859 của Samuel Smiles, nhưng còn được biết đến và phân loại theo \"tự cải thiện\", một thuật ngữ bản hiện đại hóa của tự lực", UrlSlug = "sach-tu-luc", ShowOnMenu = true},
-                new(){Name = "Thiếu nhiThiếu nhi", Description = "Là những loại sách dành cho thiếu nhi", UrlSlug = "thieunhi", ShowOnMenu = true},
+                new(){Name = "Thiếu nhi", Description = "Là những loại sách dành cho thiếu nhi", UrlSlug = "thieunhi", ShowOnMenu = true},
                 new(){Name = "Truyện ngắn", Description = "Là thể loại truyện ngắn về một câu chuyện nào đó", UrlSlug = "truyenngan", ShowOnMenu = true},
                 new(){Name = "Truyện tranh", Description = "Là thể loại về truyện tranh", UrlSlug = "truyentranh", ShowOnMenu = true},
                 new(){Name = "Giáo trình", Description = "Là thể loại sách , tài liệu cụ thể, nói về các lĩnh vực nghiên cứu", UrlSlug = "giaotrinhgiaotrinh", ShowOnMenu = true},
@@ -700,7 +700,7 @@ namespace TatBlog.Data.Seeders
                     Description =  "Sách được thiết kế và vẽ câu chuyện theo tranh , sách được thiết kế phần tiếng anh và tiếng việt , với sự kết hợp cả hai thứ tiếng , giúp các bạn nhỏ thích thú hơn trong từng câu chuyện hay nhất được chọn lọc , bạn nhỏ có thể vừa đọc truyện tiếng anh và tiếng việt , để nâng cao phần ngoại ngữ thêm cho bé , cuối mỗi cuốn truyện đều có phần câu hỏi theo tranh cho bé thích thú hơn khi đọc xong câu chuyện, Bộ sách này có 10 chủ đề các em nhỏ tìm cho đủ tập nhé.",
                     Meta = "Truyện Tranh Ngụ Ngôn Dành Cho Thiếu Nhi: Chuột, Gà Trống Và Mèo (Song Ngữ Anh - Việt)",
                     UrlSlug = "truyen-tranh-ngu-ngon-danh-cho-thieu-nhi-chuot-ga-trong-va-meo-song-ngu-anh-viet",
-                    ImageUrl = "https://cdn0.fahasa.com/media/wysiwyg/hieu_kd/2023_04_frame/FRAME_NCC_FRAME_T42023_SLIVER_NCC_MCBOOK.png",
+                    ImageUrl = "https://cdn0.fahasa.com/media/flashmagazine/images/page_images/truyen_tranh_ngu_ngon_danh_cho_thieu_nhi_chuot__ga_trong_va_meo_song_ngu_anh___viet/2021_08_05_14_10_42_1-390x510.jpg",
                     Supplier = "MCBooks",
                     PublishCompany = "NXB Phụ Nữ Việt Nam",
                     CoverForm = "Bìa Mềm",

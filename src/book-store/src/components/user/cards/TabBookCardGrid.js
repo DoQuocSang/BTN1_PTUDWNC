@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -12,10 +12,14 @@ import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7
 import  Book1  from "images/book1.png";
 import  Book2  from "images/book2.jpg";
 import  Book3  from "images/book3.jpg";
+import  BookDefault from "images/book-default.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { getBooks } from "../../../services/BookRepository";
+import { isEmptyOrSpaces } from "../../utils/Utils";
+import { toVND } from "../../utils/Utils";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw.h2`text-4xl sm:text-4xl font-black tracking-wide text-center`
@@ -54,8 +58,8 @@ const CardButton = tw(PrimaryButtonBase)`text-sm`;
 const CardReview = tw.div`font-medium text-xs text-gray-600`;
 
 const CardText = tw.div`p-4 text-gray-900`;
-const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500`;
-const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600`;
+const CardTitle = tw.h5`text-lg font-semibold group-hover:text-primary-500 line-clamp-2`;
+const CardContent = tw.p`mt-1 text-sm font-medium text-gray-600 line-clamp-3`;
 const CardPrice = tw.p`mt-4 text-lg font-bold text-red-500`;
 
 const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
@@ -65,93 +69,32 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-export default ({
-  heading = "Checkout the Menu",
-  tabs = {
-    "Tất cả": [
-      {
-        imageSrc: Book1,
-        title: "Veg Mixer",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "5.0",
-        reviews: "87",
-        url: "#"
-      },
-      {
-        imageSrc: Book2,
-        title: "Macaroni",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "4.8",
-        reviews: "32",
-        url: "#"
-      },
-      {
-        imageSrc: Book3,
-        title: "Nelli",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "4.9",
-        reviews: "89",
-        url: "#"
-      },
-      {
-        imageSrc: Book1,
-        title: "Jalapeno Poppers",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "4.6",
-        reviews: "12",
-        url: "#"
-      },
-      {
-        imageSrc: Book2,
-        title: "Cajun Chicken",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "4.2",
-        reviews: "19",
-        url: "#"
-      },
-      {
-        imageSrc: Book3,
-        title: "Chillie Cake",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "5.0",
-        reviews: "61",
-        url: "#"
-      },
-      {
-        imageSrc: Book3,
-        title: "Guacamole Mex",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "4.2",
-        reviews: "95",
-        url: "#"
-      },
-      {
-        imageSrc: Book3,
-        title: "Carnet Nachos",
-        content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-        price: "120.000VND",
-        rating: "3.9",
-        reviews: "26",
-        url: "#"
+export default () => {
+  const [booksList, setBooksList] = useState([]);
+  const [metadata, setMetadata] = useState([]);
+
+  useEffect(() => {
+    document.title = 'Trang chủ';
+
+    getBooks().then(data => {
+      if (data) {
+        setBooksList(data.items);
+        setMetadata(data.metadata);
       }
-    ],
+      else
+        setBooksList([]);
+      console.log(data.items)
+    })
+
+  }, []);
+
+  let tabs = {
+    "Tất cả": booksList,
     "Hot": getRandomCards(),
     "Mới": getRandomCards(),
     "Phổ biến": getRandomCards()
   }
-}) => {
-  /*
-   * To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab
-   * as the key and value of the key will be its content (as an array of objects).
-   * To see what attributes are configurable of each object inside this array see the example above for "Starters".
-   */
+
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
 
@@ -159,7 +102,7 @@ export default ({
     <Container>
       <ContentWithPaddingXl>
         <HeaderRow>
-          <Header>{heading}</Header>
+          <Header>Danh mục sản phẩm</Header>
           <TabsControl>
             {Object.keys(tabs).map((tabName, index) => (
               <TabControl key={index} active={activeTab === tabName} onClick={() => setActiveTab(tabName)}>
@@ -190,14 +133,14 @@ export default ({
           >
             {tabs[tabKey].map((card, index) => (
               <CardContainer key={index}>
-                <Card className="group" href={card.url} initial="rest" whileHover="hover" animate="rest">
-                  <CardImageContainer imageSrc={card.imageSrc}>
+                <Card className="group" href={"/all-product/"+card.urlSlug} initial="rest" whileHover="hover" animate="rest">
+                  <CardImageContainer imageSrc={card.imageUrl}>
                     <CardRatingContainer>
                       <CardRating>
                         <StarIcon />
-                        {card.rating}
+                        {card.starNumber}
                       </CardRating>
-                      <CardReview>({card.reviews})</CardReview>
+                      <CardReview>({card.reviewNumber})</CardReview>
                     </CardRatingContainer>
                     <CardHoverOverlay
                       variants={{
@@ -212,16 +155,16 @@ export default ({
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Link to="/product-detail">
+                      <Link to={card.urlSlug}>
                       <CardButton>Mua ngay</CardButton>
                       </Link>
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>
                     <CardTitle>{card.title}</CardTitle>
-                    <CardContent>{card.content}</CardContent>
+                    <CardContent>{card.shortDescription}</CardContent>
                     <CardPrice>
-                      {card.price}
+                      {toVND(card.price)}
                     </CardPrice>
                   </CardText>
                 </Card>

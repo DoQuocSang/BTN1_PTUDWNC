@@ -9,3 +9,7 @@ export function useQuery() {
     const { search } = useLocation();
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
+
+export function toVND(value) {
+    return value.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+}

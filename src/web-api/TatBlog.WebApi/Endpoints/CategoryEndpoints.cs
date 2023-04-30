@@ -60,16 +60,31 @@ namespace TatBlog.WebApi.Endpoints
             return app;
         }
 
-        private static async Task<IResult> GetCategories(
-            [AsParameters] CategoryFilterModel model, 
-            ICategoryRepository categoryRepository)
-        {
-            // model kế thừa từ PagingModel
-            var categories = await categoryRepository.GetPagedCategoriesAsync(model, model.Name);
+        //private static async Task<IResult> GetCategories(
+        //    [AsParameters] CategoryFilterModel model, 
+        //    ICategoryRepository categoryRepository)
+        //{
+        //    // model kế thừa từ PagingModel
+        //    var categories = await categoryRepository.GetPagedCategoriesAsync(model, model.Name);
 
-            var paginationResult = new PaginationResult<CategoryItem>(categories);
-            return Results.Ok(paginationResult);
+        //    var paginationResult = new PaginationResult<CategoryItem>(categories);
+        //    return Results.Ok(paginationResult);
+        //}
+
+        private static async Task<IResult> GetCategories(
+         [AsParameters] CategoryFilterModel model,
+         ICategoryRepository categoryRepository)
+        {
+            var categoriesList = await categoryRepository
+                .GetPagedCategoriesAsync(model, model.Name);
+
+            var paginationResult =
+                new PaginationResult<CategoryItem>(categoriesList);
+
+            //return Results.Ok(paginationResult);
+            return Results.Ok(ApiResponse.Success(paginationResult));
         }
+
 
         private static async Task<IResult> GetCategoryDetails(
           int id,
