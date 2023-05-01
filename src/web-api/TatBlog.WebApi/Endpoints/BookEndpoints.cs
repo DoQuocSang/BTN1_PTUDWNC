@@ -43,11 +43,11 @@ namespace TatBlog.WebApi.Endpoints
                 .WithName("GetBookById")
                 .Produces<ApiResponse<BookItem>>();
 
-            //routeGroupBuilder.MapGet(
-            //        "/byslug/{slug:regex(^[a-z0-9_-]+$)}",
-            //        GetBooksBySlug)
-            //    .WithName("GetBooksBySlug")
-            //    .Produces<ApiResponse<PaginationResult<BookDto>>>();
+            routeGroupBuilder.MapGet(
+                    "/byslug/{slug:regex(^[a-z0-9_-]+$)}",
+                    GetBooksBySlug)
+                .WithName("GetBooksBySlug")
+                .Produces<ApiResponse<PaginationResult<BookDto>>>();
 
             //routeGroupBuilder.MapBook("/", AddBook)
             //    .WithName("AddNewBook")
@@ -160,24 +160,23 @@ namespace TatBlog.WebApi.Endpoints
                 : Results.Ok(ApiResponse.Success(mapper.Map<BookItem>(Book)));
         }
 
-        //private static async Task<IResult> GetBooksBySlug(
-        //    [FromRoute] string slug,
-        //    [AsParameters] PagingModel pagingModel,
-        //    IBlogRepository blogRepository)
-        //{
-        //    var BookQuery = new BookQuery()
-        //    {
-        //        BookSlug = slug,
-        //        PublishedOnly = true
-        //    };
+        private static async Task<IResult> GetBooksBySlug(
+            [FromRoute] string slug,
+            [AsParameters] PagingModel pagingModel,
+            IBookRepository bookRepository)
+        {
+            var BookQuery = new BookQuery()
+            {
+                BookSlug = slug,
+            };
 
-        //    var BooksList = await blogRepository.GetPagedBooksAsync(
-        //        BookQuery, pagingModel,
-        //        Books => Books.ProjectToType<BookDto>());
-        //    var paginationResult = new PaginationResult<BookDto>(BooksList);
+            var BooksList = await bookRepository.GetPagedBooksConvertBookItemAsync(
+                BookQuery, pagingModel,
+                Books => Books.ProjectToType<BookDto>());
+            var paginationResult = new PaginationResult<BookDto>(BooksList);
 
-        //    return Results.Ok(ApiResponse.Success(paginationResult));
-        //}
+            return Results.Ok(ApiResponse.Success(paginationResult));
+        }
 
         //private static async Task<IResult> AddBook(
         //    AuthorEditModel model,

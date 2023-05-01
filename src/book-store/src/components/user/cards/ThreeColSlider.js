@@ -220,9 +220,9 @@ export default ({HeadingText = "Sản phẩm"}) => {
                   <PriceText>{" "}{toVND(card.price)}</PriceText>
                 </PriceContainer>
               </TextInfo>
-              <Link to={card.urlSlug}>
+              <a href={`/product-detail/${card.urlSlug}`}>
                 <PrimaryButton>Mua ngay</PrimaryButton>
-              </Link>
+              </a>
             </Card>
           ))}
         </CardSlider>

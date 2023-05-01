@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro"; //eslint-disable-line
@@ -8,6 +8,10 @@ import StatsIllustrationSrc from "images/stats-illustration.svg";
 import { ReactComponent as StarIcon } from "feather-icons/dist/icons/star.svg";
 import { ReactComponent as SvgDotPattern } from "images/dot-pattern.svg";
 import Book1 from "images/book1.png";
+import BookDefault from "images/book-default.png"
+import { getBookBySlug } from "../../../services/BookRepository";
+import { isEmptyOrSpaces } from "../../utils/Utils";
+import { toVND } from "../../utils/Utils";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-2`;
@@ -44,8 +48,8 @@ const Rating = tw.span`ml-2 font-bold`;
 
 const Statistics = tw.div`flex flex-col items-center sm:block text-center md:text-left mt-4`;
 const Statistic = tw.div`text-left sm:inline-block sm:mr-12 last:mr-0 mt-4`;
-const Key = tw.div`font-bold text-lg sm:text-xl lg:text-xl text-secondary-500 tracking-wide`;
-const Value = tw.div`font-medium text-primary-700`;
+const Key = tw.div`font-bold text-sm sm:text-xl lg:text-xl text-secondary-500 tracking-wide`;
+const Value = tw.div`font-medium text-sm text-primary-700`;
 
 const PrimaryButton = tw(PrimaryButtonBase)`mt-8 md:mt-10 text-sm inline-block mx-auto md:mx-0`;
 const SecondaryButton = tw(PrimaryButton)`md:ml-5 bg-gray-500`;
@@ -55,105 +59,129 @@ const DecoratorBlob = styled(SvgDotPattern)(props => [
 ]);
 
 export default ({
-  subheading = "Sách bán chạy",
-  heading = (
-    <>
-      {/* We have been doing this <wbr /> since <span tw="text-primary-500">1999.</span> */}
-      Alice In Borderland - Tập 6 - Tặng Kèm Card Giấy
-    </>
-  ),
-  description = "Arisu Ryohei tự nhận mình là một thành phần “ăn hại xã hội”, học hành lẹt đẹt nên đang cực kỳ chán đời. Trong một lần tụ tập than vãn cùng hai thằng bạn thân Karube và Chota, cả ba bất chợt nhìn thấy pháo hoa, và sau đó là một vụ nổ long trời lở đất. ",
   primaryButtonText = "Mua ngay",
   secondaryButtonText = "Thêm vào giỏ hàng",
-  primaryButtonUrl = "https://timerse.com",
-  imageSrc = Book1,
+  primaryButtonUrl = "",
   imageCss = null,
   imageContainerCss = null,
   imageDecoratorBlob = false,
   imageDecoratorBlobCss = null,
   imageInsideDiv = true,
-  statistics = null,
   textOnLeft = false,
-  ratingIcon = 4,
-  ratingCount = 4.8
+  slug = ""
 }) => {
-  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
-  //Change the statistics variable as you like, add or delete objects
-  const defaultStatistics = [
-    {
-      key: "Nhà cung cấp",
-      value: "NXB Trẻ"
-    },
-    {
-      key: "Nhà xuất bản",
-      value: "Trẻ"
-    },
-    {
-      key: "Tác giả",
-      value: "Haro Aso"
-    }
-    ,
-    {
-      key: "Hình thức bìa",
-      value: "Bìa mềm"
-    }
-  ];
 
-  if (!statistics) statistics = defaultStatistics;
+  const [booksList, setBooksList] = useState([]);
+  const [metadata, setMetadata] = useState([]);
+
+  useEffect(() => {
+    document.title = 'Thông tin sản phẩm';
+
+    getBookBySlug(slug).then(data => {
+      if (data) {
+        setBooksList(data.items);
+        setMetadata(data.metadata);
+      }
+      else
+        setBooksList([]);
+      //console.log(data.items)
+    })
+
+  }, []);
+
+  // const defaultStatistics = [
+  //   {
+  //     key: "Nhà cung cấp",
+  //     value: "NXB Trẻ"
+  //   },
+  //   {
+  //     key: "Nhà xuất bản",
+  //     value: "Trẻ"
+  //   },
+  //   {
+  //     key: "Tác giả",
+  //     value: "Haro Aso"
+  //   }
+  //   ,
+  //   {
+  //     key: "Hình thức bìa",
+  //     value: "Bìa mềm"
+  //   }
+  // ];
+
+  //if (!statistics) statistics = defaultStatistics;
 
   const starNum = (numLoop) => {
     //numLoop = parseInt(num, 10)
     const rows = [];
     for (var i = 0; i < numLoop; i++) {
-      rows.push(<StarIcon css= {tw`fill-current`} key={i}/>);
-    } 
+      rows.push(<StarIcon css={tw`fill-current`} key={i} />);
+    }
 
-    for (var i = 0; i < 5-numLoop; i++) {
-      rows.push(<StarIcon css= {tw`stroke-current`} key={i}/>);
-    } 
+    for (var i = 0; i < 5 - numLoop; i++) {
+      rows.push(<StarIcon css={tw`stroke-current`} key={i} />);
+    }
 
     return rows;
   };
 
   return (
     <Container>
-      <TwoColumn css={!imageInsideDiv && tw`md:items-center`}>
-        <ImageColumn css={imageContainerCss}>
-          {imageInsideDiv ? <Image imageSrc={imageSrc} css={imageCss} /> : <img src={imageSrc} css={imageCss} alt="" />}
-          {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
-        </ImageColumn>
-        <TextColumn textOnLeft={textOnLeft}>
-          <TextContent>
-            {subheading && <Subheading>{subheading}</Subheading>}
-            <Heading>{heading}</Heading>
-            <Statistics>
-              {statistics.map((statistic, index) => (
-                <Statistic key={index}>
-                  <Key>{statistic.key}</Key>
-                  <Value>{statistic.value}</Value>
+      {booksList.map((card, i) => (
+        <TwoColumn css={!imageInsideDiv && tw`md:items-center`} key={i}>
+          <ImageColumn css={imageContainerCss}>
+            {imageInsideDiv ? <Image imageSrc={card.imageUrl} css={imageCss} /> : <img src={BookDefault} css={imageCss} alt="" />}
+            {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
+          </ImageColumn>
+          <TextColumn textOnLeft={textOnLeft}>
+            <TextContent>
+              {card.category.name && <Subheading>{card.category.name}</Subheading>}
+              <Heading>{card.title}</Heading>
+              <Statistics>
+                {/* {statistics.map((statistic, index) => (
+                  <Statistic key={index}>
+                    <Key>{statistic.key}</Key>
+                    <Value>{statistic.value}</Value>
+                  </Statistic>
+                ))} */}
+                <Statistic>
+                  <Key>Nhà cung cấp</Key>
+                  <Value>{card.supplier}</Value>
                 </Statistic>
-              ))}
-            </Statistics>
+                <Statistic>
+                  <Key>Nhà xuất bản</Key>
+                  <Value>{card.publishCompany}</Value>
+                </Statistic>
+                <Statistic>
+                  <Key>Tác giả</Key>
+                  <Value>{card.author.fullName}</Value>
+                </Statistic>
+                <Statistic>
+                  <Key>Hình thức bìa</Key>
+                  <Value>{card.coverForm}</Value>
+                </Statistic>
+              </Statistics>
 
-            <RatingsInfo>
-                {starNum(ratingIcon)}
-                <Rating>({ratingCount})</Rating>
-            </RatingsInfo>
-            <Description>{description}</Description>
-            <PriceText>
-              Giá bán: <PriceValue>120.000VNĐ</PriceValue>
-            </PriceText>
+              <RatingsInfo>
+                {starNum(card.starNumber)}
+                <Rating>({card.reviewNumber + " lượt đánh giá"})</Rating>
+              </RatingsInfo>
+              <Description>{card.description}</Description>
+              <PriceText>
+                Giá bán: <PriceValue>{" "}{toVND(card.price)}</PriceValue>
+              </PriceText>
 
-            <PrimaryButton as="a" href={primaryButtonUrl}>
-              {primaryButtonText}
-            </PrimaryButton>
+              <PrimaryButton as="a" href={primaryButtonUrl}>
+                {primaryButtonText}
+              </PrimaryButton>
 
-            <SecondaryButton as="a" href={primaryButtonUrl}>
-              {secondaryButtonText}
-            </SecondaryButton>
-          </TextContent>
-        </TextColumn>
-      </TwoColumn>
+              <SecondaryButton as="a" href={primaryButtonUrl}>
+                {secondaryButtonText}
+              </SecondaryButton>
+            </TextContent>
+          </TextColumn>
+        </TwoColumn>
+      ))}
     </Container>
   );
 };

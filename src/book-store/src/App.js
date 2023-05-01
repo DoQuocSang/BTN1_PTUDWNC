@@ -48,10 +48,10 @@ function App() {
           <Route path="/login" element={<UserLogin />} />
           <Route path="/signup" element={<UserSignup />} />
           <Route path="/all-product" element={<AllProductPage />} />
-          <Route path="/product-detail" element={<ProductDetailPage />} />
+          <Route path="/product-detail/:slug" element={<ProductDetailPage />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/blog" element={<BlogIndex />} />
-          <Route path="/blog-detail" element={<BlogDetail />} />
+          <Route path="/blog-detail/:slug" element={<BlogDetail />} />
           <Route path="/cart" element={<Cart />} />
         </Route>
 

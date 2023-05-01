@@ -133,10 +133,11 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
   const defaultLinks = [
     <NavLinks key={1}>
-      <Link to="/all-product">
-        <NavLink className="group" css={tw``}>
+        <NavLink className="group" css={tw`cursor-pointer`}>
+          <Link to="/all-product">
           <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
           Danh mục
+          </Link>
           <MenuOnHover>
             <MenuSection hasBorder>
               <MenuTitle>
@@ -190,7 +191,6 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
           </MenuOnHover>
         </NavLink>
-      </Link>
 
       <NavLink className="group" css={tw`cursor-pointer`}>
         <FontAwesomeIcon icon={faMagnifyingGlass} css={tw`mr-2 text-base`} />

@@ -13,3 +13,12 @@ export function getBooks(
     ) {     
     return get_api(`https://localhost:7245/api/books?PageSize=${PageSize}&PageNumber=${PageNumber}`)
 }
+
+export function getBookBySlug(
+    slug = "",
+    PageSize = 30,
+    PageNumber = 1
+    ) {     
+    //console.log(urlSlug)
+    return get_api(`https://localhost:7245/api/books/byslug/${slug}?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}

@@ -118,7 +118,7 @@ export default () => {
                 <Subtitle>{card.categoryName}</Subtitle>
                 <Title>{card.title}</Title>
                 <Description>{card.shortDescription}</Description>
-                <Link href={card.urlSlug}>Xem chi tiết</Link>
+                <Link href={`/product-detail/${card.urlSlug}`}>Xem chi tiết</Link>
               </Details>
             </Card>
           ))}

@@ -162,7 +162,7 @@ export default () => {
             <Heading>Bài viết nổi bật</Heading>
             <PostsContainer>
               {featuredPostList.map((post, index) => (
-                <Post key={index} href={post.urlSlug} className="group" initial="rest" whileHover="hover" animate="rest">
+                <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group" initial="rest" whileHover="hover" animate="rest">
                   <Image
                     transition={{ duration: 0.3 }}
                     variants={postBackgroundSizeAnimation}
@@ -176,7 +176,7 @@ export default () => {
                       <AuthorName>{post.author.fullName}</AuthorName>
                       <AuthorProfile>{post.author.email}</AuthorProfile>
                     </AuthorNameAndProfession>
-                  </AuthorInfo>
+                  </AuthorInfo> 
                 </Post>
               ))}
             </PostsContainer>
@@ -185,7 +185,7 @@ export default () => {
             <Heading>Các bài viết</Heading>
             <PostsContainer>
               {randomPostList.map((post, index) => (
-              <Post key={index} href={post.urlSlug} className="group">
+              <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group">
                 <PostTextContainer>
                   <Title>{post.title}</Title>
                   <Description moreShort>{post.shortDescription}</Description>

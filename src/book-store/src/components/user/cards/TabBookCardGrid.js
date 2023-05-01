@@ -9,15 +9,16 @@ import { PrimaryButton as PrimaryButtonBase } from "components/user/misc/Buttons
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
-import  Book1  from "images/book1.png";
-import  Book2  from "images/book2.jpg";
-import  Book3  from "images/book3.jpg";
-import  BookDefault from "images/book-default.png"
+import Book1 from "images/book1.png";
+import Book2 from "images/book2.jpg";
+import Book3 from "images/book3.jpg";
+import BookDefault from "images/book-default.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { getBooks } from "../../../services/BookRepository";
+import { getRandomBooks } from "../../../services/BookRepository";
 import { isEmptyOrSpaces } from "../../utils/Utils";
 import { toVND } from "../../utils/Utils";
 
@@ -70,6 +71,7 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
 `;
 
 export default () => {
+
   const [booksList, setBooksList] = useState([]);
   const [metadata, setMetadata] = useState([]);
 
@@ -83,16 +85,29 @@ export default () => {
       }
       else
         setBooksList([]);
-      console.log(data.items)
+      //console.log(data.items)
     })
 
   }, []);
 
+  // const onLoadMoreClick = () => {
+  //   getRandomBooks(8).then(data => {
+  //     if (data) {
+  //       setBooksList(data.items);
+  //       setMetadata(data.metadata);
+  //     }
+  //     else
+  //       setBooksList([]);
+  //     //console.log(data.items)
+  //   })
+  //   return booksList;
+  // };
+
   let tabs = {
     "Tất cả": booksList,
-    "Hot": getRandomCards(),
-    "Mới": getRandomCards(),
-    "Phổ biến": getRandomCards()
+    "Hot": booksList,
+    "Mới":  booksList,
+    "Phổ biến":  booksList,
   }
 
   const tabsKeys = Object.keys(tabs);
@@ -118,12 +133,12 @@ export default () => {
             variants={{
               current: {
                 opacity: 1,
-                scale:1,
+                scale: 1,
                 display: "flex",
               },
               hidden: {
                 opacity: 0,
-                scale:0.8,
+                scale: 0.8,
                 display: "none",
               }
             }}
@@ -133,7 +148,7 @@ export default () => {
           >
             {tabs[tabKey].map((card, index) => (
               <CardContainer key={index}>
-                <Card className="group" href={"/all-product/"+card.urlSlug} initial="rest" whileHover="hover" animate="rest">
+                <Card className="group" href={"/all-product/" + card.urlSlug} initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageUrl}>
                     <CardRatingContainer>
                       <CardRating>
@@ -155,9 +170,9 @@ export default () => {
                       }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Link to={card.urlSlug}>
-                      <CardButton>Mua ngay</CardButton>
-                      </Link>
+                      <a href={`/product-detail/${card.urlSlug}`}>
+                        <CardButton>Mua ngay</CardButton>
+                      </a>
                     </CardHoverOverlay>
                   </CardImageContainer>
                   <CardText>
