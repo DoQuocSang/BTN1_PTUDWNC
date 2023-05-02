@@ -32,6 +32,12 @@ namespace TatBlog.WebApi.Endpoints
                .Produces<ApiResponse<CategoryItem>>();
 
             routeGroupBuilder.MapGet(
+                   "/{slug:regex(^[a-z0-9_-]+$)}",
+                   GetCategoryBySlug)
+               .WithName("GetCategoryBySlug")
+               .Produces<ApiResponse<PaginationResult<CategoryItem>>>();
+
+            routeGroupBuilder.MapGet(
                    "/{slug:regex(^[a-z0-9_-]+$)}/posts",
                    GetPostsByCategorySlug)
                .WithName("GetPostsByCategorySlug")
@@ -60,31 +66,56 @@ namespace TatBlog.WebApi.Endpoints
             return app;
         }
 
-        //private static async Task<IResult> GetCategories(
-        //    [AsParameters] CategoryFilterModel model, 
-        //    ICategoryRepository categoryRepository)
-        //{
-        //    // model kế thừa từ PagingModel
-        //    var categories = await categoryRepository.GetPagedCategoriesAsync(model, model.Name);
-
-        //    var paginationResult = new PaginationResult<CategoryItem>(categories);
-        //    return Results.Ok(paginationResult);
-        //}
-
         private static async Task<IResult> GetCategories(
-         [AsParameters] CategoryFilterModel model,
-         ICategoryRepository categoryRepository)
+            [AsParameters] CategoryFilterModel model,
+            ICategoryRepository categoryRepository)
         {
-            var categoriesList = await categoryRepository
-                .GetPagedCategoriesAsync(model, model.Name);
+            // model kế thừa từ PagingModel
+            var categories = await categoryRepository.GetPagedCategoriesAsync(model, model.Name);
 
-            var paginationResult =
-                new PaginationResult<CategoryItem>(categoriesList);
-
-            //return Results.Ok(paginationResult);
-            return Results.Ok(ApiResponse.Success(paginationResult));
+            var paginationResult = new PaginationResult<CategoryItem>(categories);
+            return Results.Ok(paginationResult);
         }
 
+        //private static async Task<IResult> GetCategories(
+        // [AsParameters] CategoryFilterModel model,
+        // ICategoryRepository categoryRepository)
+        //{
+        //    var categoriesList = await categoryRepository
+        //        .GetPagedCategoriesAsync(model, model.Name);
+
+        //    var paginationResult =
+        //        new PaginationResult<CategoryItem>(categoriesList);
+
+        //    //return Results.Ok(paginationResult);
+        //    return Results.Ok(ApiResponse.Success(paginationResult));
+        //}
+
+        //private static async Task<IResult> GetCategoryBySlug(
+        //  string slug,
+        //  ICategoryRepository categoryRepository,
+        //  IMapper mapper)
+        //{
+        //    var category = await categoryRepository.GetCachedCategoryBySlugAsync(slug);
+
+        //    return category == null
+        //        ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+        //        $"không tìm thấy chuyên mục có slug {slug}"))
+        //        : Results.Ok(ApiResponse.Success(mapper.Map<CategoryItem>(category)));
+        //}
+
+        private static async Task<IResult> GetCategoryBySlug(
+          string slug,
+          ICategoryRepository categoryRepository,
+          IMapper mapper)
+        {
+            var category = await categoryRepository.GetCachedCategoryItemBySlugAsync(slug);
+
+            return category == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+                $"không tìm thấy chuyên mục có slug {slug}"))
+                : Results.Ok(ApiResponse.Success(category));
+        }
 
         private static async Task<IResult> GetCategoryDetails(
           int id,
@@ -116,6 +147,25 @@ namespace TatBlog.WebApi.Endpoints
             var paginationResult = new PaginationResult<PostDto>(postsList);
 
             //return Results.Ok(paginationResult);
+            return Results.Ok(ApiResponse.Success(paginationResult));
+        }
+
+        private static async Task<IResult> GetPostsBySlug(
+           [FromRoute] string slug,
+           [AsParameters] PagingModel pagingModel,
+           IBlogRepository blogRepository)
+        {
+            var postQuery = new PostQuery()
+            {
+                PostSlug = slug,
+                PublishedOnly = true
+            };
+
+            var postsList = await blogRepository.GetPagedPostsAsync(
+                postQuery, pagingModel,
+                posts => posts.ProjectToType<PostDto>());
+            var paginationResult = new PaginationResult<PostDto>(postsList);
+
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
 

@@ -5,15 +5,20 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
 import { SectionHeading } from "components/user/misc/Headings";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PrimaryButton } from "components/user/misc/Buttons";
 import { Link } from "react-router-dom";
 import PostDefault from "images/post-default.png";
 import { getPosts } from "../../services/PostRepository";
 import { formatDateTme } from "../../components/utils/Utils";
+import { getCategories } from "../../services/CategoryRepository";
+import { faTag } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const HeadingRow = tw.div`flex`;
-const Heading = tw(SectionHeading)`text-gray-900`;
-const Posts = tw.div`mt-6 sm:-mr-8 flex flex-wrap`;
+// const Heading = tw(SectionHeading)`text-gray-900`;
+const Posts = tw.div`mt-0 sm:-mr-8 flex flex-wrap`;
 const PostContainer = styled.div`
   ${tw`mt-10 w-full sm:w-1/2 lg:w-1/3 sm:pr-8`}
   ${props =>
@@ -47,6 +52,10 @@ const Description = tw.div``;
 
 const ButtonContainer = tw.div`flex justify-center`;
 const LoadMoreButton = tw(PrimaryButton)`mt-16 mx-auto`;
+
+const TagContainer = tw.div`my-3 flex flex-wrap`;
+const TagItem = tw.p`mr-3 my-2 py-2 px-3 bg-teal-400 rounded-lg font-semibold text-xs text-white`;
+const Heading = tw(SectionHeading)`text-gray-900 mb-0 mt-3 text-lg text-left mr-3`;
 
 export default ({
   headingText = "Bài viết",
@@ -91,6 +100,8 @@ export default ({
 
   const [postsList, setPostsList] = useState([]);
   const [metadata, setMetadata] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
+
 
   useEffect(() => {
     document.title = 'Trang chủ';
@@ -105,34 +116,58 @@ export default ({
       console.log(data.items)
     })
 
+    getCategories().then(data => {
+      if (data) {
+        setCategoriesList(data.items);
+        setMetadata(data.metadata);
+      }
+      else
+        setCategoriesList([]);
+      //console.log(data)
+    })
+
   }, []);
 
   return (
     <AnimationRevealPage>
       <Container>
         <ContentWithNoPadding>
+
+          <TagContainer>
+            <Heading>
+              Chủ đề:
+            </Heading>
+            {categoriesList.map((category, index) => (
+              <a href={`blog/${category.urlSlug}`}>
+                <TagItem key={index}>
+                  <FontAwesomeIcon icon={faTag} className="pr-2" />
+                  {category.name}
+                </TagItem>
+              </a>
+            ))}
+          </TagContainer>
           <Posts>
             {postsList.slice(0, visible).map((post, index) => (
-             <>
-              {index%7 === 0 ? featured = true : featured = false}
-              <PostContainer key={index} featured={featured}>
-                <Post className="group" as="a" href={`/blog-detail/${post.urlSlug}`}>
-                  <Image imageSrc={PostDefault} />
-                  <Info>
-                    <Category>{post.author.fullName}</Category>
-                    <CreationDate>{formatDateTme(post.postedDate)}</CreationDate>
-                    <a href={`/blog-detail/${post.urlSlug}`}>
-                      <Title>{post.title}</Title>
-                    </a>
-                    {featured === true ? 
-                     <Description css={tw``}>{post.shortDescription}</Description>
-                     :
-                     <Description css={tw`line-clamp-3 mt-2`}>{post.shortDescription}</Description>
-                    }
-                  </Info>
-                </Post>
-              </PostContainer>
-             </>
+              <>
+                {index % 7 === 0 ? featured = true : featured = false}
+                <PostContainer key={index} featured={featured}>
+                  <Post className="group" as="a" href={`/blog-detail/${post.urlSlug}`}>
+                    <Image imageSrc={PostDefault} />
+                    <Info>
+                      <Category>{post.author.fullName}</Category>
+                      <CreationDate>{formatDateTme(post.postedDate)}</CreationDate>
+                      <a href={`/blog-detail/${post.urlSlug}`}>
+                        <Title>{post.title}</Title>
+                      </a>
+                      {featured === true ?
+                        <Description css={tw``}>{post.shortDescription}</Description>
+                        :
+                        <Description css={tw`line-clamp-3 mt-2`}>{post.shortDescription}</Description>
+                      }
+                    </Info>
+                  </Post>
+                </PostContainer>
+              </>
             ))}
           </Posts>
           {visible < postsList.length && (

@@ -32,6 +32,8 @@ namespace TatBlog.WebApi.Mapsters
             config.NewConfig<Book, BookDto>();
             config.NewConfig<Book, BookDetail>();
             config.NewConfig<BookEditModel, Book>();
+            config.NewConfig<BookFilterModel, BookQuery>();
+
 
         }
     }

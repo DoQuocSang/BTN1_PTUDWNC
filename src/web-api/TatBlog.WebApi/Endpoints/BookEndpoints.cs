@@ -49,6 +49,12 @@ namespace TatBlog.WebApi.Endpoints
                 .WithName("GetBooksBySlug")
                 .Produces<ApiResponse<PaginationResult<BookDto>>>();
 
+            routeGroupBuilder.MapGet(
+                    "/byslug/related/{slug:regex(^[a-z0-9_-]+$)}",
+                    GetBooksRelatedBySlug)
+                .WithName("GetBooksRelatedBySlug")
+                .Produces<ApiResponse<PaginationResult<BookDto>>>();
+
             //routeGroupBuilder.MapBook("/", AddBook)
             //    .WithName("AddNewBook")
             //    .AddEndpointFilter<ValidatorFilter<BookEditModel>>()
@@ -171,6 +177,24 @@ namespace TatBlog.WebApi.Endpoints
             };
 
             var BooksList = await bookRepository.GetPagedBooksConvertBookItemAsync(
+                BookQuery, pagingModel,
+                Books => Books.ProjectToType<BookDto>());
+            var paginationResult = new PaginationResult<BookDto>(BooksList);
+
+            return Results.Ok(ApiResponse.Success(paginationResult));
+        }
+
+        private static async Task<IResult> GetBooksRelatedBySlug(
+         [FromRoute] string slug,
+         [AsParameters] PagingModel pagingModel,
+         IBookRepository bookRepository)
+        {
+            var BookQuery = new BookQuery()
+            {
+                BookSlug = slug,
+            };
+
+            var BooksList = await bookRepository.GetPagedBooksRelatedConvertBookItemAsync(
                 BookQuery, pagingModel,
                 Books => Books.ProjectToType<BookDto>());
             var paginationResult = new PaginationResult<BookDto>(BooksList);

@@ -49,6 +49,12 @@ namespace TatBlog.WebApi.Endpoints
                 .WithName("GetPostsBySlug")
                 .Produces<ApiResponse<PaginationResult<PostDto>>>();
 
+            //routeGroupBuilder.MapGet(
+            //       "/byslug/category/{slug:regex(^[a-z0-9_-]+$)}",
+            //       GetPostsByCategorySlug)
+            //   .WithName("GetPostsByCategorySlug")
+            //   .Produces<ApiResponse<PaginationResult<PostDto>>>();
+
             //routeGroupBuilder.MapPost("/", AddPost)
             //    .WithName("AddNewPost")
             //    .AddEndpointFilter<ValidatorFilter<PostEditModel>>()
@@ -178,6 +184,25 @@ namespace TatBlog.WebApi.Endpoints
 
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
+
+        //private static async Task<IResult> GetPostsByCategorySlug (
+        //  [FromRoute] string slug,
+        //  [AsParameters] PagingModel pagingModel,
+        //  IBlogRepository blogRepository)
+        //{
+        //    var postQuery = new PostQuery()
+        //    {
+        //        CategorySlug = slug,
+        //        PublishedOnly = true
+        //    };
+
+        //    var postsList = await blogRepository.GetPagedPostsAsync(
+        //        postQuery, pagingModel,
+        //        posts => posts.ProjectToType<PostDto>());
+        //    var paginationResult = new PaginationResult<PostDto>(postsList);
+
+        //    return Results.Ok(ApiResponse.Success(paginationResult));
+        //}
 
         private static async Task<IResult> AddPost(
             AuthorEditModel model,

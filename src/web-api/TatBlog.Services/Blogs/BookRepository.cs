@@ -38,7 +38,7 @@ namespace TatBlog.Services.Blogs
                 books = books.Where(x => x.CategoryId == condition.CategoryId);
             }
 
-            if (!string.IsNullOrWhiteSpace(condition.CategorySlug))
+            if (!condition.HasRelated && !string.IsNullOrWhiteSpace(condition.CategorySlug))
             {
                 books = books.Where(x => x.Category.UrlSlug == condition.CategorySlug);
             }
@@ -48,7 +48,7 @@ namespace TatBlog.Services.Blogs
                 books = books.Where(x => x.AuthorId == condition.AuthorId);
             }
 
-            if (!string.IsNullOrWhiteSpace(condition.AuthorSlug))
+            if (!condition.HasRelated && !string.IsNullOrWhiteSpace(condition.AuthorSlug))
             {
                 books = books.Where(x => x.Author.UrlSlug == condition.AuthorSlug);
             }
@@ -81,6 +81,12 @@ namespace TatBlog.Services.Blogs
                 books = books.Where(x => x.UrlSlug == condition.TitleSlug);
             }
 
+            if (condition.HasRelated && !string.IsNullOrWhiteSpace(condition.AuthorSlug) && !string.IsNullOrWhiteSpace(condition.CategorySlug))
+            {
+                books = books.Where(x => x.Author.UrlSlug == condition.AuthorSlug ||
+                                         x.Category.UrlSlug == condition.CategorySlug);
+            }
+
             return books;
         }
 
@@ -90,6 +96,27 @@ namespace TatBlog.Services.Blogs
           Func<IQueryable<Book>, IQueryable<T>> mapper)
         {
             var books = FilterBooks(condition);
+            var projectedBooks = mapper(books);
+            return await projectedBooks.ToPagedListAsync(
+                pagingParams.PageNumber, pagingParams.PageSize,
+                nameof(Book.ReleasedDate), "DESC");
+        }
+
+        public async Task<IPagedList<T>> GetPagedBooksRelatedConvertBookItemAsync<T>(
+          BookQuery condition,
+          IPagingParams pagingParams,
+          Func<IQueryable<Book>, IQueryable<T>> mapper)
+        {
+            var item = await GetBookBySlugAsync(condition.BookSlug);
+            
+            var BookQuery = new BookQuery()
+            {
+               AuthorSlug = item.Author.UrlSlug,
+               CategorySlug = item.Category.UrlSlug,
+               HasRelated = true
+            };
+
+            var books = FilterBooks(BookQuery);
             var projectedBooks = mapper(books);
             return await projectedBooks.ToPagedListAsync(
                 pagingParams.PageNumber, pagingParams.PageSize,
@@ -157,6 +184,16 @@ namespace TatBlog.Services.Blogs
                 .Include(x => x.Category)
                 .Include(x => x.Author)
                 .FirstOrDefaultAsync(x => x.Id == bookId, cancellationToken);
+        }
+
+        public async Task<Book> GetBookBySlugAsync(
+          string slug,
+          CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Book>()
+                .Include(x => x.Category)
+                .Include(x => x.Author)
+                .FirstOrDefaultAsync(x => x.UrlSlug == slug, cancellationToken);
         }
 
     }

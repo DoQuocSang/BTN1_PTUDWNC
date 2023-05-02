@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -9,10 +10,7 @@ import { PrimaryButton as PrimaryButtonBase } from "components/user/misc/Buttons
 import { ReactComponent as StarIcon } from "images/star-icon.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5.svg";
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
-import Book1 from "images/book1.png";
-import Book2 from "images/book2.jpg";
-import Book3 from "images/book3.jpg";
-import BookDefault from "images/book-default.png"
+import CatDefault from "images/cat-404-full-2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -21,9 +19,14 @@ import { getBooks } from "../../../services/BookRepository";
 import { getRandomBooks } from "../../../services/BookRepository";
 import { isEmptyOrSpaces } from "../../utils/Utils";
 import { toVND } from "../../utils/Utils";
+import { getBookByAuthorSlug } from "../../../services/BookRepository";
+import { getBookByCategorySlug } from "../../../services/BookRepository";
+import { getAuthorBySlug } from "../../../services/AuthorRepository";
+import { getCategoryBySlug } from "../../../services/CategoryRepository";
+import { getBookRelatedBySlug } from "../../../services/BookRepository";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
-const Header = tw.h2`text-4xl sm:text-4xl font-black tracking-wide text-center`
+const Header = tw.h2`text-4xl sm:text-4xl font-black tracking-wide text-left`
 const TabsControl = tw.div`flex flex-wrap bg-gray-200 px-2 py-2 rounded leading-none mt-12 xl:mt-0`;
 
 const TabControl = styled.div`
@@ -70,24 +73,95 @@ const DecoratorBlob2 = styled(SvgDecoratorBlob2)`
   ${tw`pointer-events-none -z-20 absolute left-0 bottom-0 h-80 w-80 opacity-15 transform -translate-x-2/3 text-primary-500`}
 `;
 
-export default () => {
+const BlogImage = tw.img`w-full h-auto rounded-lg pt-4`;
+
+export default ({hasTab = true, isProductPage = false}) => {
+
+  let { slug } = useParams();
+  let { type } = useParams();
+
+  if (typeof slug === 'undefined') {
+    slug = "";
+  }
+
+  if (typeof type === 'undefined') {
+    type = "";
+  }
 
   const [booksList, setBooksList] = useState([]);
+  const [headingText, setheadingText] = useState("Danh mục sản phẩm");
   const [metadata, setMetadata] = useState([]);
 
   useEffect(() => {
     document.title = 'Trang chủ';
 
-    getBooks().then(data => {
-      if (data) {
-        setBooksList(data.items);
-        setMetadata(data.metadata);
-      }
-      else
-        setBooksList([]);
-      //console.log(data.items)
-    })
+    if (isEmptyOrSpaces(slug)) {
+      getBooks().then(data => {
+        if (data) {
+          setBooksList(data.items);
+          setMetadata(data.metadata);
+        }
+        else
+          setBooksList([]);
+        //console.log(data.items)
+      })
+    }
+    else {
+      if(type === "author"){
+        getAuthorBySlug(slug).then(data => {
+          if (data) {
+            setheadingText("Sản phẩm của " + data.fullName);
+          }
+          else{
+              setheadingText("Danh mục sản phẩm");
+          }
+          //console.log(data.fullName)
+        })
 
+        getBookByAuthorSlug(slug).then(data => {
+          if (data) {
+            setBooksList(data.items);
+          }
+          else
+            setBooksList([]);
+          // console.log(data.items)
+        })
+      }
+
+      if(type === "category"){
+        getCategoryBySlug(slug).then(data => {
+          if (data) {
+            setheadingText("Sản phẩm thuộc loại " + data.name);
+          }
+          else
+            setheadingText("Danh mục sản phẩm");
+          //console.log(data.name)
+        })
+
+        getBookByCategorySlug(slug).then(data => {
+          if (data) {
+            setBooksList(data.items);
+          }
+          else
+            setBooksList([]);
+          // console.log(data.items)
+        })
+      }
+
+      if(isProductPage === true){
+        getBookRelatedBySlug(slug).then(data => {
+          if (data) {
+            setBooksList(data.items);
+          }
+          else
+          {
+            setBooksList([]);
+          }
+          console.log(data.items)
+        })
+      }
+
+  }
   }, []);
 
   // const onLoadMoreClick = () => {
@@ -106,28 +180,37 @@ export default () => {
   let tabs = {
     "Tất cả": booksList,
     "Hot": booksList,
-    "Mới":  booksList,
-    "Phổ biến":  booksList,
+    "Mới": booksList,
+    "Phổ biến": booksList,
   }
 
   const tabsKeys = Object.keys(tabs);
   const [activeTab, setActiveTab] = useState(tabsKeys[0]);
 
+
   return (
     <Container>
       <ContentWithPaddingXl>
         <HeaderRow>
-          <Header>Danh mục sản phẩm</Header>
-          <TabsControl>
-            {Object.keys(tabs).map((tabName, index) => (
-              <TabControl key={index} active={activeTab === tabName} onClick={() => setActiveTab(tabName)}>
-                {tabName}
-              </TabControl>
-            ))}
-          </TabsControl>
+          <Header>
+            {headingText}
+          </Header>
+
+          {booksList.length > 0 ? (
+            <TabsControl>
+              {hasTab && Object.keys(tabs).map((tabName, index) => (
+                <TabControl key={index} active={activeTab === tabName} onClick={() => setActiveTab(tabName)}>
+                  {tabName}
+                </TabControl>
+              ))}
+            </TabsControl>
+          )
+            : ("")}
         </HeaderRow>
 
-        {tabsKeys.map((tabKey, index) => (
+        {booksList.length === 0 ? <BlogImage src={CatDefault} /> : ""}
+
+        { tabsKeys.map((tabKey, index) => (
           <TabContent
             key={index}
             variants={{
@@ -194,83 +277,82 @@ export default () => {
   );
 };
 
-/* This function is only there for demo purposes. It populates placeholder cards */
-const getRandomCards = () => {
-  const cards = [
-    {
-      imageSrc: Book1,
-      title: "Veg Mixer",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "5.0",
-      reviews: "87",
-      url: "#"
-    },
-    {
-      imageSrc: Book2,
-      title: "Macaroni",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "4.8",
-      reviews: "32",
-      url: "#"
-    },
-    {
-      imageSrc: Book3,
-      title: "Nelli",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "4.9",
-      reviews: "89",
-      url: "#"
-    },
-    {
-      imageSrc: Book1,
-      title: "Jalapeno Poppers",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "4.6",
-      reviews: "12",
-      url: "#"
-    },
-    {
-      imageSrc: Book2,
-      title: "Cajun Chicken",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "4.2",
-      reviews: "19",
-      url: "#"
-    },
-    {
-      imageSrc: Book3,
-      title: "Chillie Cake",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "5.0",
-      reviews: "61",
-      url: "#"
-    },
-    {
-      imageSrc: Book3,
-      title: "Guacamole Mex",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "4.2",
-      reviews: "95",
-      url: "#"
-    },
-    {
-      imageSrc: Book3,
-      title: "Carnet Nachos",
-      content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
-      price: "120.000VND",
-      rating: "3.9",
-      reviews: "26",
-      url: "#"
-    }
-  ];
+// const getRandomCards = () => {
+//   const cards = [
+//     {
+//       imageSrc: Book1,
+//       title: "Veg Mixer",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "5.0",
+//       reviews: "87",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book2,
+//       title: "Macaroni",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "4.8",
+//       reviews: "32",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book3,
+//       title: "Nelli",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "4.9",
+//       reviews: "89",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book1,
+//       title: "Jalapeno Poppers",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "4.6",
+//       reviews: "12",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book2,
+//       title: "Cajun Chicken",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "4.2",
+//       reviews: "19",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book3,
+//       title: "Chillie Cake",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "5.0",
+//       reviews: "61",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book3,
+//       title: "Guacamole Mex",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "4.2",
+//       reviews: "95",
+//       url: "#"
+//     },
+//     {
+//       imageSrc: Book3,
+//       title: "Carnet Nachos",
+//       content: "To customize the tabs, pass in data using the `tabs` prop. It should be an object which contains the name of the tab",
+//       price: "120.000VND",
+//       rating: "3.9",
+//       reviews: "26",
+//       url: "#"
+//     }
+//   ];
 
-  // Shuffle array
-  return cards.sort(() => Math.random() - 0.5);
-};
+//   // Shuffle array
+//   return cards.sort(() => Math.random() - 0.5);
+// };

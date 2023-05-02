@@ -17,5 +17,7 @@ namespace TatBlog.Core.DTO
         public string Email { get; set; }
         public string Notes { get; set; }
         public int PostCount { get; set; }
+        public int BookCount { get; set; }
+
     }
 }

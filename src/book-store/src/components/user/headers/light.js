@@ -117,7 +117,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       }
       else
         setAuthorsList([]);
-      //console.log(data.items)
+      console.log(data.items)
     })
 
     getCategories().then(data => {
@@ -134,10 +134,10 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
   const defaultLinks = [
     <NavLinks key={1}>
         <NavLink className="group" css={tw`cursor-pointer`}>
-          <Link to="/all-product">
+          <a href="/all-product">
           <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
           Danh mục
-          </Link>
+          </a>
           <MenuOnHover>
             <MenuSection hasBorder>
               <MenuTitle>
@@ -168,8 +168,8 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                 </MenuTitle>
                 <MenuContainer >
                   {authorsList.map((author, i) => (
-                    <MenuItem href={author.urlSlug}>
-                      {author.fullName}
+                    <MenuItem href={"/all-product/" + "author/" + author.urlSlug}>
+                      {author.fullName}{` (${author.bookCount})`}
                     </MenuItem>
                   ))}
                 </MenuContainer>
@@ -181,15 +181,15 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                 </MenuTitle>
                 <MenuContainer >
                   {categoriesList.map((category, i) => (
-                    <MenuItem href={category.urlSlug}>
-                      {category.name}
+                    <MenuItem href={"/all-product/" + "category/" + category.urlSlug}>
+                      {category.name}{` (${category.bookCount})`}
                     </MenuItem>
                   ))}
                 </MenuContainer>
               </MenuSection>
             </MenuSection>
 
-          </MenuOnHover>
+          </MenuOnHover> 
         </NavLink>
 
       <NavLink className="group" css={tw`cursor-pointer`}>

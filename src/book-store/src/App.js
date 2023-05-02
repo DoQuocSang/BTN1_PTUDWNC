@@ -48,6 +48,7 @@ function App() {
           <Route path="/login" element={<UserLogin />} />
           <Route path="/signup" element={<UserSignup />} />
           <Route path="/all-product" element={<AllProductPage />} />
+          <Route path="/all-product/:type/:slug" element={<AllProductPage />} />
           <Route path="/product-detail/:slug" element={<ProductDetailPage />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/blog" element={<BlogIndex />} />

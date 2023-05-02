@@ -35,6 +35,14 @@ namespace TatBlog.WebApi.Endpoints
                 //.Produces(404);
 
             routeGroupBuilder.MapGet(
+                  "/{slug:regex(^[a-z0-9_-]+$)}",
+                  GetAuthorBySlug)
+              .WithName("GetAuthorBySlug")
+              .Produces<ApiResponse<PaginationResult<AuthorItem>>>();
+            //.Produces<PaginationResult<PostDto>>();
+
+
+            routeGroupBuilder.MapGet(
                     "/{slug:regex(^[a-z0-9_-]+$)}/posts",
                     GetPostsByAuthorSlug)
                 .WithName("GetPostsByAuthorSlug")
@@ -94,6 +102,24 @@ namespace TatBlog.WebApi.Endpoints
             //return Results.Ok(paginationResult);
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
+
+
+        private static async Task<IResult> GetAuthorBySlug(
+            string slug,
+            IAuthorRepository authorRepository,
+            IMapper mapper)
+        {
+            var author = await authorRepository.GetCachedAuthorBySlugAsync(slug);
+            //return author == null
+            //    ? Results.NotFound($"không tìm thấy tác giả có mã số {id}")
+            //    : Results.Ok(mapper.Map<AuthorItem>(author));
+
+            return author == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+                $"không tìm thấy tác giả có slug {slug}"))
+                : Results.Ok(ApiResponse.Success(mapper.Map<AuthorItem>(author)));
+        }
+
 
         private static async Task<IResult> GetAuthorDetails(
             int id,

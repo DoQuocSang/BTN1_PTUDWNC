@@ -17,6 +17,7 @@ namespace TatBlog.Core.DTO
         public string Keyword { get; set; }
         public int? Year { get; set; }
         public int? Month { get; set; }
+        public bool HasRelated { get; set; } = false;
 
     }
 }

@@ -90,7 +90,8 @@ namespace TatBlog.Services.Blogs
                     JoinedDate = a.JoinedDate,
                     ImageUrl = a.ImageUrl,
                     UrlSlug = a.UrlSlug,
-                    PostCount = a.Posts.Count(p => p.Published)
+                    PostCount = a.Posts.Count(p => p.Published),
+                    BookCount = a.Books.Count()
                 })
                 .ToPagedListAsync(pagingParams, cancellationToken);
         }

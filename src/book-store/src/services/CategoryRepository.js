@@ -6,5 +6,10 @@ export function getCategories(
     PageNumber = 1
     ) {     
     return get_api(`https://localhost:7245/api/categories?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
 
+export function getCategoryBySlug(
+    slug = ""
+    ) {     
+    return get_api(`https://localhost:7245/api/categories/${slug}`)
 }

@@ -15,7 +15,7 @@ import  Book3  from "images/book3.jpg";
 import  BookDefault from "images/book-default.png"
 
 import { Link } from "react-router-dom";
-import { getBooks } from "../../../services/BookRepository";
+import { getBooks, getBookByCategorySlug } from "../../../services/BookRepository";
 import { isEmptyOrSpaces } from "../../utils/Utils";
 import { toVND } from "../../utils/Utils";
 
@@ -85,7 +85,7 @@ const PriceContainer = tw.p`text-lg font-semibold leading-loose mt-1 sm:mt-2`;
 const PriceText = tw.span`text-xl leading-loose text-red-500`;
 
 const PrimaryButton = tw(PrimaryButtonBase)`mt-auto sm:text-lg rounded-none w-full rounded sm:rounded-none sm:rounded-br-4xl py-3 sm:py-6`;
-export default ({HeadingText = "Sản phẩm"}) => {
+export default ({HeadingText = "Sản phẩm", hasFilter = false}) => {
   const [sliderRef, setSliderRef] = useState(null);
   const sliderSettings = {
     arrows: false,
@@ -152,16 +152,28 @@ export default ({HeadingText = "Sản phẩm"}) => {
   useEffect(() => {
     document.title = 'Trang chủ';
 
-    getBooks().then(data => {
-      if (data) {
-        setBooksList(data.items);
-        setMetadata(data.metadata);
-      }
-      else
-        setBooksList([]);
-      //console.log(data.items)
-    })
-
+    if(hasFilter === false){
+      getBooks().then(data => {
+        if (data) {
+          setBooksList(data.items);
+          setMetadata(data.metadata);
+        }
+        else
+          setBooksList([]);
+        //console.log(data.items)
+      })
+    }
+    else{
+      getBookByCategorySlug("giaotrinhgiaotrinh").then(data => {
+        if (data) {
+          setBooksList(data.items);
+          setMetadata(data.metadata);
+        }
+        else
+          setBooksList([]);
+        //console.log(data.items)
+      })
+    }
   }, []);
 
   return (

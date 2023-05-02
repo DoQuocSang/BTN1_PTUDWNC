@@ -29,5 +29,14 @@ namespace TatBlog.Services.Blogs
         Task<Book> GetBookByIdAsync(
           int bookId, bool includeDetails = false,
           CancellationToken cancellationToken = default);
+
+        Task<IPagedList<T>> GetPagedBooksRelatedConvertBookItemAsync<T>(
+         BookQuery condition,
+         IPagingParams pagingParams,
+         Func<IQueryable<Book>, IQueryable<T>> mapper);
+
+        Task<Book> GetBookBySlugAsync(
+         string slug,
+         CancellationToken cancellationToken = default);
     }
 }

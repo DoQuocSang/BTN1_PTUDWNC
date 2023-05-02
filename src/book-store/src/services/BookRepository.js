@@ -22,3 +22,33 @@ export function getBookBySlug(
     //console.log(urlSlug)
     return get_api(`https://localhost:7245/api/books/byslug/${slug}?PageSize=${PageSize}&PageNumber=${PageNumber}`)
 }
+
+export function getBookByAuthorSlug(
+    slug = "",
+    PageSize = 30,
+    PageNumber = 1
+    ) {     
+    //console.log(urlSlug)
+    return get_api(`https://localhost:7245/api/books?AuthorSlug=${slug}&PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
+
+export function getBookByCategorySlug(
+    slug = "",
+    PageSize = 30,
+    PageNumber = 1
+    ) {     
+    //console.log(urlSlug)
+    return get_api(`https://localhost:7245/api/books?CategorySlug=${slug}&PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
+
+export function getBookRelatedBySlug(
+    slug = "",
+    PageSize = 30,
+    PageNumber = 1
+    ) {     
+    //console.log(urlSlug)
+    return get_api(`https://localhost:7245/api/books/byslug/related/${slug}?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
+
+
+

@@ -7,3 +7,10 @@ export function getAuthors(
     ) {     
     return get_api(`https://localhost:7245/api/authors?PageSize=${PageSize}&PageNumber=${PageNumber}`)
 }
+
+export function getAuthorBySlug(
+    slug = ""
+    ) {     
+    return get_api(`https://localhost:7245/api/authors/${slug}`)
+}
+
