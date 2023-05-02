@@ -52,7 +52,7 @@ function App() {
           <Route path="/product-detail/:slug" element={<ProductDetailPage />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/blog" element={<BlogIndex />} />
-          <Route path="/blog/:slug" element={<BlogIndex />} />
+          <Route path="/blog/:type/:slug" element={<BlogIndex />} />
           <Route path="/blog-detail/:slug" element={<BlogDetail />} />
           <Route path="/cart" element={<Cart />} />
         </Route>
