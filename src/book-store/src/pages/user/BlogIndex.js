@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithNoPadding } from "components/user/misc/Layouts";
+import { useParams } from 'react-router-dom';
 import tw from "twin.macro";
 import styled from "styled-components";
 import { css } from "styled-components/macro";
@@ -12,7 +13,9 @@ import PostDefault from "images/post-default.png";
 import { getPosts } from "../../services/PostRepository";
 import { formatDateTme } from "../../components/utils/Utils";
 import { getCategories } from "../../services/CategoryRepository";
+import { getPostsByCategorySlug } from "../../services/CategoryRepository";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
+import { isEmptyOrSpaces } from "../../components/utils/Utils";
 
 
 
@@ -98,6 +101,12 @@ export default ({
 
   let featured = false;
 
+  let { slug } = useParams();
+
+  if (typeof slug === 'undefined') {
+    slug = "";
+  }
+
   const [postsList, setPostsList] = useState([]);
   const [metadata, setMetadata] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
@@ -105,16 +114,6 @@ export default ({
 
   useEffect(() => {
     document.title = 'Trang chủ';
-
-    getPosts().then(data => {
-      if (data) {
-        setPostsList(data.items);
-        setMetadata(data.metadata);
-      }
-      else
-        setPostsList([]);
-      console.log(data.items)
-    })
 
     getCategories().then(data => {
       if (data) {
@@ -125,6 +124,29 @@ export default ({
         setCategoriesList([]);
       //console.log(data)
     })
+
+    if (isEmptyOrSpaces(slug)){
+      getPosts().then(data => {
+        if (data) {
+          setPostsList(data.items);
+          setMetadata(data.metadata);
+        }
+        else
+          setPostsList([]);
+        //console.log(data.items)
+      })
+    }
+    else{
+      getPostsByCategorySlug(slug).then(data => {
+        if (data) {
+          setPostsList(data.items);
+          setMetadata(data.metadata);
+        }
+        else
+          setPostsList([]);
+        console.log(data.items)
+      })
+    }
 
   }, []);
 
@@ -138,7 +160,7 @@ export default ({
               Chủ đề:
             </Heading>
             {categoriesList.map((category, index) => (
-              <a href={`blog/${category.urlSlug}`}>
+              <a href={`/blog/${category.urlSlug}`}>
                 <TagItem key={index}>
                   <FontAwesomeIcon icon={faTag} className="pr-2" />
                   {category.name}

@@ -117,7 +117,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       }
       else
         setAuthorsList([]);
-      console.log(data.items)
+      //console.log(data.items)
     })
 
     getCategories().then(data => {
@@ -127,7 +127,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       }
       else
         setCategoriesList([]);
-      //console.log(data)
+      console.log(data)
     })
   }, []);
 
@@ -213,12 +213,12 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
         </NavLink>
       </Link>
 
-      <Link to="/blog">
+      <a href="/blog">
         <NavLink>
           <FontAwesomeIcon icon={faFileLines} css={tw`mr-2 text-base`} />
           Bài viết
         </NavLink>
-      </Link>
+      </a>
 
       <Link to="/cart">
         <NavLink>

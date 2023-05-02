@@ -13,3 +13,13 @@ export function getCategoryBySlug(
     ) {     
     return get_api(`https://localhost:7245/api/categories/${slug}`)
 }
+
+export function getPostsByCategorySlug(
+    slug = "",
+    PageSize = 30,
+    PageNumber = 1
+    ) {     
+    return get_api(`https://localhost:7245/api/categories/${slug}/posts?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
+
+

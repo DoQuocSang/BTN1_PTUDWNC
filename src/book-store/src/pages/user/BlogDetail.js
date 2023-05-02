@@ -13,6 +13,7 @@ import PostDefault from "images/post-default.png";
 import PostDefaultFull from "images/post-default-full.png";
 import { getRandomPosts } from "../../services/PostRepository";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { getCategories } from "../../services/CategoryRepository";
 
 const HeadingRow = tw.div`flex`;
 const BlogImage = tw.img`w-full h-auto rounded-lg py-4`;
@@ -21,8 +22,10 @@ const BlogImage = tw.img`w-full h-auto rounded-lg py-4`;
 //   tw`rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8`
 // ]);
 const Heading = tw(SectionHeading)`text-gray-900 mb-0 mt-3 text-3xl text-left`;
-const TagContainer = tw.div`my-3 flex`;
-const TagItem = tw.p`mr-3 py-2 px-3 bg-teal-400 rounded-lg font-semibold text-xs text-white`;
+const HeadingSmall = tw(Heading)`text-lg mr-3 `;
+
+const TagContainer = tw.div`my-3 flex flex-wrap`;
+const TagItem = tw.p`mr-3 my-2 py-2 px-3 bg-teal-400 rounded-lg font-semibold text-xs text-white`;
 
 const InfoContainer = tw.div`my-3 text-right`;
 const InfoItem = tw.p`py-1 text-base text-gray-500`;
@@ -96,6 +99,7 @@ export default () => {
   const { slug } = useParams();
   //console.log(slug);
   const [postsList, setPostsList] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
   const [randomPostList, setRandomPostList] = useState([]);
   const [metadata, setMetadata] = useState([]);
 
@@ -122,6 +126,16 @@ export default () => {
       //console.log(data)
     })
 
+    getCategories().then(data => {
+      if (data) {
+        setCategoriesList(data.items);
+        setMetadata(data.metadata);
+      }
+      else
+        setCategoriesList([]);
+      //console.log(data)
+    })
+
   }, []);
 
   const postBackgroundSizeAnimation = {
@@ -141,21 +155,23 @@ export default () => {
             <PopularPostsContainer key={index}>
               <Heading>{post.title}</Heading>
               <InfoItem>
-                    <FontAwesomeIcon icon={faEye} className="mr-2" />
-                    {"Số lượt xem: "}{post.viewCount}
-                  </InfoItem>
+                <FontAwesomeIcon icon={faEye} className="mr-2" />
+                {"Số lượt xem: "}{post.viewCount}
+              </InfoItem>
               <PostsContainer>
                 <TagContainer>
                   {post.tags.map((tag, index) => (
-                    <TagItem key={index}>
-                      <FontAwesomeIcon icon={faTag} className="pr-2" />
-                      {tag.name}
-                    </TagItem>
+                    <a href={`/blog/${tag.urlSlug}`}>
+                      <TagItem key={index}>
+                        <FontAwesomeIcon icon={faTag} className="pr-2" />
+                        {tag.name}
+                      </TagItem>
+                    </a>
                   ))}
                 </TagContainer>
 
                 <BlogImage src={PostDefaultFull} />
-               
+
                 <Text>
                   <p>
                     {post.description}
@@ -171,6 +187,20 @@ export default () => {
                     Ngày đăng: 26/10/2023
                   </InfoItem>
                 </InfoContainer>
+
+                <TagContainer>
+                  <HeadingSmall>
+                    Chủ đề:
+                  </HeadingSmall>
+                  {categoriesList.map((category, index) => (
+                    <a href={`/blog/${category.urlSlug}`}>
+                      <TagItem key={index}>
+                        <FontAwesomeIcon icon={faTag} className="pr-2" />
+                        {category.name}
+                      </TagItem>
+                    </a>
+                  ))}
+                </TagContainer>
               </PostsContainer>
             </PopularPostsContainer>
           ))}
