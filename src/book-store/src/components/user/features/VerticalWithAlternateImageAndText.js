@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { ReactComponent as SvgDotPatternIcon } from "images/dot-pattern.svg";
 import { SectionHeading as HeadingTitle } from "components/user/misc/Headings.js";
@@ -28,7 +28,7 @@ const Image = styled.div(props => [
   tw`rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8`
 ]);
 const Details = tw.div`mt-4 md:mt-0 md:max-w-md mx-4 sm:mx-8 md:mx-4 lg:mx-8`;
-const Subtitle = tw.div`font-bold tracking-wide text-secondary-100`;
+const Subtitle = tw.div`font-bold tracking-wide text-secondary-100 transition duration-300 hover:text-primary-500`;
 const Title = tw.h4`text-3xl font-bold text-gray-900`;
 const Description = tw.p`mt-2 text-sm leading-loose`;
 const Link = tw.a`inline-block mt-4 text-lg text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500`;
@@ -89,7 +89,7 @@ export default () => {
         }
         else
             setBooksList([]);
-        //console.log(data.items)
+        console.log(data.items)
     })
   }, []);
 
@@ -115,7 +115,7 @@ export default () => {
                 <Image imageSrc={card.imageUrl} />
               )} 
               <Details>
-                <Subtitle>{card.categoryName}</Subtitle>
+                <Subtitle as="a" href={"/all-product/" + "category/" + card.categorySlug}>{card.categoryName}</Subtitle>
                 <Title>{card.title}</Title>
                 <Description>{card.shortDescription}</Description>
                 <Link href={`/product-detail/${card.urlSlug}`}>Xem chi tiết</Link>

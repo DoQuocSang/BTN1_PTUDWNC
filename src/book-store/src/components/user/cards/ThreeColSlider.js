@@ -75,10 +75,10 @@ const Text = tw.div`ml-2 text-sm font-semibold text-gray-800`;
 
 const InfoTagContainer = tw.div`flex flex-col mb-2 sm:flex-row`;
 const TagContainer = styled.div(({ otherColor }) => [
-  tw`flex items-center mr-3 my-2 sm:my-0 bg-red-500 rounded-md`,
-  otherColor && tw`bg-teal-500`,
+  tw`flex items-center mr-3 my-2 sm:my-0 bg-red-500 rounded-md transition duration-300 hover:bg-red-600`,
+  otherColor && tw`bg-teal-500 hover:bg-teal-600`,
 ]);
-const TagText = tw.div`px-2 py-1 text-xs font-semibold text-white line-clamp-1`;
+const TagText = tw.a`px-2 py-1 text-xs font-semibold text-white line-clamp-1`;
 
 
 const PriceContainer = tw.p`text-lg font-semibold leading-loose mt-1 sm:mt-2`;
@@ -197,10 +197,10 @@ export default ({HeadingText = "Sản phẩm", hasFilter = false}) => {
               <TextInfo>
               <InfoTagContainer> 
                   <TagContainer>
-                    <TagText>{card.category.name}</TagText>
+                    <TagText href={"/all-product/" + "category/" + card.category.urlSlug}>{card.category.name}</TagText>
                   </TagContainer>
                   <TagContainer otherColor>
-                    <TagText>{card.author.fullName}</TagText>
+                    <TagText href={"/all-product/" + "author/" + card.author.urlSlug}>{card.author.fullName}</TagText>
                   </TagContainer>
                 </InfoTagContainer>
 

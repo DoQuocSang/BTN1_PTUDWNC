@@ -25,5 +25,7 @@ namespace TatBlog.Core.DTO
         public DateTime ReleasedDate { get; set; }
         public string CategoryName { get; set; }
         public string AuthorName { get; set; }
+        public string CategorySlug { get; set; }
+        public string AuthorSlug { get; set; }
     }
 }

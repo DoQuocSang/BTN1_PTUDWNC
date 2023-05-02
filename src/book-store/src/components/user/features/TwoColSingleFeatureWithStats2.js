@@ -28,7 +28,7 @@ const Image = styled.div(props => [
 ]);
 const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
-const Subheading = tw(SubheadingBase)`text-center md:text-left`;
+const Subheading = tw(SubheadingBase)`text-center md:text-left transition duration-300 hover:text-primary-700`;
 const Heading = tw(
   SectionHeading
 )`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-4xl text-center md:text-left leading-tight`;
@@ -135,7 +135,7 @@ export default ({
           </ImageColumn>
           <TextColumn textOnLeft={textOnLeft}>
             <TextContent>
-              {card.category.name && <Subheading>{card.category.name}</Subheading>}
+              {card.category.name && <Subheading as="a" href={"/all-product/" + "category/" + card.category.urlSlug}>{card.category.name}</Subheading>}
               <Heading>{card.title}</Heading>
               <Statistics>
                 {/* {statistics.map((statistic, index) => (
@@ -152,9 +152,9 @@ export default ({
                   <Key>Nhà xuất bản</Key>
                   <Value>{card.publishCompany}</Value>
                 </Statistic>
-                <Statistic>
+                <Statistic as="a" href={"/all-product/" + "author/" + card.author.urlSlug}>
                   <Key>Tác giả</Key>
-                  <Value>{card.author.fullName}</Value>
+                  <Value css={tw`text-primary-700 transition duration-300 hover:text-primary-500`}>{card.author.fullName}</Value>
                 </Statistic>
                 <Statistic>
                   <Key>Hình thức bìa</Key>

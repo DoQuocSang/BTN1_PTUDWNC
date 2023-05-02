@@ -14,6 +14,7 @@ import PostDefaultFull from "images/post-default-full.png";
 import { getRandomPosts } from "../../services/PostRepository";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { getCategories } from "../../services/CategoryRepository";
+import { getTags } from "../../services/TagRepository";
 
 const HeadingRow = tw.div`flex`;
 const BlogImage = tw.img`w-full h-auto rounded-lg py-4`;
@@ -25,7 +26,7 @@ const Heading = tw(SectionHeading)`text-gray-900 mb-0 mt-3 text-3xl text-left`;
 const HeadingSmall = tw(Heading)`text-lg mr-3 `;
 
 const TagContainer = tw.div`my-3 flex flex-wrap`;
-const TagItem = tw.p`mr-3 my-2 py-2 px-3 bg-teal-400 rounded-lg font-semibold text-xs text-white`;
+const TagItem = tw.p`mr-3 my-2 py-2 px-3 bg-teal-400 rounded-lg font-semibold text-xs text-white transition duration-300 hover:bg-teal-500`;
 
 const InfoContainer = tw.div`my-3 text-right`;
 const InfoItem = tw.p`py-1 text-base text-gray-500`;
@@ -60,13 +61,19 @@ const Row = tw.div`flex flex-col lg:flex-row mx-20 max-w-screen-xl mx-auto`;
 const PopularPostsContainer = tw.div`lg:w-2/3 mr-16`;
 const PostsContainer = tw.div`mt-5 `;
 const Post = tw(motion.a)`block sm:max-w-sm cursor-pointer mb-16 last:mb-0 sm:mb-0 sm:odd:mr-8 lg:mr-8 xl:mr-16`;
+const Category = tw(motion.a)`block sm:max-w-sm cursor-pointer py-3 px-4 border border-gray-200 shadow-md rounded-lg mb-4 last:mb-2 hover:bg-primary-500 transition duration-300`;
+
 const Image = styled(motion.div)(props => [
   `background-image: url("${props.$imageSrc}");`,
-  tw`h-64 bg-cover bg-center rounded`
+  tw`h-64 bg-cover bg-center rounded mt-2`
 ]);
-const Title = tw.h5`mt-6 text-xl font-bold transition duration-300 group-hover:text-primary-500`;
+const Title = tw.h5`mt-6 text-xl font-bold transition duration-300 group-hover:text-primary-500 line-clamp-1`;
+const CategoryTitle = tw.h5`text-base font-semibold transition duration-300 group-hover:text-white line-clamp-1`;
+
+const PostCategory = tw(motion.a)`cursor-pointer font-semibold text-base transition duration-300 hover:text-primary-500`;
+
 const Description = styled.p(({ moreShort }) => [
-  tw`mt-2 font-medium text-secondary-100 leading-loose text-sm line-clamp-4`,
+  tw`mt-2 font-medium text-secondary-100 leading-loose text-sm line-clamp-2`,
   moreShort && tw`line-clamp-2`,
 ]);
 
@@ -100,6 +107,7 @@ export default () => {
   //console.log(slug);
   const [postsList, setPostsList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
+  const [tagsList, setTagsList] = useState([]);
   const [randomPostList, setRandomPostList] = useState([]);
   const [metadata, setMetadata] = useState([]);
 
@@ -113,7 +121,7 @@ export default () => {
       }
       else
         setPostsList([]);
-      console.log(data.items)
+      //console.log(data.items)
     })
 
     getRandomPosts(5).then(data => {
@@ -136,6 +144,16 @@ export default () => {
       //console.log(data)
     })
 
+    getTags().then(data => {
+      if (data) {
+        setTagsList(data.items);
+        setMetadata(data.metadata);
+      }
+      else
+        setTagsList([]);
+      console.log(data)
+    })
+
   }, []);
 
   const postBackgroundSizeAnimation = {
@@ -153,6 +171,7 @@ export default () => {
         <Row>
           {postsList.map((post, index) => (
             <PopularPostsContainer key={index}>
+              <PostCategory href={`/blog/${post.category.urlSlug}`}>{post.category.name}</PostCategory>
               <Heading>{post.title}</Heading>
               <InfoItem>
                 <FontAwesomeIcon icon={faEye} className="mr-2" />
@@ -190,13 +209,13 @@ export default () => {
 
                 <TagContainer>
                   <HeadingSmall>
-                    Chủ đề:
+                    Thẻ:
                   </HeadingSmall>
-                  {categoriesList.map((category, index) => (
-                    <a href={`/blog/${category.urlSlug}`}>
+                  {tagsList.map((tag, index) => (
+                    <a href={`/blog/${tag.urlSlug}`}>
                       <TagItem key={index}>
                         <FontAwesomeIcon icon={faTag} className="pr-2" />
-                        {category.name}
+                        {tag.name}
                       </TagItem>
                     </a>
                   ))}
@@ -216,6 +235,17 @@ export default () => {
                   </PostTextContainer>
                   <Image $imageSrc={PostDefault} />
                 </Post>
+              ))}
+            </PostsContainer>
+
+            <Heading>Các chủ đề</Heading>
+            <PostsContainer>
+              {categoriesList.map((category, index) => (
+                <Category key={index} href={`/blog/${category.urlSlug}`} className="group">
+                  <PostTextContainer>
+                    <CategoryTitle>{`${category.name} (${category.postCount})`}</CategoryTitle>
+                  </PostTextContainer>
+                </Category>
               ))}
             </PostsContainer>
           </RecentPostsContainer>

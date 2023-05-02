@@ -139,7 +139,7 @@ export default () => {
       }
       else
         setFeaturedPostList([]);
-      console.log(data.items)
+      //console.log(data.items)
     })
 
     getRandomPosts().then(data => {

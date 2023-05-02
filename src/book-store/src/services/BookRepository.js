@@ -8,10 +8,14 @@ export function getRandomBooks(
 }
 
 export function getBooks(
+    SortColumn = "Title",
+    SortOrder = "ASC",
     PageSize = 30,
-    PageNumber = 1
+    PageNumber = 1,
     ) {     
-    return get_api(`https://localhost:7245/api/books?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+    // return get_api(`https://localhost:7245/api/books?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+    return get_api(` https://localhost:7245/api/books?PageSize=${PageSize}&PageNumber=${PageNumber}&SortColumn=${SortColumn}&SortOrder=${SortOrder}`)
+   
 }
 
 export function getBookBySlug(
@@ -25,20 +29,24 @@ export function getBookBySlug(
 
 export function getBookByAuthorSlug(
     slug = "",
+    SortColumn = "Title",
+    SortOrder = "ASC",
     PageSize = 30,
     PageNumber = 1
     ) {     
     //console.log(urlSlug)
-    return get_api(`https://localhost:7245/api/books?AuthorSlug=${slug}&PageSize=${PageSize}&PageNumber=${PageNumber}`)
+    return get_api(`https://localhost:7245/api/books?AuthorSlug=${slug}&PageSize=${PageSize}&PageNumber=${PageNumber}&SortColumn=${SortColumn}&SortOrder=${SortOrder}`)
 }
 
 export function getBookByCategorySlug(
     slug = "",
+    SortColumn = "Title",
+    SortOrder = "ASC",
     PageSize = 30,
     PageNumber = 1
     ) {     
     //console.log(urlSlug)
-    return get_api(`https://localhost:7245/api/books?CategorySlug=${slug}&PageSize=${PageSize}&PageNumber=${PageNumber}`)
+    return get_api(`https://localhost:7245/api/books?CategorySlug=${slug}&PageSize=${PageSize}&PageNumber=${PageNumber}&SortColumn=${SortColumn}&SortOrder=${SortOrder}`)
 }
 
 export function getBookRelatedBySlug(

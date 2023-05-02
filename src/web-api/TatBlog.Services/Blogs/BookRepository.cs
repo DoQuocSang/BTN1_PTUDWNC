@@ -97,6 +97,14 @@ namespace TatBlog.Services.Blogs
         {
             var books = FilterBooks(condition);
             var projectedBooks = mapper(books);
+
+            if (!string.IsNullOrWhiteSpace(pagingParams.SortColumn) && !string.IsNullOrWhiteSpace(pagingParams.SortOrder))
+            {
+                return await projectedBooks.ToPagedListAsync(
+                pagingParams.PageNumber, pagingParams.PageSize,
+                pagingParams.SortColumn, pagingParams.SortOrder);
+            }
+
             return await projectedBooks.ToPagedListAsync(
                 pagingParams.PageNumber, pagingParams.PageSize,
                 nameof(Book.ReleasedDate), "DESC");
@@ -152,7 +160,9 @@ namespace TatBlog.Services.Blogs
                     Price = x.Price,
                     ReleasedDate = x.ReleasedDate,
                     CategoryName = x.Category.Name,
-                    AuthorName = x.Author.FullName
+                    AuthorName = x.Author.FullName,
+                    CategorySlug = x.Category.UrlSlug,
+                    AuthorSlug = x.Author.UrlSlug
                 })
                 .ToPagedListAsync(pageNumber, pageSize,
                 nameof(Book.ReleasedDate), "DESC",

@@ -12,7 +12,7 @@ import { ReactComponent as SvgDecoratorBlob1 } from "images/svg-decorator-blob-5
 import { ReactComponent as SvgDecoratorBlob2 } from "images/svg-decorator-blob-7.svg";
 import CatDefault from "images/cat-404-full-2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDownAZ, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { getBooks } from "../../../services/BookRepository";
@@ -24,6 +24,7 @@ import { getBookByCategorySlug } from "../../../services/BookRepository";
 import { getAuthorBySlug } from "../../../services/AuthorRepository";
 import { getCategoryBySlug } from "../../../services/CategoryRepository";
 import { getBookRelatedBySlug } from "../../../services/BookRepository";
+import { icon } from "@fortawesome/fontawesome-svg-core";
 
 const HeaderRow = tw.div`flex justify-between items-center flex-col xl:flex-row`;
 const Header = tw.h2`text-4xl sm:text-4xl font-black tracking-wide text-left`
@@ -151,10 +152,12 @@ export default ({hasTab = true, isProductPage = false}) => {
       if(isProductPage === true){
         getBookRelatedBySlug(slug).then(data => {
           if (data) {
+            setheadingText("Các sản phẩm liên quan");
             setBooksList(data.items);
           }
           else
           {
+            setheadingText("Danh mục sản phẩm");
             setBooksList([]);
           }
           console.log(data.items)
@@ -178,10 +181,10 @@ export default ({hasTab = true, isProductPage = false}) => {
   // };
 
   let tabs = {
-    "Tất cả": booksList,
-    "Hot": booksList,
-    "Mới": booksList,
-    "Phổ biến": booksList,
+    "A-Z" : ["Title", "ASC"],
+    "Z-A": ["Title", "DESC"],
+    "Giá tăng": ["Price", "ASC"],
+    "Giá giảm": ["Price", "DESC"]
   }
 
   const tabsKeys = Object.keys(tabs);
@@ -199,7 +202,43 @@ export default ({hasTab = true, isProductPage = false}) => {
           {booksList.length > 0 ? (
             <TabsControl>
               {hasTab && Object.keys(tabs).map((tabName, index) => (
-                <TabControl key={index} active={activeTab === tabName} onClick={() => setActiveTab(tabName)}>
+                <TabControl key={index} active={activeTab === tabName} onClick={() => {{ setActiveTab(tabName); 
+                  if (isEmptyOrSpaces(slug)) {
+                    getBooks(tabs[tabName][0], tabs[tabName][1]).then(data => {
+                      if (data) {
+                        setBooksList(data.items);
+                      }
+                      else
+                      {
+                        setBooksList([]);
+                      }
+                      //console.log(booksList);
+                    })}
+  
+                  }
+                  
+                  if(type === "author"){
+                    getBookByAuthorSlug(slug, tabs[tabName][0], tabs[tabName][1]).then(data => {
+                      if (data) {
+                        setBooksList(data.items);
+                      }
+                      else
+                        setBooksList([]);
+                      // console.log(data.items)
+                    })
+                  }
+            
+                  if(type === "category"){
+                    getBookByCategorySlug(slug, tabs[tabName][0], tabs[tabName][1]).then(data => {
+                      if (data) {
+                        setBooksList(data.items);
+                      }
+                      else
+                        setBooksList([]);
+                      // console.log(data.items)
+                    })
+                  }
+                }}>
                   {tabName}
                 </TabControl>
               ))}
@@ -210,7 +249,7 @@ export default ({hasTab = true, isProductPage = false}) => {
 
         {booksList.length === 0 ? <BlogImage src={CatDefault} /> : ""}
 
-        { tabsKeys.map((tabKey, index) => (
+        {tabsKeys.map((tabKey, index) => (
           <TabContent
             key={index}
             variants={{
@@ -229,7 +268,7 @@ export default ({hasTab = true, isProductPage = false}) => {
             initial={activeTab === tabKey ? "current" : "hidden"}
             animate={activeTab === tabKey ? "current" : "hidden"}
           >
-            {tabs[tabKey].map((card, index) => (
+            {booksList.map((card, index) => (
               <CardContainer key={index}>
                 <Card className="group" href={"/all-product/" + card.urlSlug} initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageUrl}>
@@ -356,3 +395,15 @@ export default ({hasTab = true, isProductPage = false}) => {
 //   // Shuffle array
 //   return cards.sort(() => Math.random() - 0.5);
 // };
+
+// const getRandomCards = ({booksList}) => {
+//   let arr = [];
+//   getBooks().then(data => {
+//     if (data) {
+//       arr = data.items;
+//     }
+//     //console.log(arr);
+//   })
+//   return arr;
+// };
+

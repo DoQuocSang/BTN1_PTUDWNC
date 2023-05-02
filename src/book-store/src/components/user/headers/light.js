@@ -127,7 +127,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
       }
       else
         setCategoriesList([]);
-      console.log(data)
+      //console.log(data)
     })
   }, []);
 

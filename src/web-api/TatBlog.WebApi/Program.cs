@@ -63,6 +63,7 @@ try
         app.MapCategoryEndpoints();
         app.MapPostEndpoints();
         app.MapBookEndpoints();
+        app.MapTagEndpoints();
 
         app.Run();
     }
