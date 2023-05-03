@@ -139,6 +139,19 @@ namespace TatBlog.Services.Blogs
                 cancellationToken);
         }
 
+
+        //Tăng số lượt xem của một bài viết
+        public async Task IncreaseViewCountBySlugAsync(
+            string slug,
+            CancellationToken cancellationToken = default)
+        {
+            await _context.Set<Post>()
+                .Where(x => x.UrlSlug == slug)
+                .ExecuteUpdateAsync(p =>
+                p.SetProperty(x => x.ViewCount, x => x.ViewCount + 1),
+                cancellationToken);
+        }
+
         //Lấy danh sách tác giả
         //public async Task<IList<AuthorItem>> GetAuthorsAsync(CancellationToken cancellationToken = default)
         //{

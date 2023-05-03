@@ -270,7 +270,7 @@ export default ({hasTab = true, isProductPage = false}) => {
           >
             {booksList.map((card, index) => (
               <CardContainer key={index}>
-                <Card className="group" href={"/all-product/" + card.urlSlug} initial="rest" whileHover="hover" animate="rest">
+                <Card className="group" href={"/product-detail/" + card.urlSlug} initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageUrl}>
                     <CardRatingContainer>
                       <CardRating>

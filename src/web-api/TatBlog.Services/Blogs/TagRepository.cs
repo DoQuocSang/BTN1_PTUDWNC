@@ -35,5 +35,30 @@ namespace TatBlog.Services.Blogs
                 })
                 .ToPagedListAsync(pagingParams, cancellationToken);
         }
+
+        public async Task<TagItem> GetCachedTagItemBySlugAsync(
+            string slug, CancellationToken cancellationToken = default)
+        {
+            return await _memoryCache.GetOrCreateAsync(
+                $"tag.by-slug.{slug}",
+                async (entry) =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
+                    return await GetTagItemBySlugAsync(slug, cancellationToken);
+                });
+        }
+
+        public async Task<TagItem> GetTagItemBySlugAsync(
+            string slug, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Tag>()
+                   .Select(x => new TagItem()
+                   {
+                       Id = x.Id,
+                       Name = x.Name,
+                       UrlSlug = x.UrlSlug
+                   })
+                .FirstOrDefaultAsync(a => a.UrlSlug == slug, cancellationToken);
+        }
     }
 }

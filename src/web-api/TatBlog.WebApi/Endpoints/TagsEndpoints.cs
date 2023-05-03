@@ -25,7 +25,19 @@ namespace TatBlog.WebApi.Endpoints
 
             routeGroupBuilder.MapGet("/", GetTags)
                 .WithName("GetTags")
-                .Produces<ApiResponse<PaginationResult<PostItem>>>();
+                .Produces<ApiResponse<PaginationResult<TagItem>>>();
+
+            routeGroupBuilder.MapGet(
+                "/{slug:regex(^[a-z0-9_-]+$)}/posts",
+                 GetPostsByTagSlug)
+                 .WithName("GetPostsByTagSlug")
+                 .Produces<ApiResponse<PaginationResult<PostDto>>>();
+
+            routeGroupBuilder.MapGet(
+                  "/{slug:regex(^[a-z0-9_-]+$)}",
+                  GetTagBySlug)
+                  .WithName("GetTagBySlug")
+                  .Produces<ApiResponse<PaginationResult<TagItem>>>();
 
             return app;
         }
@@ -44,7 +56,40 @@ namespace TatBlog.WebApi.Endpoints
             //return Results.Ok(paginationResult);
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
-        
+
+        private static async Task<IResult> GetPostsByTagSlug(
+         [FromRoute] string slug,
+         [AsParameters] PagingModel pagingModel,
+         IBlogRepository blogRepository)
+        {
+            var postQuery = new PostQuery()
+            {
+                TagSlug = slug,
+                PublishedOnly = true
+            };
+
+            var postsList = await blogRepository.GetPagedPostsAsync(
+                postQuery, pagingModel,
+                posts => posts.ProjectToType<PostDto>());
+            var paginationResult = new PaginationResult<PostDto>(postsList);
+
+            //return Results.Ok(paginationResult);
+            return Results.Ok(ApiResponse.Success(paginationResult));
+        }
+
+        private static async Task<IResult> GetTagBySlug(
+          string slug,
+          ITagRepository tagRepository,
+          IMapper mapper)
+        {
+            var tag = await tagRepository.GetCachedTagItemBySlugAsync(slug);
+
+            return tag == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+                $"không tìm thấy thẻ có slug {slug}"))
+                : Results.Ok(ApiResponse.Success(tag));
+        }
+
     }
 }
 

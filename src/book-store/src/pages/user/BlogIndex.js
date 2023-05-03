@@ -18,6 +18,11 @@ import { getPostsByCategorySlug } from "../../services/CategoryRepository";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 import { isEmptyOrSpaces } from "../../components/utils/Utils";
 import { getCategoryBySlug } from "../../services/CategoryRepository";
+import CatDefault from "images/cat-404-full-2.png";
+import { getPostsByTagSlug } from "../../services/TagRepository";
+import { getTagBySlug } from "../../services/TagRepository";
+import { getAuthorBySlug, getPostsByAuthorSlug } from "../../services/AuthorRepository";
+
 
 const HeadingRow = tw.div`flex`;
 // const Heading = tw(SectionHeading)`text-gray-900`;
@@ -50,7 +55,7 @@ const Image = styled.div`
 const Info = tw.div`p-8 border-2 border-t-0 rounded-lg rounded-t-none border-gray-200`;
 const Category = tw.div`uppercase text-primary-500 text-xs font-bold tracking-widest leading-loose after:content after:block after:border-b-2 after:border-primary-500 after:w-8`;
 const CreationDate = tw.div`mt-4 uppercase text-gray-600 font-semibold text-xs`;
-const Title = tw.div`mt-1 font-black text-2xl text-gray-900 group-hover:text-primary-500 transition duration-300`;
+const Title = tw.div`mt-1 font-black text-xl text-gray-900 group-hover:text-primary-500 transition duration-300`;
 const Description = tw.div``;
 
 const ButtonContainer = tw.div`flex justify-center`;
@@ -63,6 +68,8 @@ const Heading = tw(SectionHeading)`text-gray-900 mb-0 mt-3 text-lg text-left mr-
 const Row = tw.div`flex flex-col lg:flex-row mx-20 max-w-screen-xl mx-auto`;
 
 const ContentWithNoPadding = tw.div`max-w-screen-lg mr-12 mx-auto`;
+
+const PostImage = tw.img`w-full h-auto rounded-lg pt-4`;
 
 export default () => {
 
@@ -117,26 +124,47 @@ export default () => {
       })
     }
     else {
-      // if(type === "author"){
-      //   getAuthorBySlug(slug).then(data => {
-      //     if (data) {
-      //       setheadingText("Sản phẩm của " + data.fullName);
-      //     }
-      //     else{
-      //         setheadingText("Danh mục sản phẩm");
-      //     }
-      //     //console.log(data.fullName)
-      //   })
+      if(type === "author"){
+        getAuthorBySlug(slug).then(data => {
+          if (data) {
+            setheadingText("Các bài viết của tác giả " + data.fullName);
+          }
+          else{
+            setheadingText("Danh sách bài viết");
+          }
+          //console.log(data.fullName)
+        })
 
-      //   getBookByAuthorSlug(slug).then(data => {
-      //     if (data) {
-      //       setBooksList(data.items);
-      //     }
-      //     else
-      //       setBooksList([]);
-      //     // console.log(data.items)
-      //   })
-      // }
+        getPostsByAuthorSlug(slug).then(data => {
+          if (data) {
+            setPostsList(data.items);
+          }
+          else
+            setPostsList([]);
+          // console.log(data.items)
+        })
+      }
+
+      if(type === "tag"){
+        getTagBySlug(slug).then(data => {
+          if (data) {
+            setheadingText("Các bài viết có chứa thẻ " + data.name);
+          }
+          else{
+            setheadingText("Danh sách bài viết");
+          }
+          //console.log(data.fullName)
+        })
+
+        getPostsByTagSlug(slug).then(data => {
+          if (data) {
+            setPostsList(data.items);
+          }
+          else
+            setPostsList([]);
+          // console.log(data.items)
+        })
+      }
 
       if (type === "category") {
         getCategoryBySlug(slug).then(data => {
@@ -170,6 +198,7 @@ export default () => {
             <Heading css={tw`mt-5 text-3xl`}>
               {headingText}
             </Heading>
+            {postsList.length === 0 ? <PostImage src={CatDefault} /> : ""}
             <Posts>
               {postsList.slice(0, visible).map((post, index) => (
                 <>
@@ -184,7 +213,7 @@ export default () => {
                           <Title>{post.title}</Title>
                         </a>
                         {featured === true ?
-                          <Description css={tw``}>{post.shortDescription}</Description>
+                          <Description css={tw`line-clamp-6`}>{post.shortDescription}</Description>
                           :
                           <Description css={tw`line-clamp-3 mt-2`}>{post.shortDescription}</Description>
                         }

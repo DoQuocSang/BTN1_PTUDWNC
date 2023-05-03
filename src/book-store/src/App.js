@@ -38,6 +38,7 @@ import AdminLogin from "pages/admin/login/Login"
 
 import { Route, Routes } from "react-router-dom"
 import Cart from "pages/user/Cart";
+import NotFound404 from "./pages/user/NotFound404";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path="/blog/:type/:slug" element={<BlogIndex />} />
           <Route path="/blog-detail/:slug" element={<BlogDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/not-found-404" element={<NotFound404 />} />
         </Route>
 
         <Route path="/admin" element={<AdminLogin />} />

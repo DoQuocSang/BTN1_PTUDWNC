@@ -176,11 +176,13 @@ namespace TatBlog.WebApi.Endpoints
                 PostSlug = slug,
                 PublishedOnly = true
             };
-
+            
             var postsList = await blogRepository.GetPagedPostsAsync(
                 postQuery, pagingModel,
                 posts => posts.ProjectToType<PostDto>());
             var paginationResult = new PaginationResult<PostDto>(postsList);
+
+            await blogRepository.IncreaseViewCountBySlugAsync(slug);
 
             return Results.Ok(ApiResponse.Success(paginationResult));
         }

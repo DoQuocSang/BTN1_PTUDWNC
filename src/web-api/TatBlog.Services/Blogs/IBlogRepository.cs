@@ -333,5 +333,9 @@ namespace TatBlog.Services.Blogs
           PostQuery condition,
           IPagingParams pagingParams,
           Func<IQueryable<Post>, IQueryable<T>> mapper);
+
+        Task IncreaseViewCountBySlugAsync(
+            string slug,
+            CancellationToken cancellationToken = default);
     }
 }

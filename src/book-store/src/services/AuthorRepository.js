@@ -14,3 +14,11 @@ export function getAuthorBySlug(
     return get_api(`https://localhost:7245/api/authors/${slug}`)
 }
 
+export function getPostsByAuthorSlug(
+    slug = "",
+    PageSize = 30,
+    PageNumber = 1
+    ) {     
+    return get_api(`https://localhost:7245/api/authors/${slug}/posts?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
+

@@ -145,16 +145,16 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                 Truy cập nhanh
               </MenuTitle>
               <MenuContainer flexCol>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Sách mới
                 </MenuItem>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Sách bán chạy
                 </MenuItem>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Sách nổi bật
                 </MenuItem>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Đang giảm giá
                 </MenuItem>
               </MenuContainer>

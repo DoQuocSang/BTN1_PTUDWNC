@@ -16,6 +16,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { getCategories } from "../../services/CategoryRepository";
 import { getTags } from "../../services/TagRepository";
 import BlogSidebar from "../../components/user/blogs/BlogSidebar";
+import { formatDateTme } from "../../components/utils/Utils";
 
 const HeadingRow = tw.div`flex`;
 const BlogImage = tw.img`w-full h-auto rounded-lg py-4`;
@@ -113,7 +114,7 @@ export default () => {
         <Row>
           {postsList.map((post, index) => (
             <PopularPostsContainer key={index}>
-              <PostCategory href={`/blog/${post.category.urlSlug}`}>{post.category.name}</PostCategory>
+              <PostCategory href={`/blog/${"category/"}${post.category.urlSlug}`}>{post.category.name}</PostCategory>
               <Heading>{post.title}</Heading>
               <InfoItem>
                 <FontAwesomeIcon icon={faEye} className="mr-2" />
@@ -122,7 +123,7 @@ export default () => {
               <PostsContainer>
                 <TagContainer >
                   {post.tags.map((tag, index) => (
-                    <a href={`/blog/${tag.urlSlug}`}>
+                    <a href={`/blog/${"tag/"}${tag.urlSlug}`}>
                       <TagItem key={index} >
                         <FontAwesomeIcon icon={faTag} className="pr-2" />
                         {tag.name}
@@ -141,11 +142,12 @@ export default () => {
                 <InfoContainer>
                   <InfoItem>
                     <FontAwesomeIcon icon={faUserPen} className="mr-2" />
-                    Tác giả: Sang Đỗ
+                    Tác giả:{" "}
+                    <PostCategory href={`/blog/${"author/"}${post.author.urlSlug}`}>{post.author.fullName}</PostCategory>
                   </InfoItem>
                   <InfoItem>
                     <FontAwesomeIcon icon={faCalendarCheck} className="mr-2" />
-                    Ngày đăng: 26/10/2023
+                    {formatDateTme(post.postedDate)}
                   </InfoItem>
                 </InfoContainer>
 
