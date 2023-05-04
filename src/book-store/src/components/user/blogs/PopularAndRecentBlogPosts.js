@@ -8,6 +8,7 @@ import { Container, ContentWithPaddingXl } from "components/user/misc/Layouts.js
 import { getFeaturedPosts } from "../../../services/PostRepository";
 import { getRandomPosts } from "../../../services/PostRepository";
 import PostDefault from "images/post-default.png";
+import { isEmptyOrSpaces } from "../../utils/Utils";
 
 const Row = tw.div`flex flex-col lg:flex-row -mb-10`;
 const Heading = tw(SectionHeading)`text-left lg:text-4xl xl:text-4xl`;
@@ -163,20 +164,33 @@ export default () => {
             <PostsContainer>
               {featuredPostList.map((post, index) => (
                 <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group" initial="rest" whileHover="hover" animate="rest">
-                  <Image
-                    transition={{ duration: 0.3 }}
-                    variants={postBackgroundSizeAnimation}
-                    $imageSrc={PostDefault}
-                  />
+
+                  {isEmptyOrSpaces(post.imageUrl) ? (
+                    <Image
+                      transition={{ duration: 0.3 }}
+                      variants={postBackgroundSizeAnimation}
+                      $imageSrc={PostDefault}
+                    />
+                  ) : (
+                    <Image
+                      transition={{ duration: 0.3 }}
+                      variants={postBackgroundSizeAnimation}
+                      $imageSrc={post.imageUrl}
+                    />
+                  )}
                   <Title>{post.title}</Title>
                   <Description>{post.shortDescription}</Description>
                   <AuthorInfo>
-                    <AuthorImage src={PostDefault} />
+                    {isEmptyOrSpaces(post.author.imageUrl) ? (
+                      <AuthorImage src={PostDefault} />
+                    ) : (
+                      <AuthorImage src={post.imageUrl} />
+                    )}
                     <AuthorNameAndProfession>
                       <AuthorName>{post.author.fullName}</AuthorName>
                       <AuthorProfile>{post.author.email}</AuthorProfile>
                     </AuthorNameAndProfession>
-                  </AuthorInfo> 
+                  </AuthorInfo>
                 </Post>
               ))}
             </PostsContainer>
@@ -185,13 +199,17 @@ export default () => {
             <Heading>Các bài viết</Heading>
             <PostsContainer>
               {randomPostList.map((post, index) => (
-              <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group">
-                <PostTextContainer>
-                  <Title>{post.title}</Title>
-                  <Description moreShort>{post.shortDescription}</Description>
-                </PostTextContainer>
-                <Image $imageSrc={PostDefault} />
-              </Post>
+                <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group">
+                  <PostTextContainer>
+                    <Title>{post.title}</Title>
+                    <Description moreShort>{post.shortDescription}</Description>
+                  </PostTextContainer>
+                  {isEmptyOrSpaces(post.imageUrl) ? (
+                    <Image $imageSrc={PostDefault} />
+                  ) : (
+                    <Image $imageSrc={post.imageUrl} />
+                  )}
+                </Post>
               ))}
             </PostsContainer>
           </RecentPostsContainer>

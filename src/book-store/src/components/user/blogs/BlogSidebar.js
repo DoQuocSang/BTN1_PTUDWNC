@@ -13,6 +13,7 @@ import { getPostBySlug } from "../../../services/PostRepository";
 import { getCategories } from "../../../services/CategoryRepository";
 import { getTags } from "../../../services/TagRepository";
 import { getAuthors } from "../../../services/AuthorRepository";
+import { isEmptyOrSpaces } from "../../utils/Utils";
 
 
 
@@ -94,10 +95,10 @@ export default ({ isDetailPage = false }) => {
             }
             else
                 setTagsList([]);
-            console.log(data)
+            //console.log(data)
         })
 
-        if(isDetailPage === true){
+        if (isDetailPage === true) {
             getRandomPosts(5).then(data => {
                 if (data) {
                     setRandomPostList(data.items);
@@ -124,7 +125,13 @@ export default ({ isDetailPage = false }) => {
                                             <Title>{post.title}</Title>
                                             <Description moreShort>{post.shortDescription}</Description>
                                         </PostTextContainer>
-                                        <Image $imageSrc={PostDefault} />
+
+                                        {isEmptyOrSpaces(post.imageUrl) ? (
+                                            <Image $imageSrc={PostDefault} />
+
+                                        ) : (
+                                            <Image $imageSrc={post.imageUrl} />
+                                        )}
                                     </Post>
                                 ))}
                             </PostsContainer>

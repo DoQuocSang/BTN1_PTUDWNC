@@ -17,6 +17,8 @@ import { getCategories } from "../../services/CategoryRepository";
 import { getTags } from "../../services/TagRepository";
 import BlogSidebar from "../../components/user/blogs/BlogSidebar";
 import { formatDateTme } from "../../components/utils/Utils";
+import { isEmptyOrSpaces } from "../../components/utils/Utils";
+import { FormatParagraph } from "../../components/utils/Utils";
 
 const HeadingRow = tw.div`flex`;
 const BlogImage = tw.img`w-full h-auto rounded-lg py-4`;
@@ -84,7 +86,7 @@ export default () => {
       }
       else
         setPostsList([]);
-      //console.log(data.items)
+      console.log(data.items[0])
     })
 
     getTags().then(data => {
@@ -132,12 +134,14 @@ export default () => {
                   ))}
                 </TagContainer>
 
-                <BlogImage src={PostDefaultFull} />
+                {isEmptyOrSpaces(post.imageUrl) ? (
+                  <BlogImage src={PostDefaultFull} />
+                ) : (
+                  <BlogImage src={post.imageUrl} />
+                )}
 
                 <Text>
-                  <p>
-                    {post.description}
-                  </p>
+                    {<FormatParagraph props={post.description} />}
                 </Text>
                 <InfoContainer>
                   <InfoItem>
@@ -168,7 +172,7 @@ export default () => {
             </PopularPostsContainer>
           ))}
 
-       <BlogSidebar isDetailPage={true}/>
+          <BlogSidebar isDetailPage={true} />
         </Row>
       </Container>
     </AnimationRevealPage>

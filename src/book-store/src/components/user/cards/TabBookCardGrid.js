@@ -268,7 +268,7 @@ export default ({hasTab = true, isProductPage = false}) => {
             initial={activeTab === tabKey ? "current" : "hidden"}
             animate={activeTab === tabKey ? "current" : "hidden"}
           >
-            {booksList.map((card, index) => (
+            {booksList.map((card, index) => (  
               <CardContainer key={index}>
                 <Card className="group" href={"/product-detail/" + card.urlSlug} initial="rest" whileHover="hover" animate="rest">
                   <CardImageContainer imageSrc={card.imageUrl}>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Moment from 'moment';
+import tw from "twin.macro";
 
 
 export function isEmptyOrSpaces(str) {
@@ -20,5 +21,11 @@ export function formatDateTme(value) {
     const time =  " - " + Moment(value).format("kk:mm:ss");
     const date =  "Ngày đăng: " + Moment(value).format("DD/MM/YYYY");
     return date + time;
+}
+
+export function FormatParagraph({props}) {
+    //console.log(props.split('\n')); 
+    const newText = props.split('\r\n\r\n').map(str => <p css={tw`pb-2`}>{str}</p>);
+    return newText;
 }
 

@@ -124,12 +124,12 @@ export default () => {
       })
     }
     else {
-      if(type === "author"){
+      if (type === "author") {
         getAuthorBySlug(slug).then(data => {
           if (data) {
             setheadingText("Các bài viết của tác giả " + data.fullName);
           }
-          else{
+          else {
             setheadingText("Danh sách bài viết");
           }
           //console.log(data.fullName)
@@ -145,12 +145,12 @@ export default () => {
         })
       }
 
-      if(type === "tag"){
+      if (type === "tag") {
         getTagBySlug(slug).then(data => {
           if (data) {
             setheadingText("Các bài viết có chứa thẻ " + data.name);
           }
-          else{
+          else {
             setheadingText("Danh sách bài viết");
           }
           //console.log(data.fullName)
@@ -205,7 +205,11 @@ export default () => {
                   {index % 7 === 0 ? featured = true : featured = false}
                   <PostContainer key={index} featured={featured}>
                     <Post className="group" as="a" href={`/blog-detail/${post.urlSlug}`}>
-                      <Image imageSrc={PostDefault} />
+                      {isEmptyOrSpaces(post.imageUrl) ? (
+                        <Image imageSrc={PostDefault} />
+                      ) : (
+                        <Image imageSrc={post.imageUrl} />
+                      )}
                       <Info>
                         <Category>{post.author.fullName}</Category>
                         <CreationDate>{formatDateTme(post.postedDate)}</CreationDate>
