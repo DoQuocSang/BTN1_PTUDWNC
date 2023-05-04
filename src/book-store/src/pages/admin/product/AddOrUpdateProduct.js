@@ -7,11 +7,12 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { AddOrUpdateText } from "../../../components/utils/Utils";
 
 
+export default ({type = ""}) => {
 
-
-export default () => {
+    let mainText = AddOrUpdateText(type, "bài viết");
 
     return (
         <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
@@ -21,7 +22,7 @@ export default () => {
                         <div className="flex mb-4 items-center space-x-5">
                             <div className="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">i</div>
                             <div className="block pl-2 font-semibold text-xl self-start text-gray-700">
-                                <h2 className="leading-relaxed">Thêm sản phẩm</h2>
+                                <h2 className="leading-relaxed">{mainText.headingText}</h2>
                                 <p className="text-sm text-gray-500 font-normal leading-relaxed">Vui lòng điền vào các ô bên dưới</p>
                             </div>
                         </div>
@@ -90,7 +91,7 @@ export default () => {
                                 Hủy
                             </Link>
                             <Link to="/admin/dashboard/all-product" className="btn ml-2 rounded-md transition duration-300 ease-in-out cursor-pointer hover:bg-indigo-700 bg-indigo-500 p-2 px-5 font-semibold text-white">
-                                Thêm
+                                {mainText.buttonText}
                             </Link>
                         </div>
 

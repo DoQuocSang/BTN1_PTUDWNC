@@ -16,7 +16,7 @@ import AdminLayout from "components/admin/layout/Layout"
 import Dashboard from "pages/admin/dashboard/Dashboard"
 
 import AllProduct from "pages/admin/product/AllProduct"
-import AddProduct from "pages/admin/product/AddProduct"
+import AddOrUpdateProduct from "pages/admin/product/AddOrUpdateProduct"
 
 import AllCategory from "pages/admin/category/AllCategory"
 import AddCategory from "pages/admin/category/AddCategory"
@@ -28,17 +28,18 @@ import AllTag from "pages/admin/tag/AllTag"
 import AddTag from "pages/admin/tag/AddTag"
 
 import AllBlog from "pages/admin/blog/AllBlog"
-import AddBlog from "pages/admin/blog/AddBlog"
+import AddOrUpdateBlog from "pages/admin/blog/AddOrUpdateBlog"
 
 import AllUser from "pages/admin/user/AllUser"
 import AddUser from "pages/admin/user/AddUser"
 
 import AdminLogin from "pages/admin/login/Login"
 
+import NotFound404 from "./pages/user/NotFound404";
+
 
 import { Route, Routes } from "react-router-dom"
 import Cart from "pages/user/Cart";
-import NotFound404 from "./pages/user/NotFound404";
 
 function App() {
   return (
@@ -64,18 +65,27 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/dashboard/all-product" element={<AllProduct />} />
-          <Route path="/admin/dashboard/add-product" element={<AddProduct />} />
+          <Route path="/admin/dashboard/add-product" element={<AddOrUpdateProduct type="add" />} />
+          <Route path="/admin/dashboard/update-product" element={<AddOrUpdateProduct type="update" />} />
+
           <Route path="/admin/dashboard/all-category" element={<AllCategory />} />
           <Route path="/admin/dashboard/add-category" element={<AddCategory />} />
+
           <Route path="/admin/dashboard/all-author" element={<AllAuthor />} />
           <Route path="/admin/dashboard/add-author" element={<AddAuthor />} />
+
           <Route path="/admin/dashboard/all-tag" element={<AllTag />} />
           <Route path="/admin/dashboard/add-tag" element={<AddTag />} />
+
           <Route path="/admin/dashboard/all-blog" element={<AllBlog />} />
-          <Route path="/admin/dashboard/add-blog" element={<AddBlog />} />
+          <Route path="/admin/dashboard/add-blog" element={<AddOrUpdateBlog type="add" />} />
+          <Route path="/admin/dashboard/update-blog" element={<AddOrUpdateBlog ype="update" />} />
+
           <Route path="/admin/dashboard/all-user" element={<AllUser />} />
           <Route path="/admin/dashboard/add-user" element={<AddUser />} />
         </Route>
+
+        <Route path="*" element={<NotFound404 />} />
 
       </Routes>
     </AnimationRevealPage>

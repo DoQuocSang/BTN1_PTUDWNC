@@ -304,7 +304,7 @@ export default ({hasTab = true, isProductPage = false}) => {
                       {toVND(card.price)}
                     </CardPrice>
                   </CardText>
-                </Card>
+                </Card> 
               </CardContainer>
             ))}
           </TabContent>

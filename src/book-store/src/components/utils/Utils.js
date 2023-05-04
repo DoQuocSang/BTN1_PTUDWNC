@@ -29,3 +29,19 @@ export function FormatParagraph({props}) {
     return newText;
 }
 
+export function AddOrUpdateText(type, mainText) {
+    let item = {
+        headingText: "",
+        buttonText: ""
+    }
+
+    if(type === "add"){
+        item.headingText = "Thêm " + mainText;
+        item.buttonText = "Thêm";
+    }
+    else{
+        item.headingText = "Cập nhật " + mainText;
+        item.buttonText = "Cập nhật";
+    }
+    return item;
+}
