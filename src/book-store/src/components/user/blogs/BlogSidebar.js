@@ -16,7 +16,6 @@ import { getAuthors } from "../../../services/AuthorRepository";
 import { isEmptyOrSpaces } from "../../utils/Utils";
 
 
-
 const Row = tw.div`flex flex-col lg:flex-row mx-20 max-w-screen-xl mx-auto`;
 
 const PopularPostsContainer = tw.div`lg:w-2/3 mr-16`;

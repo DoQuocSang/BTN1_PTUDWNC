@@ -21,7 +21,7 @@ import { isEmptyOrSpaces } from "../../components/utils/Utils";
 import { FormatParagraph } from "../../components/utils/Utils";
 
 const HeadingRow = tw.div`flex`;
-const BlogImage = tw.img`w-full h-auto rounded-lg py-4`;
+const BlogImage = tw.img`w-full h-auto rounded-lg my-4 shadow-lg`;
 // const BlogImage = styled.div(props => [
 //   `background-image: url("${props.imageSrc}"); `,
 //   tw`rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8`

@@ -70,13 +70,13 @@ export default () => {
             </TextPrimary>
 
             <SocialLinksContainer>
-              <SocialLink href="https://facebook.com">
+              <SocialLink href="/not-found-404">
                 <FacebookIcon />
               </SocialLink>
-              <SocialLink href="https://twitter.com">
+              <SocialLink href="/not-found-404">
                 <TwitterIcon />
               </SocialLink>
-              <SocialLink href="https://youtube.com">
+              <SocialLink href="/not-found-404">
                 <YoutubeIcon />
               </SocialLink>
             </SocialLinksContainer>
@@ -85,16 +85,16 @@ export default () => {
             <ColumnHeading>Lối tắt</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Danh mục</Link>
+                <Link href="/all-product">Danh mục</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">FAQs</Link>
+                <Link href="/not-found-404">FAQs</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Hỗ trợ</Link>
+                <Link href="/not-found-404">Hỗ trợ</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Giới thiệu</Link>
+                <Link href="/about-us">Giới thiệu</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -102,16 +102,16 @@ export default () => {
             <ColumnHeading>Tài khoản</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Đăng nhập</Link>
+                <Link href="/login">Đăng nhập</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Chi tiết tài khoản</Link>
+                <Link href="/not-found-404">Chi tiết tài khoản</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Lịch sử mua hàng</Link>
+                <Link href="/not-found-404">Lịch sử mua hàng</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Mục ưa thích</Link>
+                <Link href="/not-found-404">Mục ưa thích</Link>
               </LinkListItem>
             </LinkList>
           </Column>
@@ -119,16 +119,16 @@ export default () => {
             <ColumnHeading>Hỗ trợ</ColumnHeading>
             <LinkList>
               <LinkListItem>
-                <Link href="#">Chính sách đổi trả</Link>
+                <Link href="/not-found-404">Chính sách đổi trả</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Chính sách bảo hành</Link>
+                <Link href="/not-found-404">Chính sách bảo hành</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Chính sách vận chuyển</Link>
+                <Link href="/not-found-404">Chính sách vận chuyển</Link>
               </LinkListItem>
               <LinkListItem>
-                <Link href="#">Phương thức thanh toán</Link>
+                <Link href="/not-found-404">Phương thức thanh toán</Link>
               </LinkListItem>
             </LinkList>
           </Column>
