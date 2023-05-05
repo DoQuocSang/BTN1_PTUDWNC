@@ -29,4 +29,4 @@ namespace TatBlog.Core.DTO
         public string ConfirmPassword { get; set; }
     }
 }
-}
+

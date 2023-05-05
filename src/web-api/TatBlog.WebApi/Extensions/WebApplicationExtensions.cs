@@ -40,7 +40,8 @@ namespace TatBlog.WebApi.Extensions
             .AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             builder.Services
             .AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
-
+            builder.Services
+            .AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 
             return builder;
         }

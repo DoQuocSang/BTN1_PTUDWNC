@@ -9,7 +9,7 @@ namespace TatBlog.Services.Blogs
 {
     public interface IUserServiceRepository
     {
-        Task<bool> Authencate(LoginRequest request);
+        Task<string> Authencate(LoginRequest request);
 
         Task<bool> Register(RegisterRequest request);
 
