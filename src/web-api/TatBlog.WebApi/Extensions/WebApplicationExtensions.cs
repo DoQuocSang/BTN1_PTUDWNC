@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using NLog.Web;
+using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
 using TatBlog.Services.Blogs;
 using TatBlog.Services.Media;
@@ -34,6 +36,11 @@ namespace TatBlog.WebApi.Extensions
               .AddScoped<IBookRepository, BookRepository>();
             builder.Services
             .AddScoped<ITagRepository, TagRepository>();
+            builder.Services
+            .AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+            builder.Services
+            .AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+
 
             return builder;
         }
