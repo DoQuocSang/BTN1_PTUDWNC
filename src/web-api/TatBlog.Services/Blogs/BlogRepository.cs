@@ -551,6 +551,22 @@ namespace TatBlog.Services.Blogs
             return post;
         }
 
+        public async Task<bool> AddOrUpdateAsync(
+           Post post, CancellationToken cancellationToken = default)
+        {
+            if (post.Id > 0)
+            {
+                _context.Posts.Update(post);
+                _memoryCache.Remove($"post.by-id.{post.Id}");
+            }
+            else
+            {
+                _context.Posts.Add(post);
+            }
+
+            return await _context.SaveChangesAsync(cancellationToken) > 0;
+        }
+
         public async Task DeletePostAsync(
                 int id, CancellationToken cancellationToken = default)
         {
@@ -784,6 +800,34 @@ namespace TatBlog.Services.Blogs
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
                     return await GetPostByIdAsync(postId);
                 });
+        }
+
+        public async Task<PostItem> GetPostDetailByIdAsync(
+           int id,
+           CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Post>()
+                .Include(x => x.Tags)
+                .Include(x => x.Category)
+                .Include(x => x.Author)
+                .AsNoTracking()
+                .Select(x => new PostItem()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    UrlSlug = x.UrlSlug,
+                    ImageUrl = x.ImageUrl,
+                    Meta = x.Meta,
+                    ShortDescription = x.ShortDescription,
+                    Description = x.Description,
+                    Published = x.Published,
+                    Category = x.Category,
+                    Tags = x.Tags,
+                    Author = x.Author,
+                    AuthorId = x.Author.Id,
+                    CategoryId = x.Category.Id,
+                })
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public async Task<IPagedList<PostItem>> GetRandomPostsAsync(

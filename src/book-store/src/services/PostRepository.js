@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { get_api } from './Method';
+import { post_api } from './Method';
 
 export function getFeaturedPosts(
     numBooks=2
@@ -27,4 +28,19 @@ export function getPostBySlug(
     ) {     
     //console.log(urlSlug)
     return get_api(`https://localhost:7245/api/posts/byslug/${slug}?PageSize=${PageSize}&PageNumber=${PageNumber}`)
+}
+
+export async function getPostById(
+    id = 0
+    ) {
+    if(id > 0){
+        return get_api(`https://localhost:7245/api/posts/${id}`);
+    }
+    return null;
+}
+
+export function addOrUppdatePost(
+    formData
+    ) {
+    return post_api(`https://localhost:7245/api/posts`, formData);
 }

@@ -52,7 +52,7 @@ namespace TatBlog.WebApi.Endpoints
             routeGroupBuilder.MapPost("/", AddAuthor)
                 .WithName("AddNewAuthor")
                 .AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-                .RequireAuthorization()
+                //.RequireAuthorization()
                 .Produces(401)
                 .Produces<ApiResponse<AuthorItem>>();
                 //.Produces(201)

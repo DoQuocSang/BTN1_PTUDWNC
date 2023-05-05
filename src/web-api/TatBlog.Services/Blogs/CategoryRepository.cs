@@ -81,7 +81,7 @@ namespace TatBlog.Services.Blogs
                 });
         }
 
-        public async Task<IList<CategoryItem>> GetCategoriessAsync(
+        public async Task<IList<CategoryItem>> GetCategoriesAsync(
             CancellationToken cancellationToken = default)
         {
             return await _context.Set<Category>()

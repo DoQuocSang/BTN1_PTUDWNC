@@ -79,13 +79,13 @@ function App() {
 
           <Route path="/admin/dashboard/all-blog" element={<AllBlog />} />
           <Route path="/admin/dashboard/add-blog" element={<AddOrUpdateBlog type="add" />} />
-          <Route path="/admin/dashboard/update-blog" element={<AddOrUpdateBlog ype="update" />} />
+          <Route path="/admin/dashboard/update-blog/:id" element={<AddOrUpdateBlog type="update" />} />
 
           <Route path="/admin/dashboard/all-user" element={<AllUser />} />
           <Route path="/admin/dashboard/add-user" element={<AddUser />} />
         </Route>
 
-        <Route path="*" element={<NotFound404 />} />
+        {/* <Route path="*" element={<NotFound404 />} /> */}
 
       </Routes>
     </AnimationRevealPage>

@@ -22,3 +22,14 @@ export function getPostsByAuthorSlug(
     return get_api(`https://localhost:7245/api/authors/${slug}/posts?PageSize=${PageSize}&PageNumber=${PageNumber}`)
 }
 
+// export function getPostsByAuthorSlugasdsda(
+//     slug = "",
+//     PageSize = 30,
+//     PageNumber = 1
+//     ) {     
+//     return get_api(`https://localhost:7245/api/authors`)
+// }
+
+// export async function updateService(id = 0, formData) {
+//     return put_api(`https://localhost:7024/api/services/${id}`, formData);
+//   }
