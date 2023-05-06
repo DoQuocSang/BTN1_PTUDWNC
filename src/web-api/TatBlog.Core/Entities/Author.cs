@@ -19,5 +19,6 @@ namespace TatBlog.Core.Entities
         public IList<Post> Posts { get; set; }
         public IList<Book> Books { get; set; }
 
+
     }
 }

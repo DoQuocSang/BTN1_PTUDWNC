@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatBlog.Core.Contracts;
 using TatBlog.Core.Entities;
 
 namespace TatBlog.Data.Mappings
@@ -53,18 +54,16 @@ namespace TatBlog.Data.Mappings
                 .IsRequired();
 
             builder.Property(p => p.StarNumber)
-             .HasDefaultValue(0)
-             .IsRequired();
+             .HasDefaultValue(0);
 
-            builder.Property(p => p.AverageStar)
-             .HasDefaultValue(0)
-             .IsRequired();
+            builder.Property(p => p.ReviewNumber)
+             .HasDefaultValue(0);
 
-            builder.Property(p => p.PostedDate)
-                .HasColumnType("datetime");
+            builder.Property(p => p.Price)
+            .HasDefaultValue(0);
 
-            builder.Property(p => p.ModifiedDate)
-                .HasColumnType("datetime");
+            builder.Property(p => p.ReleasedDate)
+             .HasColumnType("datetime");
 
             builder.HasOne(p => p.Category)
                 .WithMany(c => c.Books)

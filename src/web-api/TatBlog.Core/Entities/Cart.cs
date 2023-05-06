@@ -14,7 +14,7 @@ namespace TatBlog.Core.Entities
         public int BookId { get; set; }
         // Giá sản phẩm
         public string Price { get; set; }
-     
+
         // Danh sách sản phẩm
         public IList<Book> Books { get; set; }
 

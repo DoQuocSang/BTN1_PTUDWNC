@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "images/logo.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import DefaultUserImage from "images/post-default.png"
 
 
 export default () => {
@@ -47,7 +48,7 @@ export default () => {
                      </svg>
                   </button>
                   <div className="hidden lg:flex items-center">
-                     <img className="h-8 w-8 rounded-lg mx-3" src="https://demo.themesberg.com/windster/images/users/michael-gough.png" alt="Neil image" />
+                     <img className="h-8 w-8 rounded-lg mx-3" src={DefaultUserImage} alt="Neil image" />
                      <span className="text-base font-bold text-gray-500 mr-5">
                         Sang Đỗ
                      </span>
@@ -55,7 +56,7 @@ export default () => {
                         <a className="github-button" href="#" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themesberg/windster-tailwind-css-dashboard on GitHub">Star</a>
                      </div> */}
                   </div>
-                  <a href="#" className="hidden transition duration-300 sm:inline-flex ml-5 text-white bg-amber-400 hover:bg-purple-500 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
+                  <a href="/" className="hidden transition duration-300 sm:inline-flex ml-5 text-white  bg-red-400 hover:bg-amber-400 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
                      <FontAwesomeIcon icon={faRightFromBracket} className="text-base mr-3" />
                      Đăng xuất
                   </a>

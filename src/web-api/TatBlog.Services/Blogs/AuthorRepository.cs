@@ -90,7 +90,8 @@ namespace TatBlog.Services.Blogs
                     JoinedDate = a.JoinedDate,
                     ImageUrl = a.ImageUrl,
                     UrlSlug = a.UrlSlug,
-                    PostCount = a.Posts.Count(p => p.Published)
+                    PostCount = a.Posts.Count(p => p.Published),
+                    BookCount = a.Books.Count()
                 })
                 .ToPagedListAsync(pagingParams, cancellationToken);
         }
@@ -204,6 +205,23 @@ namespace TatBlog.Services.Blogs
                 pageNumber, pageSize,
                 nameof(Author.FullName), "ASC",
                 cancellationToken);
+        }
+
+        public async Task<AuthorItem> GetAuthorDetailByIdAsync(
+          int id,
+          CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Author>()
+                .AsNoTracking()
+                .Select(x => new AuthorItem()
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    UrlSlug = x.UrlSlug,
+                    ImageUrl = x.ImageUrl,
+                    Email = x.Email,
+                })
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }

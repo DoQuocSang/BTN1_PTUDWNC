@@ -19,5 +19,8 @@ namespace TatBlog.Core.DTO
         public bool ShowOnMenu { get; set; }
 
         public int PostCount { get; set; }
+
+        public int BookCount { get; set; }
+
     }
 }

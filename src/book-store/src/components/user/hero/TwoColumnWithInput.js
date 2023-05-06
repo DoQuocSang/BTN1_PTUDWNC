@@ -28,7 +28,7 @@ const Actions = styled.div`
 
 const IllustrationContainer = tw.div`flex justify-center lg:justify-end items-center`;
 
-// Random Decorator Blobs (shapes that you see in background)
+// Random Decorator Blobs
 const DecoratorBlob1 = styled(SvgDecoratorBlob1)`
   ${tw`pointer-events-none opacity-5 absolute left-0 bottom-0 h-64 w-64 transform -translate-x-2/3 -z-10`}
 `;

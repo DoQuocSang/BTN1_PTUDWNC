@@ -15,6 +15,8 @@ namespace TatBlog.Data.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         public BlogDbContext()
         {
@@ -29,7 +31,7 @@ namespace TatBlog.Data.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=LAPTOP-GEIT9Q0O;TrustServerCertificate=True;Database=BookStore;
+            optionsBuilder.UseSqlServer(@"Server=LAPTOP-C4HORG37;TrustServerCertificate=True;Database=BookStore;
                 Trusted_Connection=True;MultipleActiveResultSets=true");
             //Data Source=LAPTOP-C4HORG37;Initial Catalog=TatBlog;Integrated Security=True
         }

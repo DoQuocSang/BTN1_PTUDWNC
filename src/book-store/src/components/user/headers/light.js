@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -22,6 +22,9 @@ import { faFire } from "@fortawesome/free-solid-svg-icons";
 import { faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import catFind from "images/cat-find.png"
+import { isEmptyOrSpaces } from "../../utils/Utils";
+import { getAuthors } from "../../../services/AuthorRepository.js";
+import { getCategories } from "../../../services/CategoryRepository.js";
 
 const Header = tw.header`
   flex justify-between items-center
@@ -32,9 +35,6 @@ export const PaddingContainer = tw.div`p-8`;
 
 export const NavLinks = tw.div`inline-block`;
 
-/* hocus: stands for "on hover or focus"
- * hocus:bg-primary-700 will apply the bg-primary-700 class on hover or focus
- */
 export const NavLink = tw.a`
   text-lg my-2 lg:text-sm lg:mx-6 lg:my-0
   font-semibold tracking-wide transition duration-300
@@ -100,25 +100,41 @@ export const ImageFinding = tw.img`text-center w-1/2 mx-auto`;
 
 
 export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
-  /*
-   * This header component accepts an optionals "links" prop that specifies the links to render in the navbar.
-   * This links props should be an array of "NavLinks" components which is exported from this file.
-   * Each "NavLinks" component can contain any amount of "NavLink" component, also exported from this file.
-   * This allows this Header to be multi column.
-   * So If you pass only a single item in the array with only one NavLinks component as root, you will get 2 column header.
-   * Left part will be LogoLink, and the right part will be the the NavLinks component you
-   * supplied.
-   * Similarly if you pass 2 items in the links array, then you will get 3 columns, the left will be "LogoLink", the center will be the first "NavLinks" component in the array and the right will be the second "NavLinks" component in the links array.
-   * You can also choose to directly modify the links here by not passing any links from the parent component and
-   * changing the defaultLinks variable below below.
-   * If you manipulate links here, all the styling on the links is already done for you. If you pass links yourself though, you are responsible for styling the links or use the helper styled components that are defined here (NavLink)
-   */
+  const [authorsList, setAuthorsList] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [metadata, setMetadata] = useState([]);
+
+  useEffect(() => {
+    document.title = 'Trang chủ';
+
+    getAuthors().then(data => {
+      if (data) {
+        setAuthorsList(data.items);
+        setMetadata(data.metadata);
+      }
+      else
+        setAuthorsList([]);
+      //console.log(data.items)
+    })
+
+    getCategories().then(data => {
+      if (data) {
+        setCategoriesList(data.items);
+        setMetadata(data.metadata);
+      }
+      else
+        setCategoriesList([]);
+      //console.log(data)
+    })
+  }, []);
+
   const defaultLinks = [
     <NavLinks key={1}>
-      <Link to="/all-product">
-        <NavLink className="group" css={tw``}>
+        <NavLink className="group" css={tw`cursor-pointer`}>
+          <a href="/all-product">
           <FontAwesomeIcon icon={faListUl} css={tw`mr-2 text-base`} />
           Danh mục
+          </a>
           <MenuOnHover>
             <MenuSection hasBorder>
               <MenuTitle>
@@ -126,16 +142,16 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                 Truy cập nhanh
               </MenuTitle>
               <MenuContainer flexCol>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Sách mới
                 </MenuItem>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Sách bán chạy
                 </MenuItem>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Sách nổi bật
                 </MenuItem>
-                <MenuItem href="#">
+                <MenuItem href="/not-found-404">
                   Đang giảm giá
                 </MenuItem>
               </MenuContainer>
@@ -148,36 +164,11 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                   Tác giả
                 </MenuTitle>
                 <MenuContainer >
-                  <MenuItem href="#">
-                    Sách thiếu nhi
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách văn học
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách nổi bật
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Đang giảm giá
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách bán chạy
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách thiếu nhi
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách văn học
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách nổi bật
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Đang giảm giá
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách bán chạy
-                  </MenuItem>
+                  {authorsList.map((author, i) => (
+                    <MenuItem href={"/all-product/" + "author/" + author.urlSlug}>
+                      {author.fullName}{` (${author.bookCount})`}
+                    </MenuItem>
+                  ))}
                 </MenuContainer>
               </MenuSection>
               <MenuSection>
@@ -186,43 +177,17 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                   Thể loại
                 </MenuTitle>
                 <MenuContainer >
-                  <MenuItem href="#">
-                    Sách thiếu nhi
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách văn học
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách nổi bật
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Đang giảm giá
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách bán chạy
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách thiếu nhi
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách văn học
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách nổi bật
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Đang giảm giá
-                  </MenuItem>
-                  <MenuItem href="#">
-                    Sách bán chạy
-                  </MenuItem>
+                  {categoriesList.map((category, i) => (
+                    <MenuItem href={"/all-product/" + "category/" + category.urlSlug}>
+                      {category.name}{` (${category.bookCount})`}
+                    </MenuItem>
+                  ))}
                 </MenuContainer>
               </MenuSection>
             </MenuSection>
 
-          </MenuOnHover>
+          </MenuOnHover> 
         </NavLink>
-      </Link>
 
       <NavLink className="group" css={tw`cursor-pointer`}>
         <FontAwesomeIcon icon={faMagnifyingGlass} css={tw`mr-2 text-base`} />
@@ -245,12 +210,12 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
         </NavLink>
       </Link>
 
-      <Link to="/blog">
+      <a href="/blog">
         <NavLink>
           <FontAwesomeIcon icon={faFileLines} css={tw`mr-2 text-base`} />
           Bài viết
         </NavLink>
-      </Link>
+      </a>
 
       <Link to="/cart">
         <NavLink>
@@ -310,12 +275,6 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
   );
 };
-
-/* The below code is for generating dynamic break points for navbar.
- * Using this you can specify if you want to switch
- * to the toggleable mobile navbar at "sm", "md" or "lg" or "xl" above using the collapseBreakpointClass prop
- * Its written like this because we are using macros and we can not insert dynamic variables in macros
- */
 
 const collapseBreakPointCssMap = {
   sm: {

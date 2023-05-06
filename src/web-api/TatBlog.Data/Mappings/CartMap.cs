@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TatBlog.Core.Contracts;
 using TatBlog.Core.Entities;
-
 
 namespace TatBlog.Data.Mappings
 {
@@ -17,7 +17,6 @@ namespace TatBlog.Data.Mappings
             builder.ToTable("Carts");
 
             builder.HasKey(a => a.Id);
-
         }
     }
 }

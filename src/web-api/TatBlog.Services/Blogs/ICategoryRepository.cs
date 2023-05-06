@@ -51,4 +51,14 @@ public interface ICategoryRepository
 	Task<IList<CategoryItem>> GetCategoriesAsync(
 		bool showOnMenu = false,
 		CancellationToken cancellationToken = default);
+
+	Task<CategoryItem> GetCategoryItemBySlugAsync(
+		string slug, CancellationToken cancellationToken = default);
+
+	Task<CategoryItem> GetCachedCategoryItemBySlugAsync(
+		   string slug, CancellationToken cancellationToken = default);
+
+    Task<CategoryItem> GetCategoryDetailByIdAsync(
+		int id,
+		CancellationToken cancellationToken = default);
 }

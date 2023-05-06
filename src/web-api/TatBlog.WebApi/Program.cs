@@ -7,12 +7,10 @@ using TatBlog.WebApi.Extensions;
 using TatBlog.WebApi.Mapsters;
 using TatBlog.WebApi.Validations;
 
-
 //Khoi tao du lieu cho db
-    var context = new BlogDbContext();
+var context = new BlogDbContext();
 var seeder = new DataSeeder(context);
 seeder.Initialize();
-
 
 // Early init of NLog to allow startup and exception logging, before host is built
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -64,6 +62,8 @@ try
         app.MapAuthorEndpoints();
         app.MapCategoryEndpoints();
         app.MapPostEndpoints();
+        app.MapBookEndpoints();
+        app.MapTagEndpoints();
 
         app.Run();
     }
