@@ -6,8 +6,9 @@
     "\\src\\web-api\\TatBlog.Services",
     "\\src\\web-api\\TatBlog.Services\\Blogs",
     "\\src\\web-api\\TatBlog.WebApi",
+    "\\src\\web-api\\TatBlog.WebApi\\Endpoints",
     "\\src\\web-api\\TatBlog.WebApi\\Models"
   ],
-  "SelectedNode": "\\src\\web-api\\TatBlog.Services\\Blogs\\UserServiceRepository.cs",
+  "SelectedNode": "\\src\\web-api\\TatBlog.WebApi\\Endpoints\\UserEndpoints.cs",
   "PreviewInSolutionExplorer": false
 }

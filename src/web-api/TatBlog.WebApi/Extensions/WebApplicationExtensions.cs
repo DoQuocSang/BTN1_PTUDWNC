@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using NLog.Web;
 using TatBlog.Core.Entities;
 using TatBlog.Data.Contexts;
 using TatBlog.Services.Blogs;
 using TatBlog.Services.Media;
 using TatBlog.Services.Timing;
+using TatBlog.WebApi.Endpoints;
 
 namespace TatBlog.WebApi.Extensions
 {
@@ -21,6 +21,10 @@ namespace TatBlog.WebApi.Extensions
                 options.UseSqlServer(
                     builder.Configuration
                         .GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<BlogDbContext>()
+                .AddDefaultTokenProviders();
 
             builder.Services
                 .AddScoped<ITimeProvider, LocalTimeProvider>();
@@ -42,6 +46,9 @@ namespace TatBlog.WebApi.Extensions
             .AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
             builder.Services
             .AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+
+
+
 
             return builder;
         }

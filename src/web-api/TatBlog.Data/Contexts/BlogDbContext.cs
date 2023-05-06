@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace TatBlog.Data.Contexts
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Cart> Carts { get; set; }
-
+        
         public BlogDbContext()
         {
 
@@ -31,7 +32,7 @@ namespace TatBlog.Data.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=LAPTOP-C4HORG37;TrustServerCertificate=True;Database=BookStore;
+            optionsBuilder.UseSqlServer(@"Server=HOANG;TrustServerCertificate=True;Database=BookStore;
                 Trusted_Connection=True;MultipleActiveResultSets=true");
             //Data Source=LAPTOP-C4HORG37;Initial Catalog=TatBlog;Integrated Security=True
         }
@@ -40,6 +41,13 @@ namespace TatBlog.Data.Contexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(
                 typeof(CategoryMap).Assembly);
+
+            modelBuilder.ApplyConfiguration(new AppUserMap());
+
+            modelBuilder.ApplyConfiguration(new AppRoleMap());
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
         }
     }
 }
