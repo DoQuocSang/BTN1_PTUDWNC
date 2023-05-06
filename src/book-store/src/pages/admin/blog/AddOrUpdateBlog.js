@@ -126,6 +126,7 @@ export default ({ type = "" }) => {
                             })}
                             placeholder="Nhập tiêu để"
                             className="text-black mb-4 placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-1 ring-offset-current ring-offset-2 ring-purple-400" />
+
                         <input
                             name="slug"
                             required
@@ -202,8 +203,6 @@ export default ({ type = "" }) => {
                             })}
                             placeholder="Nhập từ khóa (mỗi từ 1 dòng)"
                             className="description mb-4 sec h-36 text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-1 ring-offset-current ring-offset-2 ring-purple-400" spellcheck="false" ></textarea>
-                      
-                        {!isEmptyOrSpaces(post.imageUrl) && <>
                         <input
                             name="imageUrl"
                             required
@@ -215,19 +214,11 @@ export default ({ type = "" }) => {
                             })}
                             placeholder="Nhập link ảnh"
                             className="text-black mb-4 placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-1 ring-offset-current ring-offset-2 ring-purple-400" />
-                        <p className="text-gray-600 mb-4 text-center">Ảnh hiện tại</p>
-                        <img src={post.imageUrl} className="w-full h-auto mb-4 rounded-lg" />
-                        </>}
 
-                        {/* <div className="icons m-2 flex text-gray-500">
-                            <svg className="mr-2 h-7 cursor-pointer rounded-full border p-1 hover:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <svg className="mr-2 h-7 cursor-pointer rounded-full border p-1 hover:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <svg className="mr-2 h-7 cursor-pointer rounded-full border p-1 hover:text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" /></svg>
-                            <div className="count ml-auto text-xs font-semibold text-gray-400">0/300</div>
-                        </div> */}
+                        {!isEmptyOrSpaces(post.imageUrl) && <>
+                            <p className="text-gray-600 mb-4 text-center">Ảnh hiện tại</p>
+                            <img src={post.imageUrl} className="w-full h-auto mb-4 rounded-lg" />
+                        </>}
 
                         <div className="buttons flex">
                             <hr className="mt-4" />

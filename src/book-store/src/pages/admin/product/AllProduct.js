@@ -25,7 +25,7 @@ export default () => {
             }
             else
                 setBooksList([]);
-            console.log(data.items)
+            //console.log(data.items)
         })
     }, []);
 

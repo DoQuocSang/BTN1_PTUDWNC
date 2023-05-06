@@ -58,4 +58,8 @@ public interface IAuthorRepository
 		int pageNumber = 1,
 		int pageSize = 10,
 		CancellationToken cancellationToken = default);
+
+	Task<AuthorItem> GetAuthorDetailByIdAsync(
+		  int id,
+		  CancellationToken cancellationToken = default);
 }

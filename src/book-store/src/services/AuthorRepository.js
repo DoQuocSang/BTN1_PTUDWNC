@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { get_api } from './Method';
+import { post_api } from './Method';
 
 export function getAuthors(
     PageSize = 30,
@@ -33,3 +34,21 @@ export function getPostsByAuthorSlug(
 // export async function updateService(id = 0, formData) {
 //     return put_api(`https://localhost:7024/api/services/${id}`, formData);
 //   }
+
+
+export async function getAuthorById(
+    id = 0
+    ) {
+    if(id > 0){
+        return get_api(`https://localhost:7245/api/authors/detail/${id}`);
+    }
+    return null;
+}
+
+export function addOrUpdateAuthor(
+    formData
+    ) {
+    return post_api(``, formData);
+}
+
+

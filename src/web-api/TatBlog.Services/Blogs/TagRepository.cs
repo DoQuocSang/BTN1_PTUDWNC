@@ -31,6 +31,7 @@ namespace TatBlog.Services.Blogs
                     Id = x.Id,
                     Name = x.Name,
                     UrlSlug = x.UrlSlug,
+                    Description = x.Description,
                     PostCount = x.Posts.Count(p => p.Published),
                 })
                 .ToPagedListAsync(pagingParams, cancellationToken);
@@ -59,6 +60,22 @@ namespace TatBlog.Services.Blogs
                        UrlSlug = x.UrlSlug
                    })
                 .FirstOrDefaultAsync(a => a.UrlSlug == slug, cancellationToken);
+        }
+
+        public async Task<TagItem> GetTagDetailByIdAsync(
+          int id,
+          CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Tag>()
+                .AsNoTracking()
+                .Select(x => new TagItem()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlSlug = x.UrlSlug,
+                    Description = x.Description,
+                })
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }

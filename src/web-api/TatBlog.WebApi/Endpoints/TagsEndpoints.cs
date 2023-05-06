@@ -39,6 +39,10 @@ namespace TatBlog.WebApi.Endpoints
                   .WithName("GetTagBySlug")
                   .Produces<ApiResponse<PaginationResult<TagItem>>>();
 
+            routeGroupBuilder.MapGet("/detail/{id:int}", GetTagDetails)
+                .WithName("GeTagById")
+                .Produces<ApiResponse<TagItem>>();
+
             return app;
         }
 
@@ -56,6 +60,8 @@ namespace TatBlog.WebApi.Endpoints
             //return Results.Ok(paginationResult);
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
+
+
 
         private static async Task<IResult> GetPostsByTagSlug(
          [FromRoute] string slug,
@@ -88,6 +94,20 @@ namespace TatBlog.WebApi.Endpoints
                 ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
                 $"không tìm thấy thẻ có slug {slug}"))
                 : Results.Ok(ApiResponse.Success(tag));
+        }
+
+        private static async Task<IResult> GetTagDetails(
+            int id,
+            ITagRepository tagRepository,
+            IMapper mapper)
+        {
+            //var category = await categoryRepository.GetCachedCategoryByIdAsync(id);
+            var tag = await tagRepository.GetTagDetailByIdAsync(id);
+
+            return tag == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+                $"không tìm thấy thẻ có mã số {id}"))
+                : Results.Ok(ApiResponse.Success(mapper.Map<CategoryItem>(tag)));
         }
 
     }
