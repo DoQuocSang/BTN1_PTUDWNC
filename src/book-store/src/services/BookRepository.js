@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { get_api } from './Method';
+import { post_api } from './Method';
 
 export function getRandomBooks(
     numBooks = 3
@@ -59,4 +60,19 @@ export function getBookRelatedBySlug(
 }
 
 
+
+export async function getBookById(
+    id = 0
+    ) {
+    if(id > 0){
+        return get_api(`https://localhost:7245/api/books/${id}`);
+    }
+    return null;
+}
+
+export function addOrUppdateBook(
+    formData
+    ) {
+    return post_api(``, formData);
+}
 

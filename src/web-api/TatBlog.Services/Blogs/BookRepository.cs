@@ -181,6 +181,32 @@ namespace TatBlog.Services.Blogs
                 });
         }
 
+        public async Task<BookItem> GetBookDetailByIdAsync(
+           int id,
+           CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Book>()
+                .Include(x => x.Category)
+                .Include(x => x.Author)
+                .AsNoTracking()
+                .Select(x => new BookItem()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    UrlSlug = x.UrlSlug,
+                    ImageUrl = x.ImageUrl,
+                    Meta = x.Meta,
+                    ShortDescription = x.ShortDescription,
+                    Description = x.Description,
+                    PublishCompany = x.PublishCompany,
+                    Price = x.Price,
+                    CoverForm = x.CoverForm,
+                    AuthorId = x.Author.Id,
+                    CategoryId = x.Category.Id,
+                })
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
         public async Task<Book> GetBookByIdAsync(
           int bookId, bool includeDetails = false,
           CancellationToken cancellationToken = default)

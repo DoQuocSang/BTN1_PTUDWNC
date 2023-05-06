@@ -66,7 +66,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/dashboard/all-product" element={<AllProduct />} />
           <Route path="/admin/dashboard/add-product" element={<AddOrUpdateProduct type="add" />} />
-          <Route path="/admin/dashboard/update-product" element={<AddOrUpdateProduct type="update" />} />
+          <Route path="/admin/dashboard/update-product/:id" element={<AddOrUpdateProduct type="update" />} />
 
           <Route path="/admin/dashboard/all-category" element={<AllCategory />} />
           <Route path="/admin/dashboard/add-category" element={<AddCategory />} />

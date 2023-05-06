@@ -38,5 +38,9 @@ namespace TatBlog.Services.Blogs
         Task<Book> GetBookBySlugAsync(
          string slug,
          CancellationToken cancellationToken = default);
+
+        Task<BookItem> GetBookDetailByIdAsync(
+           int id,
+           CancellationToken cancellationToken = default);
     }
 }

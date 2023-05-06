@@ -158,7 +158,8 @@ namespace TatBlog.WebApi.Endpoints
             IBookRepository bookRepository,
             IMapper mapper)
         {
-            var Book = await bookRepository.GetCachedBookByIdAsync(id);
+            //var Book = await bookRepository.GetCachedBookByIdAsync(id);
+            var Book = await bookRepository.GetBookDetailByIdAsync(id);
 
             return Book == null
                 ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
