@@ -30,6 +30,10 @@ namespace TatBlog.WebApi.Extensions
                 .AddScoped<IAuthorRepository, AuthorRepository>();
             builder.Services
                .AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services
+              .AddScoped<IBookRepository, BookRepository>();
+            builder.Services
+            .AddScoped<ITagRepository, TagRepository>();
 
             return builder;
         }

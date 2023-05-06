@@ -27,6 +27,32 @@ namespace TatBlog.Services.Blogs
                 .FirstOrDefaultAsync(a => a.UrlSlug == slug, cancellationToken);
         }
 
+        public async Task<CategoryItem> GetCategoryItemBySlugAsync(
+          string slug, CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Category>()
+                   .Select(x => new CategoryItem()
+                   {
+                       Id = x.Id,
+                       Name = x.Name,
+                       UrlSlug = x.UrlSlug,
+                       BookCount = x.Books.Count
+                   })
+                .FirstOrDefaultAsync(a => a.UrlSlug == slug, cancellationToken);
+        }
+
+        public async Task<CategoryItem> GetCachedCategoryItemBySlugAsync(
+           string slug, CancellationToken cancellationToken = default)
+        {
+            return await _memoryCache.GetOrCreateAsync(
+                $"category.by-slug.{slug}",
+                async (entry) =>
+                {
+                    entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30);
+                    return await GetCategoryItemBySlugAsync(slug, cancellationToken);
+                });
+        }
+
         public async Task<Category> GetCachedCategoryBySlugAsync(
             string slug, CancellationToken cancellationToken = default)
         {
@@ -55,7 +81,7 @@ namespace TatBlog.Services.Blogs
                 });
         }
 
-        public async Task<IList<CategoryItem>> GetCategoriessAsync(
+        public async Task<IList<CategoryItem>> GetCategoriesAsync(
             CancellationToken cancellationToken = default)
         {
             return await _context.Set<Category>()
@@ -88,7 +114,8 @@ namespace TatBlog.Services.Blogs
                     UrlSlug = x.UrlSlug,
                     Description = x.Description,
                     ShowOnMenu = x.ShowOnMenu,
-                    PostCount = x.Posts.Count(p => p.Published)
+                    PostCount = x.Posts.Count(p => p.Published),
+                    BookCount = x.Books.Count()
                 })
                 .ToPagedListAsync(pagingParams, cancellationToken);
         }
@@ -204,6 +231,22 @@ namespace TatBlog.Services.Blogs
                     PostCount = x.Posts.Count(p => p.Published)
                 })
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<CategoryItem> GetCategoryDetailByIdAsync(
+           int id,
+           CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Category>()
+                .AsNoTracking()
+                .Select(x => new CategoryItem()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlSlug = x.UrlSlug,
+                    Description = x.Description,
+                })
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }

@@ -57,10 +57,9 @@ export default ({
   imageDecoratorBlobCss = null,
   textOnLeft = true
 }) => {
-  // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
 
   function NewlineText({props}) {
-    console.log(props.split('\n')); 
+    //console.log(props.split('\n')); 
 
     const newText = props.split('\n').map(str => <p css={tw`pb-2`}>{str}</p>);
     return newText;

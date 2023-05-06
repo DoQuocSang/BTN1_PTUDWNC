@@ -28,11 +28,19 @@ namespace TatBlog.WebApi.Endpoints
                 .Produces<ApiResponse<PaginationResult<AuthorItem>>>();
                 //.Produces<PaginationResult<AuthorItem>>();
 
-            routeGroupBuilder.MapGet("/{id:int}", GetAuthorDetails)
+            routeGroupBuilder.MapGet("/detail/{id:int}", GetAuthorDetails)
                 .WithName("GetAuthorById")
                 .Produces<ApiResponse<AuthorItem>>();
                 //.Produces<AuthorItem>()
                 //.Produces(404);
+
+            routeGroupBuilder.MapGet(
+                  "/{slug:regex(^[a-z0-9_-]+$)}",
+                  GetAuthorBySlug)
+              .WithName("GetAuthorBySlug")
+              .Produces<ApiResponse<PaginationResult<AuthorItem>>>();
+            //.Produces<PaginationResult<PostDto>>();
+
 
             routeGroupBuilder.MapGet(
                     "/{slug:regex(^[a-z0-9_-]+$)}/posts",
@@ -44,7 +52,7 @@ namespace TatBlog.WebApi.Endpoints
             routeGroupBuilder.MapPost("/", AddAuthor)
                 .WithName("AddNewAuthor")
                 .AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-                .RequireAuthorization()
+                //.RequireAuthorization()
                 .Produces(401)
                 .Produces<ApiResponse<AuthorItem>>();
                 //.Produces(201)
@@ -95,12 +103,32 @@ namespace TatBlog.WebApi.Endpoints
             return Results.Ok(ApiResponse.Success(paginationResult));
         }
 
+
+        private static async Task<IResult> GetAuthorBySlug(
+            string slug,
+            IAuthorRepository authorRepository,
+            IMapper mapper)
+        {
+            var author = await authorRepository.GetCachedAuthorBySlugAsync(slug);
+            //return author == null
+            //    ? Results.NotFound($"không tìm thấy tác giả có mã số {id}")
+            //    : Results.Ok(mapper.Map<AuthorItem>(author));
+
+            return author == null
+                ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,
+                $"không tìm thấy tác giả có slug {slug}"))
+                : Results.Ok(ApiResponse.Success(mapper.Map<AuthorItem>(author)));
+        }
+
+
         private static async Task<IResult> GetAuthorDetails(
             int id,
             IAuthorRepository authorRepository,
             IMapper mapper)
         {
-            var author = await authorRepository.GetCachedAuthorByIdAsync(id);
+            //var author = await authorRepository.GetCachedAuthorByIdAsync(id);
+            var author = await authorRepository.GetAuthorDetailByIdAsync(id);
+
             //return author == null
             //    ? Results.NotFound($"không tìm thấy tác giả có mã số {id}")
             //    : Results.Ok(mapper.Map<AuthorItem>(author));
