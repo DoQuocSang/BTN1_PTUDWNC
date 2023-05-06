@@ -15,6 +15,7 @@ namespace TatBlog.Data.Seeders
     // Update-Database -Verbose
 
 
+
     public class DataSeeder : IDataSeeder
     {
         private readonly BlogDbContext _dbContext;
