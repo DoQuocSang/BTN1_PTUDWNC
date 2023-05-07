@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -35,6 +38,7 @@ namespace TatBlog.Data.Seeders
             var tags = AddTags();
             var posts = AddPosts(authors, categories, tags);
             var books = AddBooks(authors, categories);
+            var users = AddUsers();
             //var carts = AddCarts();
         }
 
@@ -288,6 +292,63 @@ namespace TatBlog.Data.Seeders
 
             return tags;
         }
+
+        private IList<AppUser> AddUsers()
+        {
+            var users = new List<AppUser>()
+            {
+                new()
+                {
+                    Dob = new DateTime(2020, 4, 19),
+                    Email = "hoangadmin@gmail.com",
+                    FirstName = "Doan",
+                    LastName = "Hoang",
+                    UserName = "hoangadmin",
+                    PhoneNumber = "09123980012",
+                    PasswordHash = "hoang@0H",
+                },
+                new()
+                {
+                    Dob = new DateTime(2020, 5, 9),
+                    Email = "sangadmin@gmail.com",
+                    FirstName = "Do",
+                    LastName = "Sang",
+                    UserName = "sangadmin",
+                    PhoneNumber = "09138787958",
+                    PasswordHash = "sang@0S",
+                },
+                new()
+                {
+                    Dob = new DateTime(2020, 6, 26),
+                    Email = "suongadmin@gmail.com",
+                    FirstName = "Quang",
+                    LastName = "Suong",
+                    UserName = "suongadmin",
+                    PhoneNumber = "0978369364",
+                    PasswordHash = "suong@0S",
+                },
+            };
+
+            _dbContext.Users.AddRange(users);
+            _dbContext.SaveChanges();
+
+            return users;
+        }
+
+        //private AppUser AddUserItem(string email, string firstName, string lastName, string userName, string password, string phoneNumber, int day, int month, int year)
+        //{
+        //    var user = new AppUser()
+        //    {
+        //        Dob = new DateTime(year, month, day),
+        //        Email = email,
+        //        FirstName = firstName,
+        //        LastName = lastName,
+        //        UserName = userName,
+        //        PhoneNumber = phoneNumber,
+        //        PasswordHash = password,
+        //    };
+        //    return user;
+        //}
 
         private IList<Post> AddPosts(
             IList<Author> authors,
