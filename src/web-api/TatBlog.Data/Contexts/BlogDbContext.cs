@@ -31,7 +31,7 @@ namespace TatBlog.Data.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=LAPTOP-C4HORG37;TrustServerCertificate=True;Database=BookStore;
+            optionsBuilder.UseSqlServer(@"Server=LAPTOP-GEIT9Q0O;TrustServerCertificate=True;Database=BookStore;
                 Trusted_Connection=True;MultipleActiveResultSets=true");
             //Data Source=LAPTOP-C4HORG37;Initial Catalog=TatBlog;Integrated Security=True
         }

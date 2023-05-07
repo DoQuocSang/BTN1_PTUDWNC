@@ -16,6 +16,7 @@ namespace TatBlog.Data.Seeders
 
 
 
+
     public class DataSeeder : IDataSeeder
     {
         private readonly BlogDbContext _dbContext;
@@ -24,6 +25,7 @@ namespace TatBlog.Data.Seeders
         {
             _dbContext = dbContext;
         }
+
 
         public void Initialize()
         {
