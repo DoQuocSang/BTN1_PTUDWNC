@@ -12,6 +12,7 @@ import { getBooks } from "../../../services/BookRepository";
 import { toVND } from "../../../components/utils/Utils";
 import { isEmptyOrSpaces } from "../../../components/utils/Utils";
 import DefaultImage from "images/post-default.png"
+import Error404 from "../../../components/admin/other/Error404";
 
 export default () => {
     const [booksList, setBooksList] = useState([]);
@@ -121,6 +122,7 @@ export default () => {
                                                     ))}
                                                 </tbody>
                                             </table>
+                                            {booksList.length === 0 ? <Error404 /> : ""}
                                         </div>
                                     </div>
                                 </div>

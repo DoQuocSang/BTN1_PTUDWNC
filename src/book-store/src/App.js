@@ -31,7 +31,7 @@ import AllBlog from "pages/admin/blog/AllBlog"
 import AddOrUpdateBlog from "pages/admin/blog/AddOrUpdateBlog"
 
 import AllUser from "pages/admin/user/AllUser"
-import AddUser from "pages/admin/user/AddUser"
+import AddOrUpdateUser from "pages/admin/user/AddOrUpdateUser"
 
 import AdminLogin from "pages/admin/login/Login"
 
@@ -85,7 +85,8 @@ function App() {
           <Route path="/admin/dashboard/update-blog/:id" element={<AddOrUpdateBlog type="update" />} />
 
           <Route path="/admin/dashboard/all-user" element={<AllUser />} />
-          <Route path="/admin/dashboard/add-user" element={<AddUser />} />
+          <Route path="/admin/dashboard/add-user" element={<AddOrUpdateUser type="add" />} />
+          <Route path="/admin/dashboard/update-user/:id" element={<AddOrUpdateUser type="update" />} />
         </Route>
 
         {/* <Route path="*" element={<NotFound404 />} /> */}

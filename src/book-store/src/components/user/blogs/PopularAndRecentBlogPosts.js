@@ -9,9 +9,13 @@ import { getFeaturedPosts } from "../../../services/PostRepository";
 import { getRandomPosts } from "../../../services/PostRepository";
 import PostDefault from "images/post-default.png";
 import { isEmptyOrSpaces } from "../../utils/Utils";
+import CatDefault from "images/cat-404-full-2.png";
+
 
 const Row = tw.div`flex flex-col lg:flex-row -mb-10`;
 const Heading = tw(SectionHeading)`text-left lg:text-4xl xl:text-4xl`;
+const ErrorImage = tw.img`max-w-xl h-auto mx-auto rounded-lg pt-4`;
+const ErrorSmallImage = tw.img`max-w-sm h-auto mx-auto rounded-lg pt-4`;
 
 const PopularPostsContainer = tw.div`lg:w-2/3`;
 const PostsContainer = tw.div`mt-12 flex flex-col sm:flex-row sm:justify-between lg:justify-start`;
@@ -162,6 +166,7 @@ export default () => {
           <PopularPostsContainer>
             <Heading>Bài viết nổi bật</Heading>
             <PostsContainer>
+              {featuredPostList.length === 0 ? <ErrorImage src={CatDefault} /> : ""}
               {featuredPostList.map((post, index) => (
                 <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group" initial="rest" whileHover="hover" animate="rest">
 
@@ -198,6 +203,7 @@ export default () => {
           <RecentPostsContainer>
             <Heading>Các bài viết</Heading>
             <PostsContainer>
+              {randomPostList.length === 0 ? <ErrorSmallImage src={CatDefault} /> : ""}
               {randomPostList.map((post, index) => (
                 <Post key={index} href={`/blog-detail/${post.urlSlug}`} className="group">
                   <PostTextContainer>

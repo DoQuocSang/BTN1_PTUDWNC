@@ -13,6 +13,8 @@ import  Book1  from "images/book1.png";
 import  Book2  from "images/book2.jpg";
 import  Book3  from "images/book3.jpg";
 import  BookDefault from "images/book-default.png"
+import CatDefault from "images/cat-404-full-2.png";
+
 
 import { Link } from "react-router-dom";
 import { getBooks, getBookByCategorySlug } from "../../../services/BookRepository";
@@ -79,7 +81,7 @@ const TagContainer = styled.div(({ otherColor }) => [
   otherColor && tw`bg-teal-500 hover:bg-teal-600`,
 ]);
 const TagText = tw.a`px-2 py-1 text-xs font-semibold text-white line-clamp-1`;
-
+const ErrorImage = tw.img`max-w-3xl h-auto mx-auto rounded-lg pt-4`;
 
 const PriceContainer = tw.p`text-lg font-semibold leading-loose mt-1 sm:mt-2`;
 const PriceText = tw.span`text-xl leading-loose text-red-500`;
@@ -186,6 +188,7 @@ export default ({HeadingText = "Sản phẩm", hasFilter = false}) => {
             <NextButton onClick={sliderRef?.slickNext}><ChevronRightIcon/></NextButton>
           </Controls>
         </HeadingWithControl>
+        {booksList.length === 0 ? <ErrorImage src={CatDefault} /> : ""}
         <CardSlider ref={setSliderRef} {...sliderSettings}>
           {booksList.map((card, index) => (
             <Card key={index}>

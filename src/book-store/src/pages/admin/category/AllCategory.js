@@ -9,6 +9,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getCategories } from "../../../services/CategoryRepository";
+import Error404 from "../../../components/admin/other/Error404";
 
 export default () => {
 
@@ -98,6 +99,7 @@ export default () => {
                                                 ))}
                                                 </tbody>
                                             </table>
+                                            {categoriesList.length === 0 ? <Error404 /> : ""}
                                         </div>
                                     </div>
                                 </div>

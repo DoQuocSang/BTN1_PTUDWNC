@@ -6,7 +6,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { css } from "styled-components/macro"; //eslint-disable-line
 
 import useAnimatedNavToggler from "../../../helpers/useAnimatedNavToggler.js";
-
+import CatDefault from "images/cat-default-nobg.png";
 import logo from "images/logo.png";
 import { ReactComponent as MenuIcon } from "feather-icons/dist/icons/menu.svg";
 import { ReactComponent as CloseIcon } from "feather-icons/dist/icons/x.svg";
@@ -96,7 +96,7 @@ const Actions = styled.div`
 `;
 
 export const ImageFinding = tw.img`text-center w-1/2 mx-auto`;
-
+const ErrorImage = tw.img`max-w-xs h-auto rounded-lg pt-4`;
 
 
 export default ({ roundedHeaderButton = false, logoLink, links, className, collapseBreakpointClass = "lg" }) => {
@@ -163,6 +163,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                   <FontAwesomeIcon icon={faUserPen} css={tw`mr-2 text-base`} />
                   Tác giả
                 </MenuTitle>
+                {authorsList.length === 0 ? <ErrorImage src={CatDefault} /> : ""}
                 <MenuContainer >
                   {authorsList.map((author, i) => (
                     <MenuItem href={"/all-product/" + "author/" + author.urlSlug}>
@@ -176,6 +177,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
                   <FontAwesomeIcon icon={faBook} css={tw`mr-2 text-base`} />
                   Thể loại
                 </MenuTitle>
+                {categoriesList.length === 0 ? <ErrorImage src={CatDefault} /> : ""}
                 <MenuContainer >
                   {categoriesList.map((category, i) => (
                     <MenuItem href={"/all-product/" + "category/" + category.urlSlug}>
