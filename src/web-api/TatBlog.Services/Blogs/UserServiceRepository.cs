@@ -19,12 +19,14 @@ namespace TatBlog.Services.Blogs
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
+        public readonly UserManager<AppUser> userManager;
 
 
         public UserServiceRepository(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
             RoleManager<AppRole> roleManager, IConfiguration config) 
         {
             _userManager = userManager;
+            this.userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
@@ -64,6 +66,18 @@ namespace TatBlog.Services.Blogs
 
         public async Task<bool> Register(RegisterRequest request)
         {
+            //var user1 = new AppUser()
+            //{
+            //    Dob = new DateTime(2020, 4, 19),
+            //    Email = "asd",
+            //    FirstName = "asd",
+            //    LastName = "sad",
+            //    UserName = "dsda",
+            //    PhoneNumber = "091239812",
+            //    Password = "0234asdA.",
+            //};
+            //await _userManager.CreateAsync(user1, request.Password);
+
             var user = new AppUser()
             {
                 Dob = request.Dob,

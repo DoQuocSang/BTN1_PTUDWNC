@@ -18,7 +18,7 @@ namespace TatBlog.WebApi.Endpoints
         //    return app;
         //}
         private readonly IUserServiceRepository _userServiceRepository;
-        private UserEndpoints(IUserServiceRepository userServiceRepository)
+        public UserEndpoints(IUserServiceRepository userServiceRepository)
         {
             _userServiceRepository = userServiceRepository;
         }
@@ -30,7 +30,7 @@ namespace TatBlog.WebApi.Endpoints
             var resultToken = await _userServiceRepository.Authencate(request);
             if (string.IsNullOrEmpty(resultToken))
             {
-                return BadRequest("Username or Password is incorrect. ");
+                return BadRequest("Username or Password is incorrect.");
             }
             return Ok(new {token = resultToken});
         }

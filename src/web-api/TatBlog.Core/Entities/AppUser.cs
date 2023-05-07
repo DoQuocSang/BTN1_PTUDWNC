@@ -9,10 +9,7 @@ namespace TatBlog.Core.Entities
     {
 
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public DateTime Dob { get; set; }
-        
     }
 }
