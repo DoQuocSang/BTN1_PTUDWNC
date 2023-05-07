@@ -28,7 +28,7 @@ namespace TatBlog.WebApi.Endpoints
                 .Produces<ApiResponse<PaginationResult<AuthorItem>>>();
                 //.Produces<PaginationResult<AuthorItem>>();
 
-            routeGroupBuilder.MapGet("/{id:int}", GetAuthorDetails)
+            routeGroupBuilder.MapGet("/detail/{id:int}", GetAuthorDetails)
                 .WithName("GetAuthorById")
                 .Produces<ApiResponse<AuthorItem>>();
                 //.Produces<AuthorItem>()
@@ -52,7 +52,7 @@ namespace TatBlog.WebApi.Endpoints
             routeGroupBuilder.MapPost("/", AddAuthor)
                 .WithName("AddNewAuthor")
                 .AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-                .RequireAuthorization()
+                //.RequireAuthorization()
                 .Produces(401)
                 .Produces<ApiResponse<AuthorItem>>();
                 //.Produces(201)
@@ -126,7 +126,9 @@ namespace TatBlog.WebApi.Endpoints
             IAuthorRepository authorRepository,
             IMapper mapper)
         {
-            var author = await authorRepository.GetCachedAuthorByIdAsync(id);
+            //var author = await authorRepository.GetCachedAuthorByIdAsync(id);
+            var author = await authorRepository.GetAuthorDetailByIdAsync(id);
+
             //return author == null
             //    ? Results.NotFound($"không tìm thấy tác giả có mã số {id}")
             //    : Results.Ok(mapper.Map<AuthorItem>(author));

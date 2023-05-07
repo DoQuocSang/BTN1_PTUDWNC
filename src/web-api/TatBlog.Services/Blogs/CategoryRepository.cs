@@ -81,7 +81,7 @@ namespace TatBlog.Services.Blogs
                 });
         }
 
-        public async Task<IList<CategoryItem>> GetCategoriessAsync(
+        public async Task<IList<CategoryItem>> GetCategoriesAsync(
             CancellationToken cancellationToken = default)
         {
             return await _context.Set<Category>()
@@ -231,6 +231,22 @@ namespace TatBlog.Services.Blogs
                     PostCount = x.Posts.Count(p => p.Published)
                 })
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<CategoryItem> GetCategoryDetailByIdAsync(
+           int id,
+           CancellationToken cancellationToken = default)
+        {
+            return await _context.Set<Category>()
+                .AsNoTracking()
+                .Select(x => new CategoryItem()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlSlug = x.UrlSlug,
+                    Description = x.Description,
+                })
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }

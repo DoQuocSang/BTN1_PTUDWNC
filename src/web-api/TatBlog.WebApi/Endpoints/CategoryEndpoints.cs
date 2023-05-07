@@ -27,7 +27,7 @@ namespace TatBlog.WebApi.Endpoints
                 .WithName("GetCategories")
                 .Produces<ApiResponse<PaginationResult<CategoryItem>>>();
 
-            routeGroupBuilder.MapGet("/{id:int}", GetCategoryDetails)
+            routeGroupBuilder.MapGet("/detail/{id:int}", GetCategoryDetails)
                .WithName("GetCategoryById")
                .Produces<ApiResponse<CategoryItem>>();
 
@@ -122,7 +122,8 @@ namespace TatBlog.WebApi.Endpoints
           ICategoryRepository categoryRepository,
           IMapper mapper)
         {
-            var category = await categoryRepository.GetCachedCategoryByIdAsync(id);
+            //var category = await categoryRepository.GetCachedCategoryByIdAsync(id);
+            var category = await categoryRepository.GetCategoryDetailByIdAsync(id);
 
             return category == null
                 ? Results.Ok(ApiResponse.Fail(HttpStatusCode.NotFound,

@@ -25,7 +25,7 @@ export default () => {
             }
             else
                 setBooksList([]);
-            console.log(data.items)
+            //console.log(data.items)
         })
     }, []);
 
@@ -110,7 +110,7 @@ export default () => {
                                                             </td>
 
                                                             <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                                <Link to="/admin/dashboard/update-product">
+                                                                <Link to={`/admin/dashboard/update-product/${book.id}`}>
                                                                     <FontAwesomeIcon icon={faPenToSquare} />
                                                                 </Link>
                                                             </th>

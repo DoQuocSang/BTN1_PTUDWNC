@@ -14,4 +14,8 @@ public interface ITagRepository
 
     Task<TagItem> GetTagItemBySlugAsync(
         string slug, CancellationToken cancellationToken = default);
+
+    Task<TagItem> GetTagDetailByIdAsync(
+          int id,
+          CancellationToken cancellationToken = default);
 }

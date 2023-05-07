@@ -57,4 +57,8 @@ public interface ICategoryRepository
 
 	Task<CategoryItem> GetCachedCategoryItemBySlugAsync(
 		   string slug, CancellationToken cancellationToken = default);
+
+    Task<CategoryItem> GetCategoryDetailByIdAsync(
+		int id,
+		CancellationToken cancellationToken = default);
 }

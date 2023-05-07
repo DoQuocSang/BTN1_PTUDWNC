@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Book1 from "images/book1.png"
@@ -8,8 +8,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { getTags } from "../../../services/TagRepository";
 
 export default () => {
+    const [tagsList, setTagsList] = useState([]);
+    const [metadata, setMetadata] = useState([]);
+
+    useEffect(() => {
+        getTags().then(data => {
+            if (data) {
+              setTagsList(data.items);
+              setMetadata(data.metadata);
+            }
+            else
+              setTagsList([]);
+            console.log(data.items)
+          })
+    }, []);
 
     return (
         <div id="main-content" className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
@@ -56,21 +71,19 @@ export default () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody className="bg-white">
+                                                {tagsList.map((tag, index) => (
                                                     <tr>
-                                                        {/* <td className="p-4  text-sm font-normal text-gray-900">
-                                                            Payment from <span className="font-semibold">Bonnie Green</span>
-                                                        </td> */}
                                                         <td className="p-4 text-center text-sm font-bold text-gray-500">
-                                                            1
+                                                            {index + 1}
                                                         </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
+                                                        <td className="p-4  text-sm font-semibold text-gray-500">
+                                                            {tag.name}
                                                         </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
+                                                        <td className="p-4  text-sm font-normal text-gray-500">
+                                                            {tag.description}
                                                         </td>
                                                         <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                        <Link to="/admin/dashboard/add-product">
+                                                        <Link to={`/admin/dashboard/update-tag/${tag.id}`}>
                                                             <FontAwesomeIcon icon={faPenToSquare} />
                                                             </Link>
                                                         </th>
@@ -78,121 +91,7 @@ export default () => {
                                                             <FontAwesomeIcon icon={faTrash} />
                                                         </th>
                                                     </tr>
-
-                                                    <tr>
-                                                        {/* <td className="p-4  text-sm font-normal text-gray-900">
-                                                            Payment from <span className="font-semibold">Bonnie Green</span>
-                                                        </td> */}
-                                                        <td className="p-4 text-center text-sm font-bold text-gray-500">
-                                                            1
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                        <Link to="/admin/dashboard/add-product">
-                                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                                            </Link>
-                                                        </th>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-red-400 uppercase tracking-wider">
-                                                            <FontAwesomeIcon icon={faTrash} />
-                                                        </th>
-                                                    </tr>
-
-                                                    <tr>
-                                                        {/* <td className="p-4  text-sm font-normal text-gray-900">
-                                                            Payment from <span className="font-semibold">Bonnie Green</span>
-                                                        </td> */}
-                                                        <td className="p-4 text-center text-sm font-bold text-gray-500">
-                                                            1
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                        <Link to="/admin/dashboard/add-product">
-                                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                                            </Link>
-                                                        </th>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-red-400 uppercase tracking-wider">
-                                                            <FontAwesomeIcon icon={faTrash} />
-                                                        </th>
-                                                    </tr>
-
-                                                    <tr>
-                                                        {/* <td className="p-4  text-sm font-normal text-gray-900">
-                                                            Payment from <span className="font-semibold">Bonnie Green</span>
-                                                        </td> */}
-                                                        <td className="p-4 text-center text-sm font-bold text-gray-500">
-                                                            1
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                        <Link to="/admin/dashboard/add-product">
-                                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                                            </Link>
-                                                        </th>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-red-400 uppercase tracking-wider">
-                                                            <FontAwesomeIcon icon={faTrash} />
-                                                        </th>
-                                                    </tr>
-
-                                                    <tr>
-                                                        {/* <td className="p-4  text-sm font-normal text-gray-900">
-                                                            Payment from <span className="font-semibold">Bonnie Green</span>
-                                                        </td> */}
-                                                        <td className="p-4 text-center text-sm font-bold text-gray-500">
-                                                            1
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                        <Link to="/admin/dashboard/add-product">
-                                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                                            </Link>
-                                                        </th>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-red-400 uppercase tracking-wider">
-                                                            <FontAwesomeIcon icon={faTrash} />
-                                                        </th>
-                                                    </tr>
-
-                                                    <tr>
-                                                        {/* <td className="p-4  text-sm font-normal text-gray-900">
-                                                            Payment from <span className="font-semibold">Bonnie Green</span>
-                                                        </td> */}
-                                                        <td className="p-4 text-center text-sm font-bold text-gray-500">
-                                                            1
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <td className="p-4  text-sm font-normal text-gray-900">
-                                                            None none none
-                                                        </td>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-emerald-400 uppercase tracking-wider">
-                                                        <Link to="/admin/dashboard/add-product">
-                                                            <FontAwesomeIcon icon={faPenToSquare} />
-                                                            </Link>
-                                                        </th>
-                                                        <th scope="col" className="p-4 text-left text-xl font-semibold text-red-400 uppercase tracking-wider">
-                                                            <FontAwesomeIcon icon={faTrash} />
-                                                        </th>
-                                                    </tr>
+                                                ))}
                                                 </tbody>
                                             </table>
                                         </div>

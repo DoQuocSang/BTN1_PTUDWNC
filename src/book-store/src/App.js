@@ -19,13 +19,13 @@ import AllProduct from "pages/admin/product/AllProduct"
 import AddOrUpdateProduct from "pages/admin/product/AddOrUpdateProduct"
 
 import AllCategory from "pages/admin/category/AllCategory"
-import AddCategory from "pages/admin/category/AddCategory"
+import AddOrUpdateCategory from "pages/admin/category/AddOrUpdateCategory"
 
 import AllAuthor from "pages/admin/author/AllAuthor"
-import AddAuthor from "pages/admin/author/AddAuthor"
+import AddOrUpdateAuthor from "pages/admin/author/AddOrUpdateAuthor"
 
 import AllTag from "pages/admin/tag/AllTag"
-import AddTag from "pages/admin/tag/AddTag"
+import AddOrUpdateTag from "pages/admin/tag/AddOrUpdateTag"
 
 import AllBlog from "pages/admin/blog/AllBlog"
 import AddOrUpdateBlog from "pages/admin/blog/AddOrUpdateBlog"
@@ -66,26 +66,29 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/dashboard/all-product" element={<AllProduct />} />
           <Route path="/admin/dashboard/add-product" element={<AddOrUpdateProduct type="add" />} />
-          <Route path="/admin/dashboard/update-product" element={<AddOrUpdateProduct type="update" />} />
+          <Route path="/admin/dashboard/update-product/:id" element={<AddOrUpdateProduct type="update" />} />
 
           <Route path="/admin/dashboard/all-category" element={<AllCategory />} />
-          <Route path="/admin/dashboard/add-category" element={<AddCategory />} />
+          <Route path="/admin/dashboard/add-category" element={<AddOrUpdateCategory type="add" />} />
+          <Route path="/admin/dashboard/update-category/:id" element={<AddOrUpdateCategory type="update" />} />
 
           <Route path="/admin/dashboard/all-author" element={<AllAuthor />} />
-          <Route path="/admin/dashboard/add-author" element={<AddAuthor />} />
+          <Route path="/admin/dashboard/add-author" element={<AddOrUpdateAuthor type="add"/>} />
+          <Route path="/admin/dashboard/update-author/:id" element={<AddOrUpdateAuthor type="update" />} />
 
           <Route path="/admin/dashboard/all-tag" element={<AllTag />} />
-          <Route path="/admin/dashboard/add-tag" element={<AddTag />} />
+          <Route path="/admin/dashboard/add-tag" element={<AddOrUpdateTag type="add"/>} />
+          <Route path="/admin/dashboard/update-tag/:id" element={<AddOrUpdateTag type="update" />} />
 
           <Route path="/admin/dashboard/all-blog" element={<AllBlog />} />
           <Route path="/admin/dashboard/add-blog" element={<AddOrUpdateBlog type="add" />} />
-          <Route path="/admin/dashboard/update-blog" element={<AddOrUpdateBlog ype="update" />} />
+          <Route path="/admin/dashboard/update-blog/:id" element={<AddOrUpdateBlog type="update" />} />
 
           <Route path="/admin/dashboard/all-user" element={<AllUser />} />
           <Route path="/admin/dashboard/add-user" element={<AddUser />} />
         </Route>
 
-        <Route path="*" element={<NotFound404 />} />
+        {/* <Route path="*" element={<NotFound404 />} /> */}
 
       </Routes>
     </AnimationRevealPage>
