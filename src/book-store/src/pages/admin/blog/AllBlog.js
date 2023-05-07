@@ -11,6 +11,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getPosts } from "../../../services/PostRepository";
 import { isEmptyOrSpaces } from "../../../components/utils/Utils";
 import DefaultImage from "images/post-default.png"
+import Error404 from "../../../components/admin/other/Error404";
 
 
 export default () => {
@@ -124,6 +125,7 @@ export default () => {
                                                     ))}
                                                 </tbody>
                                             </table>
+                                            {postsList.length === 0 ? <Error404 /> : ""}
                                         </div>
                                     </div>
                                 </div>

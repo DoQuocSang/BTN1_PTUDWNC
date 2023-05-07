@@ -2,12 +2,15 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TatBlog.Core.Collections;
 using TatBlog.Core.DTO;
+using TatBlog.Core.Entities;
 using TatBlog.Services.Blogs;
+using TatBlog.WebApi.Models;
 
 namespace TatBlog.WebApi.Endpoints
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     
     public class UserEndpoints : ControllerBase
@@ -50,6 +53,27 @@ namespace TatBlog.WebApi.Endpoints
                 return BadRequest("Register is unsuccess");
             }
             return Ok();
+        }
+
+        [HttpGet("")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUser([AsParameters] int PageSize, [AsParameters] int PageNumber)
+        {
+            var result = await GetUserList(_userServiceRepository, PageSize, PageNumber);
+            return Ok(result);
+        }
+
+        private static async Task<IResult> GetUserList(
+            IUserServiceRepository userServiceRepository, int pageSize, int pageNumber)
+        {
+            var usersList = await userServiceRepository
+                .GetPagedUsersAsync(pageSize, pageNumber);
+
+            var paginationResult =
+                new PaginationResult<AppUserItem>(usersList);
+
+            //return Results.Ok(paginationResult);
+            return Results.Ok(ApiResponse.Success(paginationResult));
         }
 
     }

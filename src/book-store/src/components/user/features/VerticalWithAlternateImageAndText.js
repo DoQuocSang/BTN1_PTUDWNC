@@ -9,6 +9,7 @@ import  Book3  from "images/book3.jpg";
 import  BookDefault from "images/book-default.png"
 import { isEmptyOrSpaces } from "../../utils/Utils";
 import { getRandomBooks } from "../../../services/BookRepository";
+import CatDefault from "images/cat-404-full-2.png";
 
 const Container = tw.div`relative`;
 
@@ -32,6 +33,7 @@ const Subtitle = tw.div`font-bold tracking-wide text-secondary-100 transition du
 const Title = tw.h4`text-3xl font-bold text-gray-900`;
 const Description = tw.p`mt-2 text-sm leading-loose`;
 const Link = tw.a`inline-block mt-4 text-lg text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500`;
+const ErrorImage = tw.img`max-w-3xl h-auto mx-auto rounded-lg pt-4`;
 
 const SvgDotPattern1 = tw(
   SvgDotPatternIcon
@@ -106,6 +108,8 @@ export default () => {
         </HeadingInfoContainer>
 
         <Content>
+          {booksList.length === 0 ? <ErrorImage src={CatDefault} /> : ""}
+
           {booksList.map((card, i) => (
             <Card key={i} reversed={i % 2 === 1}>
              

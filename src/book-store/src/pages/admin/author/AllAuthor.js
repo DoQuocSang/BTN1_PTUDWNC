@@ -11,6 +11,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getAuthors } from "../../../services/AuthorRepository";
 import { isEmptyOrSpaces } from "../../../components/utils/Utils";
 import DefaultImage from "images/post-default.png"
+import Error404 from "../../../components/admin/other/Error404";
 
 export default () => {
 
@@ -110,6 +111,7 @@ export default () => {
                                                     ))}
                                                 </tbody>
                                             </table>
+                                            {authorsList.length === 0 ? <Error404 /> : ""}
                                         </div>
                                     </div>
                                 </div>
