@@ -111,7 +111,6 @@ export default () => {
                                                     ))}
                                                 </tbody>
                                             </table>
-                                            {authorsList.length === 0 ? <Error404 /> : ""}
                                         </div>
                                     </div>
                                 </div>
